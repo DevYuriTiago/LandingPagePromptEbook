@@ -149,6 +149,8 @@ document.querySelectorAll('.benefit-card, .chapter, .testimonial-card, .faq-item
 });
 
 // Contador regressivo com efeito neon
+let endTime;
+
 function startCountdown() {
     const countdownElement = document.createElement('div');
     countdownElement.className = 'countdown';
@@ -171,25 +173,36 @@ function startCountdown() {
     
     document.body.appendChild(countdownElement);
 
+    // Define o tempo final (6 horas a partir do momento que a página é carregada)
+    if (!endTime) {
+        endTime = new Date().getTime() + (6 * 60 * 60 * 1000); // 6 horas em milissegundos
+    }
+
     function updateCountdown() {
-        const now = new Date();
-        const midnight = new Date();
-        midnight.setHours(23, 59, 59, 999);
+        const now = new Date().getTime();
+        const timeLeft = endTime - now;
         
-        const diff = midnight - now;
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        if (timeLeft <= 0) {
+            countdownElement.innerHTML = `⏰ Oferta expirada!`;
+            return;
+        }
+
+        const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
         
         countdownElement.innerHTML = `⏰ Oferta expira em: ${hours}h ${minutes}m ${seconds}s`;
     }
 
+    // Atualiza imediatamente e depois a cada segundo
     updateCountdown();
     setInterval(updateCountdown, 1000);
 }
 
-// Iniciar contador após 5 segundos
-setTimeout(startCountdown, 5000);
+// Inicia o contador assim que a página carregar
+document.addEventListener('DOMContentLoaded', () => {
+    startCountdown();
+});
 
 // Efeito de destaque no CTA principal
 const ctaButton = document.querySelector('.cta-button');
@@ -198,6 +211,23 @@ setInterval(() => {
     ctaButton.offsetHeight; // Trigger reflow
     ctaButton.style.animation = 'pulse 1s cubic-bezier(0.4, 0, 0.2, 1)';
 }, 5000);
+
+// Adiciona loading no botão de compra
+document.querySelectorAll('.cta-button').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        
+        // Adiciona classe de loading
+        this.classList.add('loading');
+        this.textContent = 'Redirecionando...';
+        
+        // Simula um pequeno delay antes do redirecionamento
+        setTimeout(() => {
+            window.location.href = href;
+        }, 1500); // 1.5 segundos de delay
+    });
+});
 
 // Efeito de paralaxe no scroll
 window.addEventListener('scroll', () => {
