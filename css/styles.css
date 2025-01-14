@@ -410,6 +410,28 @@ body {
                 inset 0 0 20px rgba(0,255,136,0.1);
 }
 
+.chapter.blurred {
+    filter: blur(4px);
+    opacity: 0.7;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.chapter.blurred::after {
+    content: "🔒";
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    text-shadow: 0 0 10px rgba(0,255,136,0.5);
+}
+
+.chapter.blurred:hover {
+    filter: blur(3px);
+    opacity: 0.8;
+}
+
 /* Testimonials */
 .testimonials {
     padding: 100px 0;
@@ -417,9 +439,21 @@ body {
 
 .testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     margin-top: 40px;
+}
+
+@media (max-width: 1200px) {
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .testimonial-card {
