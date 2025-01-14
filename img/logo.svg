@@ -17,20 +17,20 @@
     <!-- Texto Principal -->
     <g filter="url(#neon)">
         <!-- I -->
-        <text x="10" y="35" font-family="Arial" font-weight="bold" font-size="40" fill="url(#logoGradient)">I</text>
+        <text x="10" y="35" font-family="Tomorrow" font-weight="bold" font-size="25" fill="url(#logoGradient)">Prompts</text>
         <!-- NNOVA -->
-        <text x="20" y="35" font-family="Arial" font-weight="bold" font-size="30" fill="url(#logoGradient)">NNOVA</text>
+        <text x="105" y="35" font-family="Tomorrow" font-weight="bold" font-size="30" fill="url(#logoGradient)">360</text>
         <!-- T -->
-        <text x="125" y="35" font-family="Arial" font-weight="bold" font-size="40" fill="url(#logoGradient)">T</text>
+       <!-- <text x="125" y="35" font-family="Arial" font-weight="bold" font-size="40" fill="url(#logoGradient)">T</text> -->
         <!-- ECH -->
-        <text x="145" y="35" font-family="Arial" font-weight="bold" font-size="30" fill="url(#logoGradient)">ECH</text>
+        <!--<text x="145" y="35" font-family="Arial" font-weight="bold" font-size="30" fill="url(#logoGradient)">ECH</text> -->
     </g>
 
     <!-- Elementos decorativos -->
     <circle cx="15" cy="40" r="2" fill="url(#logoGradient)">
         <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="185" cy="40" r="2" fill="url(#logoGradient)">
+    <circle cx="110" cy="40" r="2" fill="url(#logoGradient)">
         <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" begin="1s"/>
     </circle>
 
