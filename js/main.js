@@ -148,57 +148,6 @@ document.querySelectorAll('.benefit-card, .chapter, .testimonial-card, .faq-item
     });
 });
 
-// Contador regressivo com efeito neon
-let endTime;
-
-function startCountdown() {
-    const countdownElement = document.createElement('div');
-    countdownElement.className = 'countdown';
-    countdownElement.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: rgba(10, 10, 31, 0.9);
-        color: #00ff88;
-        padding: 15px 25px;
-        border-radius: 8px;
-        font-weight: bold;
-        box-shadow: 0 0 20px rgba(0,255,136,0.3);
-        z-index: 1000;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(0,255,136,0.2);
-        text-shadow: 0 0 10px rgba(0,255,136,0.5);
-        animation: pulse 2s infinite;
-    `;
-    
-    document.body.appendChild(countdownElement);
-
-    // Define o tempo final (6 horas a partir do momento que a página é carregada)
-    if (!endTime) {
-        endTime = new Date().getTime() + (6 * 60 * 60 * 1000); // 6 horas em milissegundos
-    }
-
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const timeLeft = endTime - now;
-        
-        if (timeLeft <= 0) {
-            countdownElement.innerHTML = `⏰ Oferta expirada!`;
-            return;
-        }
-
-        const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-        
-        countdownElement.innerHTML = `⏰ Oferta expira em: ${hours}h ${minutes}m ${seconds}s`;
-    }
-
-    // Atualiza imediatamente e depois a cada segundo
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-}
-
 // Gerenciamento dos botões de ação
 function setupActionButtons() {
     const actionButtons = document.querySelectorAll('.action-button, .cta-button');
@@ -245,7 +194,6 @@ function setupActionButtons() {
 // Inicializa os botões quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', () => {
     setupActionButtons();
-    startCountdown(); // Mantém a inicialização do contador
 });
 
 // Efeito de destaque no CTA principal
