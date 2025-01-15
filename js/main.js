@@ -265,3 +265,74 @@ document.addEventListener('mouseup', () => {
 
 // Ocultar cursor padrão
 document.body.style.cursor = 'none';
+
+// Newsletter Form Handling
+document.getElementById('newsletter-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const email = this.querySelector('input[type="email"]').value;
+    const button = this.querySelector('button');
+    const originalText = button.textContent;
+    
+    // Adiciona classe de loading e muda o texto do botão
+    button.classList.add('loading');
+    button.textContent = 'Inscrevendo...';
+    
+    try {
+        // Envia o email para o webhook do n8n
+        const response = await fetch('https://prompts360.app.n8n.cloud/webhook-test/consult-signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                source: 'landing-page-ebook',
+                timestamp: new Date().toISOString(),
+                utm_source: new URLSearchParams(window.location.search).get('utm_source') || 'direct',
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao processar inscrição');
+        }
+
+        // Sucesso
+        button.classList.remove('loading');
+        button.textContent = 'Inscrito!';
+        button.style.backgroundColor = '#00cc6a';
+        
+        // Limpa o campo de email
+        this.querySelector('input[type="email"]').value = '';
+        
+        // Mostra mensagem de sucesso
+        const successMessage = document.createElement('div');
+        successMessage.textContent = 'Inscrição realizada com sucesso!';
+        successMessage.style.color = 'var(--primary-color)';
+        successMessage.style.marginTop = '10px';
+        this.appendChild(successMessage);
+        
+        // Remove a mensagem e restaura o botão após 3 segundos
+        setTimeout(() => {
+            successMessage.remove();
+            button.textContent = originalText;
+            button.style.backgroundColor = '';
+        }, 3000);
+
+    } catch (error) {
+        console.error('Erro:', error);
+        
+        // Tratamento de erro
+        button.classList.remove('loading');
+        button.textContent = originalText;
+        
+        const errorMessage = document.createElement('div');
+        errorMessage.textContent = 'Ocorreu um erro. Por favor, tente novamente.';
+        errorMessage.style.color = '#ff3333';
+        errorMessage.style.marginTop = '10px';
+        this.appendChild(errorMessage);
+        
+        setTimeout(() => {
+            errorMessage.remove();
+        }, 3000);
+    }
+});

@@ -842,3 +842,96 @@ a:not(.cta-button):hover::before {
         opacity: 1;
     }
 }
+
+/* Newsletter Section */
+.newsletter {
+    background: rgba(0, 255, 136, 0.05);
+    padding: 60px 0;
+    margin-top: 40px;
+    border-top: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+.newsletter-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.newsletter-form input[type="email"] {
+    flex: 1;
+    max-width: 400px;
+    padding: 12px 20px;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    border-radius: 8px;
+    background: rgba(10, 10, 31, 0.6);
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form input[type="email"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+.newsletter-form button {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-color);
+    color: var(--darker-bg);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+    background: #00cc6a;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+}
+
+/* Social Media Icons */
+.social-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.social-links i {
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+@media (max-width: 768px) {
+    .newsletter-form {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+    
+    .newsletter-form input[type="email"] {
+        max-width: 100%;
+    }
+}
