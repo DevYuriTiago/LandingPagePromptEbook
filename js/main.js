@@ -199,9 +199,53 @@ function startCountdown() {
     setInterval(updateCountdown, 1000);
 }
 
-// Inicia o contador assim que a página carregar
+// Gerenciamento dos botões de ação
+function setupActionButtons() {
+    const actionButtons = document.querySelectorAll('.action-button, .cta-button');
+    
+    actionButtons.forEach(button => {
+        button.addEventListener('click', async (e) => {
+            // Previne o comportamento padrão do link
+            e.preventDefault();
+            
+            const href = button.getAttribute('href');
+            if (!href) return;
+
+            // Desabilita temporariamente o botão
+            button.disabled = true;
+            button.style.opacity = '0.7';
+            
+            try {
+                // Se for um link externo
+                if (href.startsWith('http')) {
+                    window.open(href, '_blank');
+                } 
+                // Se for uma âncora interna
+                else if (href.startsWith('#')) {
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao processar ação do botão:', error);
+            } finally {
+                // Reabilita o botão após um pequeno delay
+                setTimeout(() => {
+                    button.disabled = false;
+                    button.style.opacity = '1';
+                }, 1000);
+            }
+        });
+    });
+}
+
+// Inicializa os botões quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', () => {
-    startCountdown();
+    setupActionButtons();
+    startCountdown(); // Mantém a inicialização do contador
 });
 
 // Efeito de destaque no CTA principal
