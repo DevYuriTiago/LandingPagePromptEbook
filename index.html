@@ -243,12 +243,26 @@
     <section class="newsletter">
         <div class="container">
             <div class="newsletter-content">
-                <h2>Quer uma consultoria personalizada?</h2>
-                <p>Preencha seu e-mail abaixo que em breve nossa equipe entrará em contato.</p>
-                <form class="newsletter-form" id="newsletter-form">
-                    <input type="email" placeholder="Seu melhor e-mail" required>
-                    <button type="submit">Inscrever-se</button>
+                <h2>Ganhe 10 Templates de Prompts Grátis!</h2>
+                <p>Preencha o formulário abaixo e receba instantaneamente nosso mini-ebook com templates prontos para usar.</p>
+                <form class="lead-form" id="lead-form">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Seu melhor e-mail" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="whatsapp" placeholder="WhatsApp (com DDD)" required 
+                               pattern="^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$"
+                               title="Digite um número de WhatsApp válido">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="profession" placeholder="Sua profissão" required>
+                    </div>
+                    <button type="submit" class="cta-button">Receber Templates Grátis</button>
                 </form>
+                <p class="form-disclaimer">Seus dados estão seguros conosco. Não enviamos spam.</p>
             </div>
         </div>
     </section>

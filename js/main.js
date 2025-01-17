@@ -266,73 +266,100 @@ document.addEventListener('mouseup', () => {
 // Ocultar cursor padrão
 document.body.style.cursor = 'none';
 
-// Newsletter Form Handling
-document.getElementById('newsletter-form').addEventListener('submit', async function(e) {
+// Lead Form Handling
+document.getElementById('lead-form').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const email = this.querySelector('input[type="email"]').value;
+    const formData = {
+        name: this.querySelector('input[name="name"]').value,
+        email: this.querySelector('input[name="email"]').value,
+        whatsapp: this.querySelector('input[name="whatsapp"]').value.replace(/\D/g, ''), // Remove não-dígitos
+        profession: this.querySelector('input[name="profession"]').value,
+        source: 'landing-page-ebook',
+        timestamp: new Date().toISOString(),
+        utm_source: new URLSearchParams(window.location.search).get('utm_source') || 'direct',
+        utm_medium: new URLSearchParams(window.location.search).get('utm_medium'),
+        utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign'),
+        page_url: window.location.href,
+        user_agent: navigator.userAgent
+    };
+
     const button = this.querySelector('button');
     const originalText = button.textContent;
     
-    // Adiciona classe de loading e muda o texto do botão
-    button.classList.add('loading');
-    button.textContent = 'Inscrevendo...';
+    // Adiciona spinner e muda texto do botão
+    button.innerHTML = '<span class="loading-spinner"></span>Enviando...';
+    button.disabled = true;
     
     try {
-        // Envia o email para o webhook do n8n
         const response = await fetch('https://prompts360.app.n8n.cloud/webhook-test/consult-signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                email: email,
-                source: 'landing-page-ebook',
-                timestamp: new Date().toISOString(),
-                utm_source: new URLSearchParams(window.location.search).get('utm_source') || 'direct',
-            })
+            body: JSON.stringify(formData)
         });
 
         if (!response.ok) {
-            throw new Error('Erro ao processar inscrição');
+            throw new Error('Erro ao processar cadastro');
         }
 
         // Sucesso
-        button.classList.remove('loading');
-        button.textContent = 'Inscrito!';
+        button.innerHTML = '✓ Template Enviado!';
         button.style.backgroundColor = '#00cc6a';
         
-        // Limpa o campo de email
-        this.querySelector('input[type="email"]').value = '';
+        // Limpa o formulário
+        this.reset();
         
         // Mostra mensagem de sucesso
         const successMessage = document.createElement('div');
-        successMessage.textContent = 'Inscrição realizada com sucesso!';
-        successMessage.style.color = 'var(--primary-color)';
-        successMessage.style.marginTop = '10px';
+        successMessage.innerHTML = `
+            <div style="color: var(--primary-color); margin-top: 20px; text-align: center;">
+                <p>✨ Parabéns! Seu template foi enviado para ${formData.email}</p>
+                <p style="font-size: 0.9em; margin-top: 10px;">
+                    Verifique também sua caixa de spam se não encontrar o email.
+                </p>
+            </div>
+        `;
         this.appendChild(successMessage);
         
-        // Remove a mensagem e restaura o botão após 3 segundos
+        // Remove a mensagem e restaura o botão após 5 segundos
         setTimeout(() => {
             successMessage.remove();
-            button.textContent = originalText;
+            button.innerHTML = originalText;
             button.style.backgroundColor = '';
-        }, 3000);
+            button.disabled = false;
+        }, 5000);
 
     } catch (error) {
         console.error('Erro:', error);
         
         // Tratamento de erro
-        button.classList.remove('loading');
-        button.textContent = originalText;
+        button.innerHTML = originalText;
+        button.disabled = false;
         
         const errorMessage = document.createElement('div');
-        errorMessage.textContent = 'Ocorreu um erro. Por favor, tente novamente.';
-        errorMessage.style.color = '#ff3333';
-        errorMessage.style.marginTop = '10px';
+        errorMessage.innerHTML = `
+            <div style="color: #ff3333; margin-top: 20px; text-align: center;">
+                <p>Ocorreu um erro ao processar seu cadastro.</p>
+                <p style="font-size: 0.9em; margin-top: 5px;">
+                    Por favor, tente novamente ou entre em contato conosco.
+                </p>
+            </div>
+        `;
         this.appendChild(errorMessage);
         
         setTimeout(() => {
             errorMessage.remove();
-        }, 3000);
+        }, 5000);
+    }
+});
+
+// Máscara para o campo de WhatsApp
+document.querySelector('input[name="whatsapp"]').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length <= 11) {
+        value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+        value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+        e.target.value = value;
     }
 });
