@@ -71,11 +71,38 @@ function setupForm(form) {
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
+        // Validação dos campos
+        const name = this.querySelector('input[name="name"]').value.trim();
+        const email = this.querySelector('input[name="email"]').value.trim();
+        const whatsapp = this.querySelector('input[name="whatsapp"]').value.replace(/\D/g, '');
+        const profession = this.querySelector('input[name="profession"]').value.trim();
+
+        // Validações específicas
+        if (name.length < 3) {
+            showErrorMessage(this, 'Por favor, insira seu nome completo');
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            showErrorMessage(this, 'Por favor, insira um e-mail válido');
+            return;
+        }
+
+        if (whatsapp.length !== 11) {
+            showErrorMessage(this, 'Por favor, insira um número de WhatsApp válido com DDD');
+            return;
+        }
+
+        if (profession.length < 2) {
+            showErrorMessage(this, 'Por favor, insira sua profissão');
+            return;
+        }
+
         const formData = {
-            name: this.querySelector('input[name="name"]').value,
-            email: this.querySelector('input[name="email"]').value,
-            whatsapp: this.querySelector('input[name="whatsapp"]').value.replace(/\D/g, ''),
-            profession: this.querySelector('input[name="profession"]').value
+            name,
+            email,
+            whatsapp,
+            profession
         };
 
         const submitButton = this.querySelector('.submit-button');
@@ -97,7 +124,7 @@ function setupForm(form) {
             }
         } catch (error) {
             console.error('Erro:', error);
-            alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
+            showErrorMessage(this, 'Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
         } finally {
             submitButton.disabled = false;
             submitButton.textContent = 'Receber Templates Grátis';
@@ -105,8 +132,44 @@ function setupForm(form) {
     });
 }
 
-// Função auxiliar para mostrar mensagem de sucesso
+// Função para validar e-mail
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Função para mostrar mensagem de erro
+function showErrorMessage(form, message) {
+    // Remove qualquer mensagem existente
+    const existingMessage = form.querySelector('.error-message, .success-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'error-message';
+    messageDiv.textContent = message;
+    messageDiv.style.cssText = `
+        color: #ff3333;
+        margin-top: 10px;
+        text-align: center;
+        padding: 10px;
+        background-color: rgba(255, 51, 51, 0.1);
+        border-radius: 4px;
+    `;
+    
+    form.appendChild(messageDiv);
+    setTimeout(() => messageDiv.remove(), 5000);
+}
+
+// Função para mostrar mensagem de sucesso
 function showSuccessMessage(form) {
+    // Remove qualquer mensagem existente
+    const existingMessage = form.querySelector('.error-message, .success-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+
     const messageDiv = document.createElement('div');
     messageDiv.className = 'success-message';
     messageDiv.textContent = 'Formulário enviado com sucesso!';
@@ -115,6 +178,8 @@ function showSuccessMessage(form) {
         margin-top: 10px;
         text-align: center;
         padding: 10px;
+        background-color: rgba(0, 255, 136, 0.1);
+        border-radius: 4px;
     `;
     
     form.appendChild(messageDiv);
