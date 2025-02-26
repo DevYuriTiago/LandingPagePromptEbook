@@ -169,6 +169,44 @@ body {
     }
 }
 
+/* Badge de acesso imediato */
+.immediate-access-badge {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--darker-bg);
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: var(--neon-glow);
+    z-index: 2;
+    transform: rotate(5deg);
+}
+
+.badge-icon {
+    font-size: 1.5rem;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.badge-text {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Livro inclinado */
+.ebook-cover.tilted {
+    transform: perspective(1000px) rotateY(15deg) rotateX(5deg);
+    transition: transform 0.5s ease;
+    box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.ebook-cover.tilted:hover {
+    transform: perspective(1000px) rotateY(5deg) rotateX(2deg);
+}
+
 /* CTA Buttons */
 .cta-button {
     display: inline-block;
@@ -843,204 +881,180 @@ a:not(.cta-button):hover::before {
     }
 }
 
-/* Newsletter Section */
-.newsletter {
-    background: rgba(0, 255, 136, 0.05);
-    padding: 60px 0;
-    margin-top: 40px;
-    border-top: 1px solid rgba(0, 255, 136, 0.1);
-}
-
-.newsletter-content {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.newsletter-form {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-    justify-content: center;
-}
-
-.newsletter-form input[type="email"] {
-    flex: 1;
-    max-width: 400px;
-    padding: 12px 20px;
-    border: 2px solid rgba(0, 255, 136, 0.3);
-    border-radius: 8px;
-    background: rgba(10, 10, 31, 0.6);
-    color: #fff;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-.newsletter-form input[type="email"]:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
-}
-
-.newsletter-form button {
-    padding: 12px 30px;
-    border: none;
-    border-radius: 8px;
-    background: var(--primary-color);
-    color: var(--darker-bg);
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.newsletter-form button:hover {
-    background: #00cc6a;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
-}
-
-/* Social Media Icons */
-.social-links {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
+/* Elementos de Confiança Redesenhados */
+.trust-elements {
     margin-top: 30px;
+    padding: 20px;
+    background: rgba(10, 10, 31, 0.3);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 255, 136, 0.2);
 }
 
-.social-links a {
-    color: #fff;
-    font-size: 24px;
-    transition: all 0.3s ease;
+.trust-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.security-badge {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    padding: 10px 15px;
+    background: rgba(0, 255, 136, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
-.social-links a:hover {
-    color: var(--primary-color);
-    transform: translateY(-2px);
+.security-badge:hover {
+    background: rgba(0, 255, 136, 0.1);
+    transform: translateY(-3px);
+    box-shadow: var(--neon-glow);
 }
 
-.social-links i {
-    text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+.trust-icon {
+    width: 32px;
+    height: 32px;
+    filter: drop-shadow(0 0 5px rgba(0, 255, 136, 0.5));
 }
 
-@media (max-width: 768px) {
-    .newsletter-form {
-        flex-direction: column;
-        padding: 0 20px;
-    }
-    
-    .newsletter-form input[type="email"] {
-        max-width: 100%;
-    }
+.payment-methods {
+    text-align: center;
+    margin: 20px 0;
 }
 
-/* Lead Form Styles */
-.lead-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 30px;
-    width: 100%;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+.payment-icons {
+    max-width: 300px;
+    filter: drop-shadow(0 0 5px rgba(0, 204, 255, 0.3));
+    transition: all 0.3s ease;
 }
 
-.form-group {
+.payment-icons:hover {
+    filter: drop-shadow(0 0 8px rgba(0, 204, 255, 0.5));
+}
+
+.trusted-by {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.trusted-by span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.trusted-logos {
+    max-width: 280px;
+    filter: grayscale(30%);
+    transition: all 0.3s ease;
+}
+
+.trusted-logos:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+/* Ajustes para gerar mais desejo */
+.price-card {
     position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.form-group input {
-    width: 100%;
-    padding: 15px 20px;
-    border: 2px solid rgba(0, 255, 136, 0.3);
-    border-radius: 8px;
-    background: rgba(10, 10, 31, 0.6);
-    color: #fff;
-    font-size: 1rem;
-    transition: all 0.3s ease;
+.price-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2), 0 0 20px rgba(0, 204, 255, 0.2);
 }
 
-.form-group input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+.price-card::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    z-index: -1;
+    border-radius: 16px;
+    opacity: 0.3;
+    animation: pulseBorder 3s infinite;
 }
 
-.form-group input:invalid {
-    border-color: #ff3333;
+@keyframes pulseBorder {
+    0% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 0.2;
+    }
 }
 
-.form-group input:invalid:focus {
-    box-shadow: 0 0 15px rgba(255, 51, 51, 0.2);
-}
-
-.lead-form button {
-    margin-top: 10px;
-    padding: 15px 30px;
-    font-size: 1.1rem;
-    background: linear-gradient(45deg, var(--primary-color), #00cc6a);
-    border: none;
-    border-radius: 8px;
-    color: var(--darker-bg);
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.cta-button {
     position: relative;
     overflow: hidden;
 }
 
-.lead-form button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
-}
-
-.lead-form button::after {
+.cta-button::after {
     content: '';
     position: absolute;
     top: -50%;
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
+    background: linear-gradient(45deg, 
+        rgba(0, 255, 136, 0) 0%, 
+        rgba(0, 255, 136, 0.1) 50%, 
+        rgba(0, 255, 136, 0) 100%);
     transform: rotate(45deg);
-    transition: all 0.3s ease;
+    animation: shineEffect 3s infinite;
 }
 
-.lead-form button:hover::after {
-    transform: rotate(45deg) translate(50%, 50%);
-}
-
-.form-disclaimer {
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-@media (max-width: 768px) {
-    .lead-form {
-        padding: 0 20px;
+@keyframes shineEffect {
+    0% {
+        left: -50%;
+    }
+    100% {
+        left: 150%;
     }
 }
 
-.loading-spinner {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
-    border-top-color: var(--darker-bg);
-    animation: spin 1s ease-in-out infinite;
-    margin-right: 10px;
+/* Esconder elementos de SEO visualmente, mas mantê-los para crawlers */
+.seo-keywords {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
+/* Logos de LLMs */
+.llm-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.llm-logo {
+    height: 30px;
+    margin: 0 10px;
+    filter: brightness(0.9) drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+    transition: all 0.3s ease;
+}
+
+.llm-logo:hover {
+    filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+    transform: translateY(-2px);
 }
