@@ -169,33 +169,6 @@ body {
     }
 }
 
-/* Badge de acesso imediato */
-.immediate-access-badge {
-    position: absolute;
-    top: -20px;
-    right: 20px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--darker-bg);
-    padding: 10px 15px;
-    border-radius: 8px;
-    font-weight: bold;
-    box-shadow: var(--neon-glow);
-    z-index: 2;
-    transform: rotate(5deg);
-}
-
-.badge-icon {
-    font-size: 1.5rem;
-    margin-right: 5px;
-    display: inline-block;
-}
-
-.badge-text {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
 /* Livro inclinado */
 .ebook-cover.tilted {
     transform: perspective(1000px) rotateY(15deg) rotateX(5deg);
@@ -522,7 +495,6 @@ body {
                 inset 0 0 20px rgba(0,255,136,0.1);
 }
 
-/* Pricing Section */
 .pricing {
     padding: 100px 0;
     background: var(--darker-bg);
@@ -543,17 +515,17 @@ body {
 .price-card::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
+    top: -85%;
+    left: -90%;
+    width: 280%;
+    height: 270%;
     background: conic-gradient(
         transparent,
         var(--primary-color),
         transparent 30%
     );
     animation: rotate 4s linear infinite;
-    opacity: 0.1;
+    opacity: 0.2;
 }
 
 @keyframes rotate {
@@ -885,7 +857,7 @@ a:not(.cta-button):hover::before {
 .trust-elements {
     margin-top: 30px;
     padding: 20px;
-    background: rgba(10, 10, 31, 0.3);
+    background: rgba(10, 10, 31, 0.9);
     border-radius: 12px;
     border: 1px solid rgba(0, 255, 136, 0.2);
 }
@@ -895,6 +867,25 @@ a:not(.cta-button):hover::before {
     justify-content: center;
     gap: 40px;
     margin-bottom: 20px;
+}
+
+.security-seals {
+    text-align: center;
+    margin: 10px;
+}
+
+.security-seals-img {
+    max-width: calc(100% - 20px);
+    height: auto;
+    width: auto;
+    max-height: none;
+    filter: drop-shadow(0 0 5px rgba(0, 255, 136, 0.5));
+    transition: all 0.3s ease;
+}
+
+.security-seals-img:hover {
+    filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.8));
+    transform: translateY(-3px);
 }
 
 .security-badge {
@@ -921,11 +912,12 @@ a:not(.cta-button):hover::before {
 
 .payment-methods {
     text-align: center;
-    margin: 20px 0;
+    margin: 10px;
 }
 
 .payment-icons {
-    max-width: 300px;
+    max-width: calc(100% - 20px);
+    height: auto;
     filter: drop-shadow(0 0 5px rgba(0, 204, 255, 0.3));
     transition: all 0.3s ease;
 }
@@ -958,31 +950,7 @@ a:not(.cta-button):hover::before {
 }
 
 /* Ajustes para gerar mais desejo */
-.price-card {
-    position: relative;
-    overflow: hidden;
-    transform: translateZ(0);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.price-card:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2), 0 0 20px rgba(0, 204, 255, 0.2);
-}
-
-.price-card::before {
-    content: '';
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    z-index: -1;
-    border-radius: 16px;
-    opacity: 0.3;
-    animation: pulseBorder 3s infinite;
-}
 
 @keyframes pulseBorder {
     0% {
@@ -1025,6 +993,151 @@ a:not(.cta-button):hover::before {
     }
 }
 
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+    .security-seals-img, .payment-icons {
+        max-width: calc(100% - 10px);
+    }
+}
+
+@media (max-width: 576px) {
+    .trust-elements {
+        padding: 10px;
+    }
+    
+    .security-seals, .payment-methods {
+        margin: 5px;
+    }
+    
+    .bandeiras-align {
+        margin-bottom: 15px;
+    }
+}
+
+/* Estilo para a seção de LLMs */
+.llm-container {
+  margin: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.llm-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 10px;
+  background: rgba(20, 20, 45, 1.9);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  box-shadow: inset 0 0 20px rgba(0, 255, 136, 0.05);
+}
+
+.llm-content > p {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: rgba(0, 255, 136, 0.8);
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.llm-logos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 15px;
+  justify-items: center;
+  align-items: center;
+  margin-top: 5px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+}
+
+.llm-logo {
+  height: 120px;
+  width: 120px;
+  object-fit: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0; 
+  filter: brightness(1.0) contrast(1.1) drop-shadow(0 0 100px rgba(255, 255, 255, 0.4));
+  transition: all 0.3s ease;
+}
+
+.llm-logo:hover {
+  filter: brightness(1.4) contrast(1.2) drop-shadow(0 0 12px rgba(255, 255, 255, 0.7));
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .llm-logo {
+    height: 100px;
+    width: 100px;
+  }
+}
+
+@media (max-width: 576px) {
+  .llm-logo {
+    height: 80px;
+    width: 80px;
+  }
+  
+  .llm-content {
+    padding: 10px 5px;
+  }
+}
+
+/* Estilo para a seção de bandeiras de pagamento */
+.bandeiras-container {
+  margin: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.bandeiras-align {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 10px;
+  background: rgba(10, 10, 31, 0.3);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.bandeiras-align > p {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: rgba(0, 255, 136, 0.8);
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.bandeiras-img {
+  max-width: 450px;
+  width: 150%;
+  height: auto;
+  filter: drop-shadow(0 0 5px rgba(0, 204, 255, 0.3));
+  transition: all 0.3s ease;
+}
+
+.bandeiras-img:hover {
+  filter: drop-shadow(0 0 8px rgba(0, 204, 255, 0.6));
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px){
+  .bandeiras-align {
+    margin-bottom: 10px;
+  }
+  
+  .bandeiras-img {
+    max-width: 280px;
+  }
+}
+
 /* Esconder elementos de SEO visualmente, mas mantê-los para crawlers */
 .seo-keywords {
     position: absolute;
@@ -1036,34 +1149,4 @@ a:not(.cta-button):hover::before {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
-}
-
-/* Logos de LLMs */
-.llm-logos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 5px;
-    justify-items: center;
-    align-items: center;
-    margin-top: 1px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.llm-logo {
-    height: 120px;
-    width: 120px;
-    object-fit: contain;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0; 
-    filter: brightness(1.5) drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
-    transition: all 0.3s ease;
-}
-
-.llm-logo:hover {
-    filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
-    transform: translateY(-2px);
 }
