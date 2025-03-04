@@ -88,13 +88,41 @@ function initLeadCapture() {
             // Remove classe de erro se existir
             emailInput.classList.remove('error');
             
-            // Simula envio (aqui você conectaria com sua API de email marketing)
-            leadForm.innerHTML = '<div class="success-message">Obrigado! Enviamos um email de confirmação.</div>';
+            // Mostra indicador de carregamento
+            const submitButton = leadForm.querySelector('.lead-submit');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Enviando...';
+            submitButton.disabled = true;
             
-            // Registra evento de conversão
-            if (typeof fbq === 'function') {
-                fbq('track', 'Lead');
-            }
+            // Envia dados para o Google Sheets
+            submitToGoogleSheets(email)
+                .then(() => {
+                    // Mostra mensagem de sucesso
+                    leadForm.innerHTML = '<div class="success-message">Obrigado! Enviamos um email de confirmação.</div>';
+                    
+                    // Registra evento de conversão
+                    if (typeof fbq === 'function') {
+                        fbq('track', 'Lead');
+                    }
+                })
+                .catch(error => {
+                    // Restaura botão e mostra erro
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                    
+                    // Adiciona mensagem de erro
+                    const errorElement = document.createElement('div');
+                    errorElement.className = 'error-message';
+                    errorElement.textContent = 'Ocorreu um erro. Tente novamente.';
+                    
+                    // Remove mensagem de erro anterior, se existir
+                    const existingError = leadForm.querySelector('.error-message');
+                    if (existingError) {
+                        existingError.remove();
+                    }
+                    
+                    leadForm.appendChild(errorElement);
+                });
         });
     }
 }
