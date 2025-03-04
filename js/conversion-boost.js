@@ -1,12 +1,24 @@
-// Funcionalidades para aumentar a conversão
+/**
+ * @fileoverview Módulo de otimização de conversão
+ * Implementa funcionalidades para aumentar a taxa de conversão da landing page
+ */
 
-// Sticky Header
+// Constantes de configuração
+const SCROLL_TRIGGER_POINT = 300; // Ponto de scroll para mostrar o header
+const SPOTS_MIN = 7;
+const SPOTS_MAX = 15;
+const REDUCTION_MIN_DELAY = 30000; // 30 segundos
+const REDUCTION_MAX_DELAY = 120000; // 2 minutos
+
+/**
+ * Inicializa o cabeçalho fixo que aparece ao rolar a página
+ */
 function initStickyHeader() {
     const stickyHeader = document.querySelector('.sticky-header');
-    const triggerPoint = 300; // Ponto de scroll para mostrar o header
+    if (!stickyHeader) return;
     
     window.addEventListener('scroll', () => {
-        if (window.scrollY > triggerPoint) {
+        if (window.scrollY > SCROLL_TRIGGER_POINT) {
             stickyHeader.classList.add('visible');
         } else {
             stickyHeader.classList.remove('visible');
@@ -14,31 +26,36 @@ function initStickyHeader() {
     });
 }
 
-// Contador de vagas limitadas
+/**
+ * Inicializa o contador de vagas limitadas com redução gradual
+ */
 function initLimitedSpots() {
     const spotsElement = document.querySelector('.spots-number');
     if (!spotsElement) return;
     
-    // Começa com um número aleatório entre 7 e 15
-    let spots = Math.floor(Math.random() * 9) + 7;
+    // Começa com um número aleatório entre SPOTS_MIN e SPOTS_MAX
+    let spots = Math.floor(Math.random() * (SPOTS_MAX - SPOTS_MIN + 1)) + SPOTS_MIN;
     spotsElement.textContent = spots;
     
-    // Diminui aleatoriamente a cada 30-120 segundos
+    /**
+     * Reduz o número de vagas e agenda a próxima redução
+     */
     function reduceSpots() {
-        if (spots > 1) {
-            spots -= 1;
-            spotsElement.textContent = spots;
-            
-            // Adiciona classe de destaque
-            spotsElement.classList.add('highlight');
-            setTimeout(() => {
-                spotsElement.classList.remove('highlight');
-            }, 1000);
-            
-            // Agenda próxima redução
-            const nextReduction = Math.floor(Math.random() * 90000) + 30000; // 30-120 segundos
-            setTimeout(reduceSpots, nextReduction);
-        }
+        if (spots <= 1) return;
+        
+        spots -= 1;
+        spotsElement.textContent = spots;
+        
+        // Adiciona classe de destaque
+        spotsElement.classList.add('highlight');
+        setTimeout(() => {
+            spotsElement.classList.remove('highlight');
+        }, 1000);
+        
+        // Agenda próxima redução
+        const nextReduction = Math.floor(Math.random() * 
+            (REDUCTION_MAX_DELAY - REDUCTION_MIN_DELAY + 1)) + REDUCTION_MIN_DELAY;
+        setTimeout(reduceSpots, nextReduction);
     }
     
     // Inicia o processo após um tempo aleatório
@@ -46,7 +63,9 @@ function initLimitedSpots() {
     setTimeout(reduceSpots, initialDelay);
 }
 
-// Popup de saída
+/**
+ * Inicializa o popup de saída
+ */
 function initExitPopup() {
     const exitPopup = document.getElementById('exit-popup');
     const closePopup = document.querySelector('.close-popup');
@@ -68,7 +87,9 @@ function initExitPopup() {
     });
 }
 
-// Formulário de captura de leads
+/**
+ * Inicializa o formulário de captura de leads
+ */
 function initLeadCapture() {
     const leadForm = document.getElementById('lead-form');
     
@@ -127,7 +148,9 @@ function initLeadCapture() {
     }
 }
 
-// Adiciona animação de scroll para todos os elementos com a classe .animate-on-scroll
+/**
+ * Inicializa as animações de scroll para os elementos com a classe .animate-on-scroll
+ */
 function initScrollAnimations() {
     const elements = document.querySelectorAll('.animate-on-scroll');
     
@@ -151,7 +174,9 @@ function initScrollAnimations() {
     });
 }
 
-// Adiciona feedback visual aos botões
+/**
+ * Inicializa o feedback visual para os botões
+ */
 function initButtonFeedback() {
     const buttons = document.querySelectorAll('button, .cta-button');
     
@@ -170,11 +195,17 @@ function initButtonFeedback() {
     });
 }
 
-// Inicializa todas as funcionalidades quando o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', () => {
+/**
+ * Inicializa todas as funcionalidades de otimização de conversão
+ */
+function initConversionFeatures() {
     initStickyHeader();
     initExitPopup();
+    initLimitedSpots();
     initLeadCapture();
     initScrollAnimations();
     initButtonFeedback();
-});
+}
+
+// Inicializa todas as funcionalidades quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', initConversionFeatures);

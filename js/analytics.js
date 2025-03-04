@@ -1,72 +1,81 @@
-// Código para rastreamento de visitantes e análise de tráfego
-// Este script registra visualizações de página e eventos importantes
+/**
+ * @fileoverview Módulo de Analytics para rastreamento de interações do usuário
+ * Implementa funções para monitorar visualizações de página, eventos, cliques e comportamento do usuário
+ */
 
-// Função para registrar visualização de página
+// Constantes em maiúsculas
+const MAX_SCROLL = 100;
+const QUARTERS = {
+    '25%': false,
+    '50%': false,
+    '75%': false,
+    '100%': false
+};
+const TIME_MARKERS = [30, 60, 120, 300]; // Segundos
+
+/**
+ * Registra uma visualização de página no Google Analytics
+ */
 function trackPageView() {
-    // Se estiver usando Google Analytics
-    if (typeof gtag === 'function') {
-        gtag('event', 'page_view', {
-            page_title: document.title,
-            page_location: window.location.href,
-            page_path: window.location.pathname
-        });
-    }
+    if (typeof gtag !== 'function') return;
+    
+    gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: window.location.pathname
+    });
 }
 
-// Função para registrar eventos de interação
+/**
+ * Registra um evento de interação no Google Analytics
+ * @param {string} category - Categoria do evento
+ * @param {string} action - Ação realizada
+ * @param {string|null} label - Rótulo descritivo (opcional)
+ * @param {number|null} value - Valor numérico (opcional)
+ */
 function trackEvent(category, action, label = null, value = null) {
-    // Se estiver usando Google Analytics
-    if (typeof gtag === 'function') {
-        gtag('event', action, {
-            'event_category': category,
-            'event_label': label,
-            'value': value
-        });
-    }
+    if (typeof gtag !== 'function') return;
+    
+    gtag('event', action, {
+        'event_category': category,
+        'event_label': label,
+        'value': value
+    });
 }
 
-// Função para rastrear cliques em botões CTA
+/**
+ * Configura rastreamento de cliques em botões CTA
+ */
 function trackCTAClicks() {
     const ctaButtons = document.querySelectorAll('.cta-button');
     
     ctaButtons.forEach((button, index) => {
         button.addEventListener('click', () => {
-            trackEvent('Engagement', 'CTA_Click', `CTA_${index + 1}`, null);
+            trackEvent('Engagement', 'CTA_Click', `CTA_${index + 1}`);
         });
     });
 }
 
-// Função para rastrear tempo na página
+/**
+ * Monitora o tempo que o usuário permanece na página
+ */
 function trackTimeOnPage() {
-    let startTime = new Date();
-    let timeSpent = 0;
+    const startTime = new Date();
     
-    // Atualiza o tempo a cada 10 segundos
     setInterval(() => {
-        timeSpent = Math.floor((new Date() - startTime) / 1000);
+        const timeSpent = Math.floor((new Date() - startTime) / 1000);
         
-        // Registra marcos de tempo (30s, 1min, 2min, 5min)
-        if (timeSpent === 30 || timeSpent === 60 || timeSpent === 120 || timeSpent === 300) {
+        if (TIME_MARKERS.includes(timeSpent)) {
             trackEvent('Engagement', 'Time_On_Page', `${timeSpent}s`, timeSpent);
         }
-    }, 10000);
-    
-    // Registra o tempo total ao sair da página
-    window.addEventListener('beforeunload', () => {
-        timeSpent = Math.floor((new Date() - startTime) / 1000);
-        trackEvent('Engagement', 'Total_Time', `${timeSpent}s`, timeSpent);
-    });
+    }, 1000);
 }
 
-// Função para rastrear rolagem da página
+/**
+ * Monitora a rolagem da página
+ */
 function trackScroll() {
     let maxScroll = 0;
-    let quarters = {
-        '25%': false,
-        '50%': false,
-        '75%': false,
-        '100%': false
-    };
     
     window.addEventListener('scroll', () => {
         // Calcula a porcentagem de rolagem
@@ -79,41 +88,37 @@ function trackScroll() {
             maxScroll = scrollPercentage;
             
             // Verifica se atingiu cada quarto da página
-            if (scrollPercentage >= 25 && !quarters['25%']) {
-                quarters['25%'] = true;
+            if (scrollPercentage >= 25 && !QUARTERS['25%']) {
+                QUARTERS['25%'] = true;
                 trackEvent('Engagement', 'Scroll_Depth', '25%', 25);
             }
-            if (scrollPercentage >= 50 && !quarters['50%']) {
-                quarters['50%'] = true;
+            if (scrollPercentage >= 50 && !QUARTERS['50%']) {
+                QUARTERS['50%'] = true;
                 trackEvent('Engagement', 'Scroll_Depth', '50%', 50);
             }
-            if (scrollPercentage >= 75 && !quarters['75%']) {
-                quarters['75%'] = true;
+            if (scrollPercentage >= 75 && !QUARTERS['75%']) {
+                QUARTERS['75%'] = true;
                 trackEvent('Engagement', 'Scroll_Depth', '75%', 75);
             }
-            if (scrollPercentage >= 99 && !quarters['100%']) {
-                quarters['100%'] = true;
+            if (scrollPercentage >= MAX_SCROLL && !QUARTERS['100%']) {
+                QUARTERS['100%'] = true;
                 trackEvent('Engagement', 'Scroll_Depth', '100%', 100);
             }
         }
     });
 }
 
-// Inicializa o rastreamento quando o DOM estiver carregado
+// Inicialização do módulo
 document.addEventListener('DOMContentLoaded', () => {
-    // Registra visualização de página
     trackPageView();
-    
-    // Inicia rastreamento de interações
     trackCTAClicks();
     trackTimeOnPage();
     trackScroll();
     
-    // Rastreia envios de formulário
-    const leadForm = document.getElementById('lead-form');
-    if (leadForm) {
-        leadForm.addEventListener('submit', () => {
-            trackEvent('Conversion', 'Lead_Form_Submit', 'Email_Capture', null);
+    // Rastrear envios de formulário
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', () => {
+            trackEvent('Conversion', 'Form_Submit', form.id || 'lead_form');
         });
-    }
+    });
 });

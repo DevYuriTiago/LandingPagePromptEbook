@@ -1,5 +1,10 @@
+/**
+ * @fileoverview Script principal da Landing Page
+ * Responsável pela inicialização de efeitos visuais e interações do usuário
+ */
+
 // Configuração das partículas de fundo
-particlesJS('particles-js', {
+const PARTICLES_CONFIG = {
     particles: {
         number: { value: 80, density: { enable: true, value_area: 800 } },
         color: { value: '#00ff88' },
@@ -37,17 +42,33 @@ particlesJS('particles-js', {
         }
     },
     retina_detect: true
-});
+};
 
-// Efeito de digitação no título
-function typeWriter(text, element, index = 0) {
-    if (index < text.length) {
-        element.textContent += text.charAt(index);
-        setTimeout(() => typeWriter(text, element, index + 1), 50);
+/**
+ * Inicializa o efeito de partículas
+ */
+function initParticles() {
+    if (typeof particlesJS === 'function' && document.getElementById('particles-js')) {
+        particlesJS('particles-js', PARTICLES_CONFIG);
     }
 }
 
-// Efeito de revelação dos elementos
+/**
+ * Cria efeito de digitação em um elemento
+ * @param {string} text - Texto a ser digitado
+ * @param {HTMLElement} element - Elemento onde o texto será exibido
+ * @param {number} index - Índice atual da letra (usado internamente)
+ */
+function typeWriter(text, element, index = 0) {
+    if (!element || index >= text.length) return;
+    
+    element.textContent += text.charAt(index);
+    setTimeout(() => typeWriter(text, element, index + 1), 50);
+}
+
+/**
+ * Efeito de revelação dos elementos
+ */
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -66,7 +87,10 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Gerenciamento do formulário
+/**
+ * Gerenciamento do formulário
+ * @param {HTMLFormElement} form - Formulário a ser gerenciado
+ */
 function setupForm(form) {
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -132,13 +156,21 @@ function setupForm(form) {
     });
 }
 
-// Função para validar e-mail
+/**
+ * Função para validar e-mail
+ * @param {string} email - E-mail a ser validado
+ * @returns {boolean} True se o e-mail for válido, false caso contrário
+ */
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
-// Função para mostrar mensagem de erro
+/**
+ * Função para mostrar mensagem de erro
+ * @param {HTMLFormElement} form - Formulário que gerou o erro
+ * @param {string} message - Mensagem de erro a ser exibida
+ */
 function showErrorMessage(form, message) {
     // Remove qualquer mensagem existente
     const existingMessage = form.querySelector('.error-message, .success-message');
@@ -162,7 +194,10 @@ function showErrorMessage(form, message) {
     setTimeout(() => messageDiv.remove(), 5000);
 }
 
-// Função para mostrar mensagem de sucesso
+/**
+ * Função para mostrar mensagem de sucesso
+ * @param {HTMLFormElement} form - Formulário que gerou a mensagem de sucesso
+ */
 function showSuccessMessage(form) {
     // Remove qualquer mensagem existente
     const existingMessage = form.querySelector('.error-message, .success-message');
@@ -186,7 +221,10 @@ function showSuccessMessage(form) {
     setTimeout(() => messageDiv.remove(), 3000);
 }
 
-// Máscara para o campo de WhatsApp
+/**
+ * Máscara para o campo de WhatsApp
+ * @param {HTMLInputElement} input - Campo de WhatsApp a ser mascarado
+ */
 function setupWhatsAppMask(input) {
     input.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
@@ -198,42 +236,35 @@ function setupWhatsAppMask(input) {
     });
 }
 
-// Inicialização quando o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', () => {
+/**
+ * Inicializa todos os componentes da página
+ */
+function initPage() {
+    // Inicializa efeito de partículas
+    initParticles();
+    
     // Inicializa efeito de digitação
     const titleElement = document.querySelector('.hero-text h1');
-    const originalText = titleElement.textContent;
-    titleElement.textContent = '';
-    setTimeout(() => typeWriter(originalText, titleElement), 1000);
-
-    // Inicializa scroll suave
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href'))?.scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    // Inicializa animações dos elementos
-    const animateElements = document.querySelectorAll('.benefit-card, .chapter, .testimonial-card, .faq-item');
-    animateElements.forEach(element => {
-        element.style.cssText = `
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        `;
+    if (titleElement) {
+        const originalText = titleElement.textContent;
+        titleElement.textContent = '';
+        setTimeout(() => typeWriter(originalText, titleElement), 500);
+    }
+    
+    // Inicializa observador para animações de scroll
+    document.querySelectorAll('.animate-on-scroll').forEach(element => {
         observer.observe(element);
     });
-
-    // Inicializa formulário
-    const form = document.getElementById('lead-form');
-    if (form) {
+    
+    // Inicializa formulários
+    document.querySelectorAll('form').forEach(form => {
         setupForm(form);
         const whatsappInput = form.querySelector('input[name="whatsapp"]');
         if (whatsappInput) {
             setupWhatsAppMask(whatsappInput);
         }
-    }
-});
+    });
+}
+
+// Inicialização quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', initPage);
