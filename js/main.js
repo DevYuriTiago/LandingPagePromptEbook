@@ -1,27 +1,16 @@
-// Efeito de partículas no fundo
-particlesJS('particles-js', {
+/**
+ * @fileoverview Script principal da Landing Page
+ * Responsável pela inicialização de efeitos visuais e interações do usuário
+ */
+
+// Configuração das partículas de fundo
+const PARTICLES_CONFIG = {
     particles: {
-        number: {
-            value: 80,
-            density: {
-                enable: true,
-                value_area: 800
-            }
-        },
-        color: {
-            value: '#00ff88'
-        },
-        shape: {
-            type: 'circle'
-        },
-        opacity: {
-            value: 0.5,
-            random: true
-        },
-        size: {
-            value: 3,
-            random: true
-        },
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: '#00ff88' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
         line_linked: {
             enable: true,
             distance: 150,
@@ -42,52 +31,44 @@ particlesJS('particles-js', {
     interactivity: {
         detect_on: 'canvas',
         events: {
-            onhover: {
-                enable: true,
-                mode: 'grab'
-            },
+            onhover: { enable: true, mode: 'grab' },
             resize: true
         },
         modes: {
             grab: {
                 distance: 140,
-                line_linked: {
-                    opacity: 1
-                }
+                line_linked: { opacity: 1 }
             }
         }
     },
     retina_detect: true
-});
+};
 
-// Efeito de digitação no título principal
-const titleElement = document.querySelector('.hero-text h1');
-const originalText = titleElement.textContent;
-titleElement.textContent = '';
-
-function typeWriter(text, element, index = 0) {
-    if (index < text.length) {
-        element.textContent += text.charAt(index);
-        setTimeout(() => typeWriter(text, element, index + 1), 50);
+/**
+ * Inicializa o efeito de partículas
+ */
+function initParticles() {
+    if (typeof particlesJS === 'function' && document.getElementById('particles-js')) {
+        particlesJS('particles-js', PARTICLES_CONFIG);
     }
 }
 
-// Inicia a animação de digitação após 1 segundo
-setTimeout(() => {
-    typeWriter(originalText, titleElement);
-}, 1000);
+/**
+ * Cria efeito de digitação em um elemento
+ * @param {string} text - Texto a ser digitado
+ * @param {HTMLElement} element - Elemento onde o texto será exibido
+ * @param {number} index - Índice atual da letra (usado internamente)
+ */
+function typeWriter(text, element, index = 0) {
+    if (!element || index >= text.length) return;
+    
+    element.textContent += text.charAt(index);
+    setTimeout(() => typeWriter(text, element, index + 1), 50);
+}
 
-// Efeito de scroll suave
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-
-// Efeito de revelação dos elementos
+/**
+ * Efeito de revelação dos elementos
+ */
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -97,171 +78,193 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            
-            // Adiciona efeito de brilho neon ao aparecer
             entry.target.style.boxShadow = '0 0 20px rgba(0,255,136,0.2)';
             setTimeout(() => {
                 entry.target.style.boxShadow = 'none';
             }, 1000);
-            
             observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Elementos para animar
-const animateElements = document.querySelectorAll('.benefit-card, .chapter, .testimonial-card, .faq-item');
-animateElements.forEach(element => {
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(20px)';
-    element.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-    observer.observe(element);
-});
-
-// Efeito de hover nos cards
-document.querySelectorAll('.benefit-card, .chapter, .testimonial-card, .faq-item').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
+/**
+ * Gerenciamento do formulário
+ * @param {HTMLFormElement} form - Formulário a ser gerenciado
+ */
+function setupForm(form) {
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
         
-        // Adiciona brilho na direção do mouse
-        const gradientSize = 150;
-        const gradientX = (x / rect.width) * 100;
-        const gradientY = (y / rect.height) * 100;
-        
-        card.style.background = `
-            radial-gradient(
-                circle ${gradientSize}px at ${gradientX}% ${gradientY}%, 
-                rgba(0, 255, 136, 0.1),
-                transparent
-            ),
-            rgba(10, 10, 31, 0.5)
-        `;
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.background = 'rgba(10, 10, 31, 0.5)';
-    });
-});
+        // Validação dos campos
+        const name = this.querySelector('input[name="name"]').value.trim();
+        const email = this.querySelector('input[name="email"]').value.trim();
+        const whatsapp = this.querySelector('input[name="whatsapp"]').value.replace(/\D/g, '');
+        const profession = this.querySelector('input[name="profession"]').value.trim();
 
-// Gerenciamento dos botões de ação
-function setupActionButtons() {
-    const actionButtons = document.querySelectorAll('.action-button, .cta-button');
-    
-    actionButtons.forEach(button => {
-        button.addEventListener('click', async (e) => {
-            // Previne o comportamento padrão do link
-            e.preventDefault();
-            
-            const href = button.getAttribute('href');
-            if (!href) return;
+        // Validações específicas
+        if (name.length < 3) {
+            showErrorMessage(this, 'Por favor, insira seu nome completo');
+            return;
+        }
 
-            // Desabilita temporariamente o botão
-            button.disabled = true;
-            button.style.opacity = '0.7';
-            
-            try {
-                // Se for um link externo
-                if (href.startsWith('http')) {
-                    window.open(href, '_blank');
-                } 
-                // Se for uma âncora interna
-                else if (href.startsWith('#')) {
-                    const targetElement = document.querySelector(href);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            } catch (error) {
-                console.error('Erro ao processar ação do botão:', error);
-            } finally {
-                // Reabilita o botão após um pequeno delay
-                setTimeout(() => {
-                    button.disabled = false;
-                    button.style.opacity = '1';
-                }, 1000);
+        if (!isValidEmail(email)) {
+            showErrorMessage(this, 'Por favor, insira um e-mail válido');
+            return;
+        }
+
+        if (whatsapp.length !== 11) {
+            showErrorMessage(this, 'Por favor, insira um número de WhatsApp válido com DDD');
+            return;
+        }
+
+        if (profession.length < 2) {
+            showErrorMessage(this, 'Por favor, insira sua profissão');
+            return;
+        }
+
+        const formData = {
+            name,
+            email,
+            whatsapp,
+            profession
+        };
+
+        const submitButton = this.querySelector('.submit-button');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+
+        try {
+            const response = await fetch('https://prompts360.app.n8n.cloud/webhook-test/consult-signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                this.reset();
+                showSuccessMessage(this);
+            } else {
+                throw new Error('Erro ao enviar formulário');
             }
-        });
+        } catch (error) {
+            console.error('Erro:', error);
+            showErrorMessage(this, 'Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Receber Templates Grátis';
+        }
     });
 }
 
-// Inicializa os botões quando o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', () => {
-    setupActionButtons();
-});
+/**
+ * Função para validar e-mail
+ * @param {string} email - E-mail a ser validado
+ * @returns {boolean} True se o e-mail for válido, false caso contrário
+ */
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
 
-// Efeito de destaque no CTA principal
-const ctaButton = document.querySelector('.cta-button');
-setInterval(() => {
-    ctaButton.style.animation = 'none';
-    ctaButton.offsetHeight; // Trigger reflow
-    ctaButton.style.animation = 'pulse 1s cubic-bezier(0.4, 0, 0.2, 1)';
-}, 5000);
+/**
+ * Função para mostrar mensagem de erro
+ * @param {HTMLFormElement} form - Formulário que gerou o erro
+ * @param {string} message - Mensagem de erro a ser exibida
+ */
+function showErrorMessage(form, message) {
+    // Remove qualquer mensagem existente
+    const existingMessage = form.querySelector('.error-message, .success-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
 
-// Adiciona loading no botão de compra
-document.querySelectorAll('.cta-button').forEach(button => {
-    button.addEventListener('click', function(e) {
-        e.preventDefault();
-        const href = this.getAttribute('href');
-        
-        // Adiciona classe de loading
-        this.classList.add('loading');
-        this.textContent = 'Redirecionando...';
-        
-        // Simula um pequeno delay antes do redirecionamento
-        setTimeout(() => {
-            window.location.href = href;
-        }, 1500); // 1.5 segundos de delay
-    });
-});
-
-// Efeito de paralaxe no scroll
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll('.benefit-card, .chapter');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'error-message';
+    messageDiv.textContent = message;
+    messageDiv.style.cssText = `
+        color: #ff3333;
+        margin-top: 10px;
+        text-align: center;
+        padding: 10px;
+        background-color: rgba(255, 51, 51, 0.1);
+        border-radius: 4px;
+    `;
     
-    parallaxElements.forEach(element => {
-        const speed = 0.1;
-        const yPos = -(scrolled * speed);
-        element.style.transform = `translateY(${yPos}px)`;
+    form.appendChild(messageDiv);
+    setTimeout(() => messageDiv.remove(), 5000);
+}
+
+/**
+ * Função para mostrar mensagem de sucesso
+ * @param {HTMLFormElement} form - Formulário que gerou a mensagem de sucesso
+ */
+function showSuccessMessage(form) {
+    // Remove qualquer mensagem existente
+    const existingMessage = form.querySelector('.error-message, .success-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'success-message';
+    messageDiv.textContent = 'Formulário enviado com sucesso!';
+    messageDiv.style.cssText = `
+        color: #00ff88;
+        margin-top: 10px;
+        text-align: center;
+        padding: 10px;
+        background-color: rgba(0, 255, 136, 0.1);
+        border-radius: 4px;
+    `;
+    
+    form.appendChild(messageDiv);
+    setTimeout(() => messageDiv.remove(), 3000);
+}
+
+/**
+ * Máscara para o campo de WhatsApp
+ * @param {HTMLInputElement} input - Campo de WhatsApp a ser mascarado
+ */
+function setupWhatsAppMask(input) {
+    input.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length <= 11) {
+            value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+            value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+            e.target.value = value;
+        }
     });
-});
+}
 
-// Cursor personalizado
-const cursor = document.querySelector('.cursor-glow');
-
-document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-});
-
-// Efeito de hover no cursor
-document.querySelectorAll('a, button, .benefit-card, .chapter, .testimonial-card, .faq-item').forEach(element => {
-    element.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(2)';
-        cursor.style.mixBlendMode = 'screen';
+/**
+ * Inicializa todos os componentes da página
+ */
+function initPage() {
+    // Inicializa efeito de partículas
+    initParticles();
+    
+    // Inicializa efeito de digitação
+    const titleElement = document.querySelector('.hero-text h1');
+    if (titleElement) {
+        const originalText = titleElement.textContent;
+        titleElement.textContent = '';
+        setTimeout(() => typeWriter(originalText, titleElement), 500);
+    }
+    
+    // Inicializa observador para animações de scroll
+    document.querySelectorAll('.animate-on-scroll').forEach(element => {
+        observer.observe(element);
     });
     
-    element.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursor.style.mixBlendMode = 'screen';
+    // Inicializa formulários
+    document.querySelectorAll('form').forEach(form => {
+        setupForm(form);
+        const whatsappInput = form.querySelector('input[name="whatsapp"]');
+        if (whatsappInput) {
+            setupWhatsAppMask(whatsappInput);
+        }
     });
-});
+}
 
-// Efeito de clique no cursor
-document.addEventListener('mousedown', () => {
-    cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
-});
-
-document.addEventListener('mouseup', () => {
-    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-});
-
-// Ocultar cursor padrão
-document.body.style.cursor = 'none';
+// Inicialização quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', initPage);
