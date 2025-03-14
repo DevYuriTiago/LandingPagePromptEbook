@@ -12,13 +12,66 @@
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
     <link rel="icon" type="image/png" href="img/favicon.png">
     
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/conversion-boost.css">
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="css/conversion-boost.css" as="style">
+    <link rel="preload" href="foto_ebook.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="img/logo.svg" as="image">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Critical CSS inline -->
+    <style>
+        :root {
+            --primary-color: #00ff88;
+            --secondary-color: #00ccff;
+            --text-color: #e0e0e0;
+            --dark-bg: #0a0a1f;
+            --darker-bg: #050510;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            background: var(--dark-bg);
+            margin: 0;
+            padding: 0;
+        }
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    
+    <!-- Non-critical CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/conversion-boost.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- Defer non-critical resources -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+    
+    <!-- Defer scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+    
     <!-- Meta Pixel Code -->
     <script>
         !function(f,b,e,v,n,t,s)
@@ -48,6 +101,12 @@
 
         gtag('config', 'G-MP7TZJNWD0');
     </script>
+    
+    <!-- DNS prefetch para domínios externos -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://connect.facebook.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     
     <!-- SEO Hidden Keywords -->
     <div class="seo-keywords" style="display:none; position:absolute; visibility:hidden; width:0; height:0; overflow:hidden;">
@@ -87,7 +146,7 @@
                     <a href="#pricing" class="cta-button">Quero Dominar a Engenharia de Prompts</a>
                 </div>
                 <div class="hero-image">
-                    <img src="foto_ebook.png" alt="Ebook Engenharia de Prompts" class="ebook-cover">
+                    <img src="foto_ebook.webp" alt="Ebook Engenharia de Prompts" class="ebook-cover" width="400" height="600" loading="eager" fetchpriority="high">
                 </div>
             </div>
         </div>
@@ -364,9 +423,111 @@
     </div>
 
     <div class="cursor-glow"></div>
-    <script src="js/main.js"></script>
-    <script src="js/sheets-integration.js"></script>
-    <script src="js/analytics.js"></script>
-    <script src="js/conversion-boost.js"></script>
+    
+    <!-- Scripts carregados de forma otimizada -->
+    <script>
+        // Função para carregar scripts de forma assíncrona
+        function loadScript(src, async = true, defer = true) {
+            const script = document.createElement('script');
+            script.src = src;
+            if (async) script.async = true;
+            if (defer) script.defer = true;
+            document.body.appendChild(script);
+        }
+        
+        // Efeito de digitação para o título principal
+        function typeWriter(text, element, index = 0) {
+            if (!element || index >= text.length) return;
+            
+            element.textContent += text.charAt(index);
+            setTimeout(() => typeWriter(text, element, index + 1), 50);
+        }
+        
+        // Carrega scripts não críticos após o carregamento da página
+        window.addEventListener('load', function() {
+            // Carregar scripts
+            loadScript('js/main.js');
+            loadScript('js/sheets-integration.js');
+            loadScript('js/analytics.js');
+            loadScript('js/conversion-boost.js');
+            
+            // Efeito de digitação no título principal
+            const titleElement = document.querySelector('.hero-text h1');
+            if (titleElement) {
+                const titleText = titleElement.textContent;
+                titleElement.textContent = '';
+                setTimeout(() => {
+                    typeWriter(titleText, titleElement);
+                }, 500);
+            }
+            
+            // Inicializa partículas apenas após carregamento completo
+            if (typeof particlesJS === 'function' && document.getElementById('particles-js')) {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: { value: 80, density: { enable: true, value_area: 800 } },
+                        color: { value: '#00ff88' },
+                        shape: { type: 'circle' },
+                        opacity: { value: 0.5, random: true },
+                        size: { value: 3, random: true },
+                        line_linked: {
+                            enable: true,
+                            distance: 150,
+                            color: '#00ff88',
+                            opacity: 0.4,
+                            width: 1
+                        },
+                        move: {
+                            enable: true,
+                            speed: 2,
+                            direction: 'none',
+                            random: true,
+                            straight: false,
+                            out_mode: 'out',
+                            bounce: false
+                        }
+                    },
+                    interactivity: {
+                        detect_on: 'canvas',
+                        events: {
+                            onhover: { enable: true, mode: 'grab' },
+                            resize: true
+                        }
+                    }
+                });
+            }
+            
+            // Inicializar o popup de saída
+            const exitPopup = document.getElementById('exit-popup');
+            const closePopup = document.querySelector('.close-popup');
+            
+            if (exitPopup && closePopup) {
+                // Mostrar popup quando o mouse sair da janela
+                document.addEventListener('mouseout', function(e) {
+                    if (e.clientY < 0 && !sessionStorage.getItem('popupShown')) {
+                        exitPopup.classList.add('visible');
+                        sessionStorage.setItem('popupShown', 'true');
+                    }
+                });
+                
+                // Fechar popup
+                closePopup.addEventListener('click', function() {
+                    exitPopup.classList.remove('visible');
+                });
+            }
+            
+            // Ativar o sticky header quando o usuário rolar a página
+            const stickyHeader = document.querySelector('.sticky-header');
+            if (stickyHeader) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        stickyHeader.classList.add('visible');
+                    } else {
+                        stickyHeader.classList.remove('visible');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
