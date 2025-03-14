@@ -757,7 +757,10 @@ a:not(.cta-button):hover::before {
 }
 
 /* Efeito de hover nos cards com borda neon */
-.benefit-card:hover, .chapter:hover, .testimonial-card:hover, .faq-item:hover {
+.benefit-card:hover,
+.chapter:hover,
+.testimonial-card:hover,
+.faq-item:hover {
     border-color: var(--primary-color);
     box-shadow: 0 0 20px rgba(0,255,136,0.3),
                 inset 0 0 20px rgba(0,255,136,0.1);
@@ -1149,4 +1152,92 @@ a:not(.cta-button):hover::before {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+/* Otimizações para dispositivos móveis */
+.mobile-optimized .benefits-card,
+.mobile-optimized .feature-card,
+.mobile-optimized .testimonial-card {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+}
+
+.mobile-optimized .particles-js-canvas-el {
+    opacity: 0.5;
+}
+
+.mobile-optimized .hero {
+    padding: 60px 0 40px;
+}
+
+.mobile-optimized .section {
+    padding: 40px 0;
+}
+
+.mobile-optimized .animate-on-scroll {
+    opacity: 1;
+    transform: translateY(0);
+    transition: none;
+}
+
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 1.8rem;
+        line-height: 1.3;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .benefit-card, .feature-card, .testimonial-card {
+        padding: 15px;
+    }
+    
+    .cta-section {
+        padding: 40px 0;
+    }
+    
+    .footer {
+        padding: 30px 0;
+    }
+    
+    /* Melhorar desempenho de rolagem */
+    * {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Reduzir complexidade visual */
+    .particles-js-canvas-el {
+        opacity: 0.3;
+    }
+}
+
+/* Otimizações para telas muito pequenas */
+@media (max-width: 480px) {
+    .hero-text h1 {
+        font-size: 1.5rem;
+    }
+    
+    .cta-button {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .benefits-grid, .features-grid, .testimonials-grid {
+        gap: 15px;
+    }
+    
+    .pricing-card {
+        padding: 15px;
+    }
+    
+    .pricing-card-header h3 {
+        font-size: 1.3rem;
+    }
 }
