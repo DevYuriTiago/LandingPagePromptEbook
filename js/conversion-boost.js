@@ -125,6 +125,11 @@ function initLeadCapture() {
                     if (typeof fbq === 'function') {
                         fbq('track', 'Lead');
                     }
+                    
+                    // Redireciona para a página de agradecimento após 1 segundo
+                    setTimeout(() => {
+                        window.location.href = 'thank-you.html';
+                    }, 1000);
                 })
                 .catch(error => {
                     // Restaura botão e mostra erro

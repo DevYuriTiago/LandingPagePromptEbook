@@ -3,53 +3,59 @@
  * Responsável pela inicialização de efeitos visuais e interações do usuário
  */
 
-// Configuração das partículas de fundo
-const PARTICLES_CONFIG = {
-    particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: '#00ff88' },
-        shape: { type: 'circle' },
-        opacity: { value: 0.5, random: true },
-        size: { value: 3, random: true },
-        line_linked: {
-            enable: true,
-            distance: 150,
-            color: '#00ff88',
-            opacity: 0.4,
-            width: 1
-        },
-        move: {
-            enable: true,
-            speed: 2,
-            direction: 'none',
-            random: true,
-            straight: false,
-            out_mode: 'out',
-            bounce: false
-        }
-    },
-    interactivity: {
-        detect_on: 'canvas',
-        events: {
-            onhover: { enable: true, mode: 'grab' },
-            resize: true
-        },
-        modes: {
-            grab: {
-                distance: 140,
-                line_linked: { opacity: 1 }
+// Configuração das partículas de fundo (usando IIFE para evitar conflitos)
+(function() {
+    // Verificar se a configuração já existe
+    if (typeof window.PARTICLES_CONFIG !== 'undefined') {
+        return; // Já foi definido, não redefina
+    }
+    
+    window.PARTICLES_CONFIG = {
+        particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: '#00ff88' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.5, random: true },
+            size: { value: 3, random: true },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#00ff88',
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 2,
+                direction: 'none',
+                random: true,
+                straight: false,
+                out_mode: 'out',
+                bounce: false
             }
-        }
-    },
-    retina_detect: true
-};
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: {
+                onhover: { enable: true, mode: 'grab' },
+                onclick: { enable: true, mode: 'push' },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 140, line_linked: { opacity: 1 } },
+                push: { particles_nb: 4 }
+            }
+        },
+        retina_detect: true
+    };
+})();
 
 /**
  * Inicializa o efeito de partículas
  */
 function initParticles() {
     if (typeof particlesJS === 'function' && document.getElementById('particles-js')) {
-        particlesJS('particles-js', PARTICLES_CONFIG);
+        particlesJS('particles-js', window.PARTICLES_CONFIG);
     }
 }
 
@@ -88,18 +94,38 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 /**
- * Gerenciamento do formulário
- * @param {HTMLFormElement} form - Formulário a ser gerenciado
+ * Configura o comportamento do formulário
+ * @param {HTMLFormElement} form - Formulário a ser configurado
  */
 function setupForm(form) {
+    if (!form) return;
+    
+    // Verifica se é o formulário de lead (simplificado) ou outro formulário
+    const isLeadForm = form.id === 'lead-form';
+    
     form.addEventListener('submit', async function(e) {
+        // Se for o formulário de lead, não fazemos nada aqui pois ele é tratado pelo conversion-boost.js
+        if (isLeadForm) {
+            return; // Deixa o conversion-boost.js lidar com este formulário
+        }
+        
         e.preventDefault();
         
-        // Validação dos campos
-        const name = this.querySelector('input[name="name"]').value.trim();
-        const email = this.querySelector('input[name="email"]').value.trim();
-        const whatsapp = this.querySelector('input[name="whatsapp"]').value.replace(/\D/g, '');
-        const profession = this.querySelector('input[name="profession"]').value.trim();
+        // Validação dos campos (apenas para formulários completos, não o lead-form)
+        const nameInput = this.querySelector('input[name="name"]');
+        const emailInput = this.querySelector('input[name="email"]');
+        const whatsappInput = this.querySelector('input[name="whatsapp"]');
+        const professionInput = this.querySelector('input[name="profession"]');
+        
+        // Só prossegue se todos os campos existirem
+        if (!nameInput || !emailInput || !whatsappInput || !professionInput) {
+            return;
+        }
+        
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const whatsapp = whatsappInput.value.replace(/\D/g, '');
+        const profession = professionInput.value.trim();
 
         // Validações específicas
         if (name.length < 3) {
@@ -256,8 +282,8 @@ function initPage() {
         observer.observe(element);
     });
     
-    // Inicializa formulários
-    document.querySelectorAll('form').forEach(form => {
+    // Inicializa formulários (exceto o formulário de lead que é tratado pelo conversion-boost.js)
+    document.querySelectorAll('form:not(#lead-form)').forEach(form => {
         setupForm(form);
         const whatsappInput = form.querySelector('input[name="whatsapp"]');
         if (whatsappInput) {
