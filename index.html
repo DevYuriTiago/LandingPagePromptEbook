@@ -60,8 +60,31 @@
 </head>
 
 <body>
-    <!-- Linha de Conexão Parallax com Movimentos Inclinados -->
-    <div class="connection-line"></div>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-container">
+            <div class="loading-logo">
+                <img src="img/loading.png" alt="Prompts360 Loading" class="loading-image">
+            </div>
+            <div class="loading-text">
+                <h2>Prompts360</h2>
+                <p>Carregando experiência inteligente...</p>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="progress-percentage">0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content - Initially Hidden -->
+    <div id="main-content" class="main-content">
+        <!-- Linha de Conexão Parallax com Movimentos Inclinados -->
+        <div class="connection-line"></div>
     
     <!-- Seção Inicial com Logo -->
     <section class="intro-section">
@@ -350,67 +373,91 @@
     </section>
 
     <!-- Ebook Section -->
-    <section class="section">
+    <section class="section ebook-section">
         <div class="section-connector"></div>
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">E-book Exclusivo</h2>
-                <p class="section-subtitle">Guia completo de prompts para IA que pode ser seu por diferentes formas</p>
+                <h2 class="section-title">📚 E-book Exclusivo</h2>
+                <p class="section-subtitle">Guia completo de prompts para IA que transformará sua produtividade</p>
             </div>
             
             <div class="ebook-bonus-section">
-                <div class="hero-content">
-                    <div class="hero-text">
+                <div class="ebook-content-wrapper">
+                    <!-- Lado Esquerdo: Informações do E-book -->
+                    <div class="ebook-info">
                         <div class="bonus-highlight">🎁 GRÁTIS para quem fechar projeto!</div>
                         
-                        <h3>E-book: "Guia Definitivo de Prompts para IA"</h3>
-                        <p>Um guia prático com mais de 200 prompts testados e aprovados para ChatGPT, Claude e outras IAs, organizados por área de negócio.</p>
+                        <h3 class="ebook-title">E-book: "Guia Definitivo de Prompts para IA"</h3>
+                        <p class="ebook-description">
+                            Um guia prático com mais de 200 prompts testados e aprovados para ChatGPT, Claude, 
+                            Gemini e outras IAs, organizados por área de negócio para máxima eficiência.
+                        </p>
                         
-                        <div class="hero-benefits">
-                            <div class="benefit-item">
-                                <span class="benefit-icon">200+</span>
-                                <span>200+ prompts testados</span>
+                        <div class="ebook-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">📊</span>
+                                <div class="feature-text">
+                                    <strong>200+ Prompts</strong>
+                                    <span>Testados e aprovados</span>
+                                </div>
                             </div>
-                            <div class="benefit-item">
-                                <span class="benefit-icon">★</span>
-                                <span>Organizados por área</span>
+                            <div class="feature-item">
+                                <span class="feature-icon">🎯</span>
+                                <div class="feature-text">
+                                    <strong>Por Categoria</strong>
+                                    <span>Organizados por área</span>
+                                </div>
                             </div>
-                            <div class="benefit-item">
-                                <span class="benefit-icon">→</span>
-                                <span>Exemplos práticos</span>
+                            <div class="feature-item">
+                                <span class="feature-icon">⚡</span>
+                                <div class="feature-text">
+                                    <strong>Aplicação Prática</strong>
+                                    <span>Exemplos reais de uso</span>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="ebook-condition">
-                            <strong>Como funciona:</strong>
-                            Feche qualquer projeto conosco e receba o e-book gratuitamente como bônus. 
-                            Não quer fechar projeto agora? Pode adquirir separadamente por apenas R$ 10,00.
-                        </div>
-                        
-                        <div class="price-comparison">
-                            <div class="price-option bonus">
-                                <div class="price-tag bonus">BÔNUS GRÁTIS</div>
-                                <h4>Com Projeto</h4>
-                                <div class="price-promo">R$ 0,00</div>
-                                <p>E-book incluído gratuitamente em qualquer projeto da Prompts360</p>
-                                <a href="#lead-form" class="cta-button">Quero Consultoria + E-book</a>
-                            </div>
-                            
-                            <div class="price-option standalone">
-                                <div class="price-tag standalone">COMPRA AVULSA</div>
-                                <h4>Apenas E-book</h4>
-                                <div class="price-original">De R$ 49,90</div>
-                                <div class="price-promo">Por R$ 10,00</div>
-                                <div class="price-limited">⚡ Oferta limitada!</div>
-                                <a href="https://pay.kiwify.com.br/aeYGH77" class="cta-button-ebook" target="_blank">🚀 Comprar Agora por R$ 10,00</a>
-                            </div>
+                        <div class="ebook-how-it-works">
+                            <h4>🔥 Como Funciona:</h4>
+                            <p>Feche qualquer projeto conosco e receba o e-book <strong>gratuitamente</strong> como bônus. 
+                            Não quer fechar projeto agora? Pode adquirir separadamente por apenas R$ 10,00.</p>
                         </div>
                     </div>
                     
-                    <div class="hero-visual">
-                        <div class="ebook-preview">
-                            <img src="foto_ebook.webp" alt="E-book Guia de Prompts" style="max-width: 300px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                    <!-- Lado Direito: Imagem do E-book -->
+                    <div class="ebook-visual">
+                        <div class="ebook-image-container">
+                            <img src="foto_ebook.webp" alt="E-book Guia de Prompts" class="ebook-image">
+                            <div class="ebook-glow"></div>
                         </div>
+                    </div>
+                </div>
+                
+                <!-- Cards de Preço -->
+                <div class="pricing-cards">
+                    <div class="price-option bonus">
+                        <div class="price-tag bonus">BÔNUS GRÁTIS</div>
+                        <h4>Com Projeto</h4>
+                        <div class="price-value">
+                            <span class="currency">R$</span>
+                            <span class="amount">0,00</span>
+                        </div>
+                        <p class="price-description">E-book incluído gratuitamente em qualquer projeto da Prompts360</p>
+                        <a href="#lead-form" class="cta-button cta-primary">Quero Consultoria + E-book</a>
+                    </div>
+                    
+                    <div class="price-option standalone">
+                        <div class="price-tag standalone">COMPRA AVULSA</div>
+                        <h4>Apenas E-book</h4>
+                        <div class="price-original">De R$ 49,90</div>
+                        <div class="price-value special">
+                            <span class="currency">R$</span>
+                            <span class="amount">10,00</span>
+                        </div>
+                        <div class="price-limited">⚡ Oferta limitada!</div>
+                        <a href="https://pay.kiwify.com.br/aeYGH77" class="cta-button-ebook" target="_blank">
+                            🚀 Comprar Agora por R$ 10,00
+                        </a>
                     </div>
                 </div>
             </div>
@@ -455,6 +502,7 @@
             </div>
         </div>
     </footer>
+    </div> <!-- End Main Content -->
 
     <!-- Scripts -->
     <script src="js/main.js" defer></script>

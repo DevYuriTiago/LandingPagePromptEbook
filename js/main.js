@@ -6,8 +6,124 @@
 // Configuração global
 const CONFIG = {
     headerShowThreshold: window.innerHeight * 0.8,
-    animationDuration: 600
+    animationDuration: 600,
+    loadingDuration: 3000 // 3 segundos de loading
 };
+
+/**
+ * Controla o loading screen com barra de progresso
+ */
+function initLoadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen');
+    const mainContent = document.getElementById('main-content');
+    const progressFill = document.getElementById('progress-fill');
+    const progressPercentage = document.getElementById('progress-percentage');
+    
+    if (!loadingScreen || !mainContent || !progressFill || !progressPercentage) {
+        console.warn('❌ Elementos de loading não encontrados');
+        return;
+    }
+    
+    console.log('🔄 Iniciando loading screen...');
+    
+    let progress = 0;
+    let resourcesLoaded = 0;
+    
+    // Lista de recursos para monitorar
+    const resourcesToLoad = [
+        'css/prompts360-final.css',
+        'logo_prompts360.png',
+        'foto_ebook.webp',
+        'js/main.js'
+    ];
+    
+    const totalResources = resourcesToLoad.length + 2; // +2 para DOM e fonts
+    
+    // Função para atualizar progresso
+    function updateProgress() {
+        resourcesLoaded++;
+        progress = Math.min((resourcesLoaded / totalResources) * 100, 100);
+        
+        progressFill.style.width = `${progress}%`;
+        progressPercentage.textContent = `${Math.round(progress)}%`;
+        
+        console.log(`📊 Progresso: ${Math.round(progress)}% (${resourcesLoaded}/${totalResources})`);
+        
+        if (progress >= 100) {
+            setTimeout(() => {
+                finishLoading();
+            }, 500);
+        }
+    }
+    
+    // Simula carregamento progressivo com timer de backup
+    const backupTimer = setInterval(() => {
+        if (resourcesLoaded < totalResources - 1) {
+            updateProgress();
+        }
+    }, 400);
+    
+    // Monitora carregamento de imagens
+    const images = document.querySelectorAll('img');
+    let imagesLoaded = 0;
+    
+    images.forEach(img => {
+        if (img.complete) {
+            imagesLoaded++;
+        } else {
+            img.addEventListener('load', () => {
+                imagesLoaded++;
+                if (imagesLoaded === 1) updateProgress(); // Primeira imagem carregada
+            });
+            img.addEventListener('error', () => {
+                imagesLoaded++;
+                if (imagesLoaded === 1) updateProgress();
+            });
+        }
+    });
+    
+    // Monitora carregamento de fonts
+    if (document.fonts) {
+        document.fonts.ready.then(() => {
+            console.log('🔤 Fonts carregadas');
+            updateProgress();
+        });
+    } else {
+        setTimeout(() => updateProgress(), 800);
+    }
+    
+    // DOM já carregado
+    updateProgress();
+    
+    // Função para finalizar o loading
+    function finishLoading() {
+        clearInterval(backupTimer);
+        console.log('✅ Loading concluído');
+        
+        // Esconde o loading screen
+        loadingScreen.classList.add('hidden');
+        
+        // Mostra o conteúdo principal
+        mainContent.classList.add('visible');
+        
+        // Remove o loading screen do DOM após a transição
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 500);
+    }
+    
+    // Carregamento forçado após tempo máximo
+    setTimeout(() => {
+        if (!loadingScreen.classList.contains('hidden')) {
+            console.log('⏰ Forçando finalização do loading (timeout)');
+            clearInterval(backupTimer);
+            progress = 100;
+            progressFill.style.width = '100%';
+            progressPercentage.textContent = '100%';
+            setTimeout(() => finishLoading(), 200);
+        }
+    }, CONFIG.loadingDuration + 1000);
+}
 
 /**
  * Controla a visibilidade do header baseado no scroll
@@ -483,6 +599,10 @@ function init() {
     }
     
     try {
+        // Inicializa loading screen primeiro
+        initLoadingScreen();
+        
+        // Inicializa outros componentes (executados em paralelo durante o loading)
         cleanupOldElements(); // Limpa elementos antigos primeiro
         initCustomCursor();
         initHeaderControl();
