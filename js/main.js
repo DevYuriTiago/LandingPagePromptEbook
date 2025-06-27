@@ -205,8 +205,25 @@ function initFormHandler() {
         submitButton.disabled = true;
         
         try {
-            // Simula envio do formulário
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            // Coleta os dados do formulário
+            const formData = {
+                name: form.querySelector('#name').value,
+                email: form.querySelector('#email').value,
+                phone: form.querySelector('#phone').value,
+                company: form.querySelector('#company').value,
+                position: form.querySelector('#position').value,
+                interest: form.querySelector('#interest').value,
+                challenge: form.querySelector('#challenge').value,
+                timestamp: new Date().toISOString(),
+                source: window.location.href
+            };
+            
+            // Envia para Google Sheets
+            if (typeof submitToGoogleSheets === 'function') {
+                await submitToGoogleSheets(formData);
+            } else {
+                console.warn('Função submitToGoogleSheets não encontrada');
+            }
             
             // Mostra mensagem de sucesso
             showAlert('Obrigado! Entraremos em contato em breve.', 'success');
@@ -225,6 +242,7 @@ function initFormHandler() {
             }
             
         } catch (error) {
+            console.error('Erro ao enviar formulário:', error);
             showAlert('Erro ao enviar formulário. Tente novamente.', 'error');
         } finally {
             submitButton.textContent = originalText;
