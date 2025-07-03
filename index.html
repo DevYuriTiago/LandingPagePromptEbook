@@ -504,9 +504,31 @@
     </footer>
     </div> <!-- End Main Content -->
 
-    <!-- Scripts -->
-    <script src="js/sheets-integration.js" defer></script>
-    <script src="js/main.js" defer></script>
-    <script src="js/analytics.js" defer></script>
+    <!-- Scripts - Nova Arquitetura Componentizada -->
+    <script type="module" src="js/main-componentized.js"></script>
+    
+    <!-- Scripts de Compatibilidade (Fallback) -->
+    <script src="js/sheets-integration-componentized.js" defer></script>
+    <script src="js/analytics-componentized.js" defer></script>
+    
+    <!-- Scripts Originais (Backup) -->
+    <script>
+        // Fallback para compatibilidade com scripts antigos
+        if (typeof window.app === 'undefined') {
+            console.warn('⚠️ Arquitetura nova não carregada, usando scripts originais');
+            const scriptElements = [
+                'js/sheets-integration.js',
+                'js/main.js',
+                'js/analytics.js'
+            ];
+            
+            scriptElements.forEach(src => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.defer = true;
+                document.head.appendChild(script);
+            });
+        }
+    </script>
 </body>
 </html>
