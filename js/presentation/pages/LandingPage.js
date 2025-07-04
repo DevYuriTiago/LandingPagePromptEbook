@@ -24,262 +24,171 @@ export class LandingPage {
      */
     async init() {
         try {
-            utils.log('Inicializando Landing Page', 'info');
-
-            // Aguarda DOM estar pronto
-            await this.waitForDOM();
-
-            // Inicializa componentes
-            this.initializeComponents();
-
-            // Configura event listeners globais
-            this.setupGlobalEventListeners();
-
-            // Inicializa analytics
-            this.initializeAnalytics();
-
-            // Configura tratamento de erros
-            this.setupErrorHandling();
-
+            // Aguarda o DOM estar pronto
+            await utils.waitForDOMReady();
+            
+            // Configura tratamento de erros global
+            this.setupGlobalErrorHandling();
+            
+            // Inicializa componentes na ordem correta
+            await this.initializeComponents();
+            
+            // Configura eventos globais
+            this.setupGlobalEvents();
+            
+            // Rastreia carregamento da página
+            await this.trackPageLoad();
+            
+            // Marca como inicializado
             this.isInitialized = true;
-            utils.log('Landing Page inicializada com sucesso', 'info');
-
+            
             // Emite evento de inicialização
             eventBus.emit('app:initialized');
-
+            
         } catch (error) {
-            utils.log(`Erro ao inicializar aplicação: ${error.message}`, 'error');
             this.handleInitializationError(error);
         }
     }
 
     /**
-     * Aguarda o DOM estar pronto
-     */
-    async waitForDOM() {
-        return new Promise((resolve) => {
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', resolve);
-            } else {
-                resolve();
-            }
-        });
-    }
-
-    /**
      * Inicializa todos os componentes
      */
-    initializeComponents() {
-        utils.log('Inicializando componentes', 'info');
-
-        // Loading Screen (primeiro componente)
+    async initializeComponents() {
+        // 1. Loading Screen (primeiro para mostrar feedback)
         this.components.loadingScreen = new LoadingScreen();
-
-        // Header
+        await this.components.loadingScreen.init();
+        
+        // 2. Header (navegação)
         this.components.header = new Header();
-
-        // Lead Form
+        await this.components.header.init();
+        
+        // 3. Lead Form (principal)
         this.components.leadForm = new LeadForm();
-
-        // Scroll Animations
+        await this.components.leadForm.init();
+        
+        // 4. Scroll Animations (visual)
         this.components.scrollAnimations = new ScrollAnimations();
-
-        // Configura comunicação entre componentes
-        this.setupComponentCommunication();
-    }
-
-    /**
-     * Configura comunicação entre componentes
-     */
-    setupComponentCommunication() {
-        // Loading Screen finished -> Show other components
-        eventBus.on('loading:finished', () => {
-            this.onLoadingFinished();
-        });
-
-        // Lead Form success -> Analytics
-        eventBus.on('lead:submit_success', (data) => {
-            this.analyticsUseCase.trackConversion({
-                value: 100, // Valor estimado de um lead
-                currency: 'BRL',
-                event_name: 'lead_submitted'
-            });
-        });
-
-        // Header navigation -> Smooth scroll
-        eventBus.on('header:navigation', (data) => {
-            this.analyticsUseCase.trackCTAClick(`nav_${data.target}`);
-        });
-
-        // CTA clicks -> Analytics
-        eventBus.on('header:cta_clicked', (data) => {
-            this.analyticsUseCase.trackCTAClick('header_cta');
-        });
-    }
-
-    /**
-     * Configura event listeners globais
-     */
-    setupGlobalEventListeners() {
-        // Cliques em CTAs
-        this.setupCTATracking();
-
-        // Navegação smooth scroll
-        this.setupSmoothScrollNavigation();
-
-        // Prevenção de spam no formulário
-        this.setupFormSpamPrevention();
-
-        // Keyboard navigation
-        this.setupKeyboardNavigation();
-    }
-
-    /**
-     * Configura rastreamento de CTAs
-     */
-    setupCTATracking() {
-        const ctaButtons = document.querySelectorAll(CONFIG.SELECTORS.ctaButtons);
+        await this.components.scrollAnimations.init();
         
-        ctaButtons.forEach((button, index) => {
-            button.addEventListener('click', (e) => {
-                const ctaText = button.textContent.trim();
-                const ctaHref = button.getAttribute('href');
-                
-                this.analyticsUseCase.trackCTAClick(ctaText, button);
-                
-                // Se for link interno, previne comportamento padrão
-                if (ctaHref && ctaHref.startsWith('#')) {
-                    e.preventDefault();
-                    this.scrollToSection(ctaHref.substring(1));
-                }
-            });
-        });
+        // 5. Configura otimizações
+        this.setupOptimizations();
     }
 
     /**
-     * Configura navegação smooth scroll
+     * Configura tratamento de erros global
      */
-    setupSmoothScrollNavigation() {
-        const navLinks = document.querySelectorAll('a[href^="#"]');
-        
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                const targetId = link.getAttribute('href').substring(1);
-                this.scrollToSection(targetId);
-            });
-        });
-    }
-
-    /**
-     * Faz scroll para uma seção
-     * @param {string} sectionId - ID da seção
-     */
-    scrollToSection(sectionId) {
-        const targetElement = document.getElementById(sectionId);
-        
-        if (targetElement) {
-            const headerHeight = this.components.header?.element?.offsetHeight || 0;
-            const offset = headerHeight + 20;
-            
-            utils.smoothScrollTo(targetElement, offset);
-        }
-    }
-
-    /**
-     * Configura prevenção de spam no formulário
-     */
-    setupFormSpamPrevention() {
-        let submitAttempts = 0;
-        let lastSubmitTime = 0;
-        
-        eventBus.on('lead:submit_attempt', () => {
-            const now = Date.now();
-            const timeDiff = now - lastSubmitTime;
-            
-            if (timeDiff < 3000) { // 3 segundos entre tentativas
-                submitAttempts++;
-                
-                if (submitAttempts > 3) {
-                    utils.log('Possível spam detectado', 'warn');
-                    eventBus.emit('form:spam_detected');
-                }
-            } else {
-                submitAttempts = 0;
-            }
-            
-            lastSubmitTime = now;
-        });
-    }
-
-    /**
-     * Configura navegação por teclado
-     */
-    setupKeyboardNavigation() {
-        document.addEventListener('keydown', (e) => {
-            // ESC para fechar modais ou voltar ao topo
-            if (e.key === 'Escape') {
-                this.scrollToTop();
-            }
-            
-            // Tab navigation enhancement
-            if (e.key === 'Tab') {
-                document.body.classList.add('keyboard-navigation');
-            }
+    setupGlobalErrorHandling() {
+        // Erros JavaScript
+        window.addEventListener('error', (event) => {
+            this.handleGlobalError(event.error);
         });
         
-        // Remove classe quando usar mouse
-        document.addEventListener('click', () => {
-            document.body.classList.remove('keyboard-navigation');
+        // Erros de Promise não tratadas
+        window.addEventListener('unhandledrejection', (event) => {
+            this.handleGlobalError(event.reason);
         });
-    }
-
-    /**
-     * Faz scroll para o topo
-     */
-    scrollToTop() {
-        utils.smoothScrollTo(document.body, 0);
-    }
-
-    /**
-     * Inicializa analytics
-     */
-    initializeAnalytics() {
-        this.analyticsUseCase.initializeAutoTracking();
-    }
-
-    /**
-     * Configura tratamento de erros
-     */
-    setupErrorHandling() {
-        // Erros JavaScript não capturados
-        window.addEventListener('error', (e) => {
-            utils.log(`Erro JavaScript: ${e.message}`, 'error');
-            this.handleGlobalError(e);
-        });
-
-        // Promises rejeitadas não capturadas
-        window.addEventListener('unhandledrejection', (e) => {
-            utils.log(`Promise rejeitada: ${e.reason}`, 'error');
-            this.handleGlobalError(e);
-        });
-
+        
         // Erros de recursos
-        window.addEventListener('error', (e) => {
-            if (e.target !== window) {
-                utils.log(`Erro de recurso: ${e.target.src || e.target.href}`, 'error');
+        window.addEventListener('error', (event) => {
+            if (event.target !== window) {
+                this.handleResourceError(event.target);
             }
         }, true);
     }
 
     /**
-     * Manipula erro global
+     * Configura eventos globais
+     */
+    setupGlobalEvents() {
+        // Evento de redimensionamento
+        window.addEventListener('resize', utils.debounce(() => {
+            eventBus.emit('window:resize');
+        }, 250));
+        
+        // Evento de scroll
+        window.addEventListener('scroll', utils.throttle(() => {
+            eventBus.emit('window:scroll', {
+                scrollY: window.scrollY,
+                scrollX: window.scrollX
+            });
+        }, 16));
+        
+        // Evento de mudança de visibilidade
+        document.addEventListener('visibilitychange', () => {
+            eventBus.emit('page:visibility', {
+                visible: !document.hidden
+            });
+        });
+        
+        // Evento de beforeunload
+        window.addEventListener('beforeunload', () => {
+            eventBus.emit('app:beforeunload');
+        });
+    }
+
+    /**
+     * Configura otimizações
+     */
+    setupOptimizations() {
+        // Lazy loading
+        this.setupLazyLoading();
+        
+        // Prefetch de recursos
+        this.setupResourcePrefetching();
+        
+        // Service Worker
+        this.setupServiceWorker();
+    }
+
+    /**
+     * Rastreia carregamento da página
+     */
+    async trackPageLoad() {
+        try {
+            // Rastreia performance
+            const performanceInfo = this.getPerformanceInfo();
+            
+            await this.analyticsUseCase.trackEvent('page_load', {
+                url: window.location.href,
+                referrer: document.referrer,
+                userAgent: navigator.userAgent,
+                ...performanceInfo
+            });
+            
+            // Rastreia visualização da página
+            await this.analyticsUseCase.trackEvent('page_view', {
+                url: window.location.href,
+                title: document.title
+            });
+            
+        } catch (error) {
+            // Falha no analytics não deve quebrar a aplicação
+            // Erro silencioso
+        }
+    }
+
+    /**
+     * Manipula erros de recursos
+     * @param {HTMLElement} element - Elemento que falhou
+     */
+    handleResourceError(element) {
+        const errorInfo = {
+            type: element.tagName,
+            src: element.src || element.href,
+            url: window.location.href
+        };
+        
+        // Em produção, enviar para serviço de monitoramento
+        eventBus.emit('app:resource-error', errorInfo);
+    }
+
+    /**
+     * Manipula erros globais
      * @param {Error} error - Erro
      */
     handleGlobalError(error) {
         // Em produção, você enviaria para um serviço de monitoramento
-        console.error('Erro global capturado:', error);
+        // console.error('Erro global capturado:', error);
         
         // Emite evento para componentes reagirem
         eventBus.emit('app:error', error);
@@ -290,53 +199,98 @@ export class LandingPage {
      * @param {Error} error - Erro de inicialização
      */
     handleInitializationError(error) {
-        // Mostra mensagem de erro ao usuário
-        const errorMessage = document.createElement('div');
-        errorMessage.className = 'initialization-error';
-        errorMessage.innerHTML = `
-            <h3>Erro ao carregar a página</h3>
-            <p>Ocorreu um erro durante o carregamento. Tente recarregar a página.</p>
-            <button onclick="window.location.reload()">Recarregar</button>
-        `;
+        // Em produção, você enviaria para um serviço de monitoramento
         
-        document.body.appendChild(errorMessage);
+        // Emite evento de erro crítico
+        eventBus.emit('app:critical-error', error);
         
-        // Força o fim do loading se ainda estiver ativo
-        if (this.components.loadingScreen) {
-            this.components.loadingScreen.forceFinish();
+        // Tenta recuperação básica
+        this.attemptRecovery();
+    }
+
+    /**
+     * Tenta recuperar a aplicação após erro crítico
+     */
+    attemptRecovery() {
+        try {
+            // Remove loading screen se existir
+            const loadingElement = document.querySelector('.loading-screen');
+            if (loadingElement) {
+                loadingElement.remove();
+            }
+            
+            // Mostra conteúdo básico
+            document.body.classList.add('error-recovery');
+            
+            // Emite evento de recuperação
+            eventBus.emit('app:recovery-attempted');
+            
+        } catch (recoveryError) {
+            // Se a recuperação falhar, pelo menos remove o loading
+            document.body.innerHTML = document.body.innerHTML.replace(
+                /<div[^>]*loading-screen[^>]*>.*?<\/div>/gs, 
+                ''
+            );
         }
     }
 
     /**
-     * Callback chamado quando loading termina
+     * Verifica se a aplicação está inicializada
      */
-    onLoadingFinished() {
-        utils.log('Loading terminado, inicializando recursos pós-loading', 'info');
-        
-        // Inicializa recursos que precisam do DOM visível
-        this.initializePostLoadingResources();
-        
-        // Força primeira verificação de animações
-        if (this.components.scrollAnimations) {
-            this.components.scrollAnimations.animateAll();
-        }
-        
-        // Emite evento
-        eventBus.emit('app:ready');
+    isAppInitialized() {
+        return this.isInitialized;
     }
 
     /**
-     * Inicializa recursos após o loading
+     * Obtém componente por nome
+     * @param {string} name - Nome do componente
      */
-    initializePostLoadingResources() {
-        // Lazy loading de imagens
-        this.setupLazyLoading();
+    getComponent(name) {
+        return this.components[name];
+    }
+
+    /**
+     * Obtém todos os componentes
+     */
+    getComponents() {
+        return { ...this.components };
+    }
+
+    /**
+     * Recarrega a aplicação
+     */
+    async reload() {
+        // Destroi componentes existentes
+        this.destroy();
         
-        // Prefetch de recursos
-        this.setupResourcePrefetching();
+        // Reinicializa
+        await this.init();
+    }
+
+    /**
+     * Pausa a aplicação
+     */
+    pause() {
+        Object.values(this.components).forEach(component => {
+            if (component.pause) {
+                component.pause();
+            }
+        });
         
-        // Service worker (se necessário)
-        this.setupServiceWorker();
+        eventBus.emit('app:paused');
+    }
+
+    /**
+     * Resume a aplicação
+     */
+    resume() {
+        Object.values(this.components).forEach(component => {
+            if (component.resume) {
+                component.resume();
+            }
+        });
+        
+        eventBus.emit('app:resumed');
     }
 
     /**
@@ -418,10 +372,20 @@ export class LandingPage {
             }
         });
         
-        // Limpa event listeners
-        eventBus.removeAllListeners();
+        // Limpa componentes
+        this.components = {};
         
+        // Remove event listeners
+        window.removeEventListener('error', this.handleGlobalError);
+        window.removeEventListener('unhandledrejection', this.handleGlobalError);
+        
+        // Marca como não inicializado
         this.isInitialized = false;
-        utils.log('Landing Page destruída', 'info');
+        
+        // Emite evento de destruição
+        eventBus.emit('app:destroyed');
     }
 }
+
+// Instância global
+export const landingPage = new LandingPage();

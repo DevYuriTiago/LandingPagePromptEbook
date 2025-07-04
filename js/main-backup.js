@@ -180,7 +180,7 @@ function setupForm(form) {
                     throw new Error('Erro ao enviar formulário');
                 }
             } catch (error) {
-                console.error('Erro:', error);
+                // console.error('Erro:', error);
                 showErrorMessage(this, 'Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
             } finally {
                 submitButton.disabled = false;
@@ -208,7 +208,7 @@ function setupForm(form) {
                     showSuccessMessage(this, 'E-mail cadastrado com sucesso!');
                 }
             } catch (error) {
-                console.error('Erro:', error);
+                // console.error('Erro:', error);
                 showErrorMessage(this, 'Erro ao cadastrar e-mail. Tente novamente.');
             }
         }

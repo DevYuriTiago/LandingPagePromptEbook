@@ -193,10 +193,10 @@ function init() {
         initSmoothScroll();
         initParallaxLine();
         
-        console.log('✅ Prompts360 Landing Page initialized successfully');
+        // console.log('✅ Prompts360 Landing Page initialized successfully');
         
     } catch (error) {
-        console.error('❌ Error initializing landing page:', error);
+        // console.error('❌ Error initializing landing page:', error);
     }
 }
 

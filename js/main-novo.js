@@ -24,7 +24,7 @@ function initializeApp() {
     
     // Marca como carregado
     isLoaded = true;
-    console.log('Prompts360 Landing Page loaded successfully');
+    // console.log('Prompts360 Landing Page loaded successfully');
 }
 
 /**
@@ -144,7 +144,7 @@ function initFormHandling() {
                 trackFormSubmission(data);
             })
             .catch((error) => {
-                console.error('Erro ao enviar formulário:', error);
+                // console.error('Erro ao enviar formulário:', error);
                 showErrorMessage();
             })
             .finally(() => {
@@ -223,10 +223,10 @@ async function submitToGoogleSheets(data) {
         });
         
         // No-cors mode doesn't allow reading response, so we assume success
-        console.log('Form submitted successfully');
+        // console.log('Form submitted successfully');
         return true;
     } catch (error) {
-        console.error('Error submitting form:', error);
+        // console.error('Error submitting form:', error);
         throw error;
     }
 }
@@ -352,7 +352,7 @@ function trackFormSubmission(data) {
         });
     }
     
-    console.log('Form submission tracked:', data.interest);
+    // console.log('Form submission tracked:', data.interest);
 }
 
 /**

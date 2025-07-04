@@ -37,7 +37,7 @@ class App {
 
         } catch (error) {
             utils.log(`❌ Erro ao inicializar aplicação: ${error.message}`, 'error');
-            console.error('Erro detalhado:', error);
+            // console.error('Erro detalhado:', error);
         }
     }
 

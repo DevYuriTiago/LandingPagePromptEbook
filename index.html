@@ -19,8 +19,9 @@
     <!-- DNS prefetch -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="dns-prefetch" href="https://connect.facebook.net">
+    <!-- Comentado temporariamente para evitar bloqueios do adblocker -->
+    <!-- <link rel="dns-prefetch" href="https://www.googletagmanager.com"> -->
+    <!-- <link rel="dns-prefetch" href="https://connect.facebook.net"> -->
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +31,8 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/prompts360-final.css">
     
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code - Comentado temporariamente -->
+    <!--
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -48,8 +50,10 @@
         src="https://www.facebook.com/tr?id=2007255499786261&ev=PageView&noscript=1"
         />
     </noscript>
+    -->
 
-    <!-- Google Analytics -->
+    <!-- Google Analytics - Comentado temporariamente -->
+    <!--
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MP7TZJNWD0"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -57,6 +61,7 @@
         gtag('js', new Date());
         gtag('config', 'G-MP7TZJNWD0');
     </script>
+    -->
 </head>
 
 <body>
@@ -352,7 +357,7 @@
                         <option value="chatbots">Chatbots & Assistentes Virtuais</option>
                         <option value="automation">Automação de Processos</option>
                         <option value="analytics">Analytics & BI com IA</option>
-                        <option value="custom-ai">Desenvolvimento de Sistemas IA</option>
+                        <option value="custom-ai">Desenvolvimento de Sistemas</option>
                         <option value="consulting">Consultoria em IA</option>
                         <option value="other">Outro</option>
                     </select>
@@ -504,31 +509,275 @@
     </footer>
     </div> <!-- End Main Content -->
 
-    <!-- Scripts - Nova Arquitetura Componentizada -->
-    <script type="module" src="js/main-componentized.js"></script>
-    
-    <!-- Scripts de Compatibilidade (Fallback) -->
-    <script src="js/sheets-integration-componentized.js" defer></script>
-    <script src="js/analytics-componentized.js" defer></script>
-    
-    <!-- Scripts Originais (Backup) -->
+    <!-- Scripts - Versão Corrigida -->
     <script>
-        // Fallback para compatibilidade com scripts antigos
-        if (typeof window.app === 'undefined') {
-            console.warn('⚠️ Arquitetura nova não carregada, usando scripts originais');
-            const scriptElements = [
-                'js/sheets-integration.js',
-                'js/main.js',
-                'js/analytics.js'
-            ];
+        // Inicialização da aplicação
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa o loading screen com progresso
+            initLoadingScreen();
             
-            scriptElements.forEach(src => {
-                const script = document.createElement('script');
-                script.src = src;
-                script.defer = true;
-                document.head.appendChild(script);
+            // Inicializa funcionalidades básicas
+            setTimeout(() => {
+                initBasicFeatures();
+            }, 100);
+            
+            // Fallback de segurança - garante que o conteúdo seja sempre exibido
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                const mainContent = document.getElementById('main-content');
+                
+                if (loadingScreen && loadingScreen.style.display !== 'none') {
+                    loadingScreen.style.display = 'none';
+                }
+                
+                if (mainContent && mainContent.style.display !== 'block') {
+                    mainContent.style.display = 'block';
+                    mainContent.style.opacity = '1';
+                    mainContent.classList.add('show');
+                }
+            }, 5000); // Após 5 segundos, força a exibição
+        });
+        
+        function initLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const mainContent = document.getElementById('main-content');
+            const progressFill = document.getElementById('progress-fill');
+            const progressPercentage = document.getElementById('progress-percentage');
+            
+            if (!loadingScreen || !mainContent || !progressFill || !progressPercentage) {
+                // Se não encontrar elementos, mostra conteúdo imediatamente
+                if (mainContent) {
+                    mainContent.style.display = 'block';
+                    mainContent.style.opacity = '1';
+                    mainContent.classList.add('show');
+                }
+                if (loadingScreen) {
+                    loadingScreen.style.display = 'none';
+                }
+                return;
+            }
+            
+            // Simula progresso de carregamento
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 15 + 5; // Incremento aleatório entre 5-20%
+                progress = Math.min(progress, 100);
+                
+                progressFill.style.width = `${progress}%`;
+                progressPercentage.textContent = `${Math.round(progress)}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    
+                    // Aguarda um pouco antes de ocultar
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = '0';
+                        
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                            mainContent.style.display = 'block';
+                            
+                            // Fade in do conteúdo
+                            setTimeout(() => {
+                                mainContent.style.transition = 'opacity 0.5s ease-in';
+                                mainContent.style.opacity = '1';
+                                mainContent.classList.add('show');
+                            }, 50);
+                        }, 500);
+                    }, 300);
+                }
+            }, 150); // Atualiza a cada 150ms
+        }
+        
+        function initBasicFeatures() {
+            // Header scroll behavior
+            const header = document.getElementById('header');
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    const scrollY = window.scrollY;
+                    
+                    if (scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                    
+                    if (scrollY > 100) {
+                        header.classList.add('visible');
+                    } else {
+                        header.classList.remove('visible');
+                    }
+                });
+            }
+            
+            // Smooth scrolling para links internos
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        const headerHeight = header ? header.offsetHeight : 0;
+                        const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        // Para elementos que só devem animar uma vez
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            animatedElements.forEach(el => observer.observe(el));
+            
+            // Form handling
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', handleFormSubmit);
             });
         }
+        
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            if (submitButton) {
+                const originalText = submitButton.textContent;
+                submitButton.textContent = 'Enviando...';
+                submitButton.disabled = true;
+                
+                // Simula envio
+                setTimeout(() => {
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                    
+                    // Mostra mensagem de sucesso
+                    showMessage('Formulário enviado com sucesso!', 'success');
+                    form.reset();
+                }, 2000);
+            }
+        }
+        
+        function showMessage(message, type = 'info') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `alert alert-${type}`;
+            messageDiv.textContent = message;
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 5px;
+                z-index: 10000;
+                color: white;
+                font-weight: bold;
+                background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+                animation: slideIn 0.3s ease-out;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => {
+                    messageDiv.remove();
+                }, 300);
+            }, 3000);
+        }
+        
+        // CSS para animações e correções
+        const style = document.createElement('style');
+        style.textContent = `
+            /* Animações */
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            
+            .fade-in {
+                animation: fadeIn 0.5s ease-out;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            .animate-on-scroll {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.6s ease-out;
+            }
+            
+            .animate-on-scroll.animated {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            /* Correções para evitar tela preta */
+            body {
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+            }
+            
+            .main-content {
+                display: none;
+                min-height: 100vh;
+                opacity: 0;
+            }
+            
+            .main-content.show {
+                display: block;
+                opacity: 1;
+            }
+            
+            /* Loading screen melhorado */
+            .loading-screen {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+                transition: opacity 0.5s ease-out;
+            }
+            
+            .progress-fill {
+                transition: width 0.3s ease-out;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

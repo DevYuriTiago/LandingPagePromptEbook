@@ -162,15 +162,16 @@ export const utils = {
         const timestamp = new Date().toISOString();
         const logMessage = `[${timestamp}] ${message}`;
         
+        // Logs removidos para produção
         switch (type) {
             case 'warn':
-                console.warn(logMessage);
+                // console.warn(logMessage);
                 break;
             case 'error':
-                console.error(logMessage);
+                // console.error(logMessage);
                 break;
             default:
-                console.log(logMessage);
+                // console.log(logMessage);
         }
     }
 };

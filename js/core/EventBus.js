@@ -46,7 +46,7 @@ class EventBus {
                 try {
                     callback(data);
                 } catch (error) {
-                    console.error(`Erro ao executar callback do evento ${event}:`, error);
+                    // Erro silencioso para evitar logs desnecessários
                 }
             });
         }

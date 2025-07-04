@@ -31,11 +31,11 @@ function initLegacyCompatibility() {
     
     // Inicializa funcionalidades legadas se necessário
     if (typeof gtag !== 'undefined') {
-        console.log('🔍 Google Analytics detectado');
+        // console.log('🔍 Google Analytics detectado');
     }
     
     if (typeof fbq !== 'undefined') {
-        console.log('📘 Facebook Pixel detectado');
+        // console.log('📘 Facebook Pixel detectado');
     }
 }
 
@@ -49,15 +49,15 @@ function initLoadingScreen() {
     const progressPercentage = document.getElementById('progress-percentage');
     
     if (!loadingScreen || !mainContent || !progressFill || !progressPercentage) {
-        console.warn('❌ Elementos de loading não encontrados');
+        // console.warn('❌ Elementos de loading não encontrados');
         return;
     }
     
-    console.log('🔄 Iniciando loading screen (modo compatibilidade)...');
+    // console.log('🔄 Iniciando loading screen (modo compatibilidade)...');
     
     // A nova arquitetura já cuida disso, mas mantém para compatibilidade
     if (app.isInitialized) {
-        console.log('✅ Loading já gerenciado pela nova arquitetura');
+        // console.log('✅ Loading já gerenciado pela nova arquitetura');
         return;
     }
     
@@ -115,13 +115,13 @@ function initHeaderBehavior() {
     const header = document.getElementById('header');
     
     if (!header) {
-        console.warn('❌ Header não encontrado');
+        // console.warn('❌ Header não encontrado');
         return;
     }
     
     // A nova arquitetura já cuida disso
     if (app.landingPage && app.landingPage.components.header) {
-        console.log('✅ Header já gerenciado pela nova arquitetura');
+        // console.log('✅ Header já gerenciado pela nova arquitetura');
         return;
     }
     
@@ -165,7 +165,7 @@ function legacyHeaderImplementation() {
 function initScrollAnimations() {
     // A nova arquitetura já cuida disso
     if (app.landingPage && app.landingPage.components.scrollAnimations) {
-        console.log('✅ Animações já gerenciadas pela nova arquitetura');
+        // console.log('✅ Animações já gerenciadas pela nova arquitetura');
         return;
     }
     
@@ -228,7 +228,7 @@ function initScrollLineEffect() {
     const connectionLine = document.querySelector('.connection-line');
     
     if (!connectionLine) {
-        console.warn('❌ Linha de conexão não encontrada');
+        // console.warn('❌ Linha de conexão não encontrada');
         return;
     }
     
@@ -254,12 +254,12 @@ function initConnectionLine() {
  * Função principal de inicialização
  */
 async function init() {
-    console.log('🚀 Inicializando aplicação (modo híbrido)...');
+    // console.log('🚀 Inicializando aplicação (modo híbrido)...');
     
     try {
         // Inicializa arquitetura limpa
         if (app && !app.isInitialized) {
-            console.log('🏗️ Inicializando nova arquitetura...');
+            // console.log('🏗️ Inicializando nova arquitetura...');
             await app.init();
         }
         
@@ -270,7 +270,7 @@ async function init() {
         setTimeout(() => {
             // Inicializa funcionalidades legadas apenas se necessário
             if (!app.isInitialized) {
-                console.log('⚠️ Fallback para implementação legada');
+                // console.log('⚠️ Fallback para implementação legada');
                 initLoadingScreen();
                 initHeaderBehavior();
                 initScrollAnimations();
@@ -279,13 +279,13 @@ async function init() {
             }
         }, 100);
         
-        console.log('✅ Aplicação inicializada com sucesso!');
+        // console.log('✅ Aplicação inicializada com sucesso!');
         
     } catch (error) {
-        console.error('❌ Erro na inicialização:', error);
+        // console.error('❌ Erro na inicialização:', error);
         
         // Fallback completo para implementação legada
-        console.log('🔄 Executando fallback completo...');
+        // console.log('🔄 Executando fallback completo...');
         initLoadingScreen();
         initHeaderBehavior();
         initScrollAnimations();
@@ -309,4 +309,4 @@ window.initSmoothScrolling = initSmoothScrolling;
 window.initScrollLineEffect = initScrollLineEffect;
 window.initConnectionLine = initConnectionLine;
 
-console.log('📦 Main.js componentizado carregado');
+// console.log('📦 Main.js componentizado carregado');

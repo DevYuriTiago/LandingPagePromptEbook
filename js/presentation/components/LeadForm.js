@@ -176,7 +176,7 @@ export class LeadForm extends BaseComponent {
         // Implementação simplificada
         // Em um projeto real, seria mais elaborado
         if (suggestions.length > 0) {
-            console.log('Sugestões:', suggestions);
+            // Sugestões processadas silenciosamente
         }
     }
 
