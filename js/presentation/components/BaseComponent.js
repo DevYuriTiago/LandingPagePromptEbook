@@ -3,8 +3,8 @@
  * Implementa funcionalidades comuns e padrões de design
  */
 
-import eventBus from '../core/EventBus.js';
-import { utils } from '../core/utils.js';
+import eventBus from '../../core/EventBus.js';
+import { utils } from '../../core/utils.js';
 
 export class BaseComponent {
     constructor(selector, options = {}) {

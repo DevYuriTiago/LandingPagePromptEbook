@@ -71,7 +71,8 @@ export const CONFIG = {
         ctaButtons: '.cta-button',
         leadForm: '#leadForm',
         animateElements: '.animate-on-scroll',
-        navLinks: '.nav-link'
+        navLinks: '.nav-link',
+        casesSection: '#cases-section'
     },
 
     // Classes CSS
