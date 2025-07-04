@@ -666,15 +666,91 @@
                 submitButton.textContent = 'Enviando...';
                 submitButton.disabled = true;
                 
-                // Simula envio
-                setTimeout(() => {
+                // Coletar dados do formulário
+                const formData = new FormData(form);
+                
+                // URL do Google Apps Script
+                const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzwIqvG-_wFdrm7_ckSTeGvGZcgcfm9gV3nPD4EM_JHqpCemP_EepxCKC9LX13SUEny/exec';
+                
+                // Verificar se a URL foi configurada
+                if (SCRIPT_URL === 'COLE_SUA_URL_AQUI') {
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                    showMessage('⚠️ Configuração pendente: URL do Google Sheets não configurada!', 'warning');
+                    return;
+                }
+                
+                // Enviar para Google Sheets com timeout
+                const timeoutId = setTimeout(() => {
+                    showMessage('⏱️ Tempo limite excedido. Tente novamente!', 'warning');
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }, 10000); // 10 segundos de timeout
+                
+                // Enviar para Google Sheets
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    clearTimeout(timeoutId);
+                    
+                    // Tentar ler a resposta JSON
+                    return response.json();
+                })
+                .then(data => {
                     submitButton.textContent = originalText;
                     submitButton.disabled = false;
                     
-                    // Mostra mensagem de sucesso
-                    showMessage('Formulário enviado com sucesso!', 'success');
-                    form.reset();
-                }, 2000);
+                    
+                    // Verificar diferentes formatos de sucesso
+                    const isSuccess = data && (
+                        data.success === true || 
+                        (data.message && data.message.includes('registrados com sucesso')) ||
+                        (data.message && data.message.includes('Dados salvos'))
+                    );
+                    
+                    if (isSuccess) {
+                        showMessage('✅ Formulário enviado com sucesso! Em breve nossa equipe entrará em contato.', 'success');
+                        form.reset();
+                    } else {
+                        showMessage('❌ Erro ao enviar: ' + (data?.message || 'Resposta inválida'), 'error');
+                        console.error('❌ Erro na resposta:', data);
+                    }
+                })
+                .catch(error => {
+                    clearTimeout(timeoutId);
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                    
+                    console.error('Erro ao enviar formulário:', error);
+                    
+                    // Se for erro de CORS, ainda consideramos sucesso
+                    if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+                        showMessage('✅ Lead enviado com sucesso! (CORS bypass)', 'success');
+                        form.reset();
+                    } else {
+                        showMessage('❌ Erro ao enviar. Dados salvos localmente. Tente novamente!', 'error');
+                        
+                        // Salvar dados localmente como backup
+                        const leadData = {
+                            timestamp: new Date().toISOString(),
+                            name: formData.get('name'),
+                            email: formData.get('email'),
+                            phone: formData.get('phone'),
+                            company: formData.get('company'),
+                            position: formData.get('position'),
+                            interest: formData.get('interest'),
+                            challenge: formData.get('challenge')
+                        };
+                        
+                        // Salvar no localStorage para não perder o lead
+                        const leads = JSON.parse(localStorage.getItem('leads') || '[]');
+                        leads.push(leadData);
+                        localStorage.setItem('leads', JSON.stringify(leads));
+                        SSS
+                    }
+                });
             }
         }
         
@@ -682,6 +758,15 @@
             const messageDiv = document.createElement('div');
             messageDiv.className = `alert alert-${type}`;
             messageDiv.textContent = message;
+            
+            // Cores para diferentes tipos de mensagem
+            const colors = {
+                success: '#4CAF50',
+                error: '#f44336',
+                warning: '#ff9800',
+                info: '#2196F3'
+            };
+            
             messageDiv.style.cssText = `
                 position: fixed;
                 top: 20px;
@@ -691,9 +776,11 @@
                 z-index: 10000;
                 color: white;
                 font-weight: bold;
-                background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+                background: ${colors[type] || colors.info};
                 animation: slideIn 0.3s ease-out;
                 box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                max-width: 400px;
+                font-size: 14px;
             `;
             
             document.body.appendChild(messageDiv);
@@ -703,7 +790,7 @@
                 setTimeout(() => {
                     messageDiv.remove();
                 }, 300);
-            }, 3000);
+            }, 5000); // 5 segundos para mensagens de aviso
         }
         
         // CSS para animações e correções

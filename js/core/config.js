@@ -34,7 +34,7 @@ export const CONFIG = {
             minNameLength: 2,
             maxMessageLength: 500
         },
-        googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbz8OZshnVdr26pq8uGeulhc41V4eep-JAJ7u5GbCfkqCC2MkV7Y48kxZ7oyZhdnfEO0Qg/exec'
+        googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbwHyA0bK65Bm9NhPxHVxvTavKdIhxfuKSqi2GVcCaZr7fDxHz6V_kTpW3Tkv_yvSWEN/exec'
     },
 
     // Configurações de Loading
