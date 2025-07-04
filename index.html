@@ -328,26 +328,31 @@
                 <div class="form-group">
                     <label for="name" class="form-label">Nome Completo *</label>
                     <input type="text" id="name" name="name" class="form-input" required>
+                    <span class="error-label" id="name-error"></span>
                 </div>
                 
                 <div class="form-group">
                     <label for="email" class="form-label">E-mail Corporativo *</label>
                     <input type="email" id="email" name="email" class="form-input" required>
+                    <span class="error-label" id="email-error"></span>
                 </div>
                 
                 <div class="form-group">
                     <label for="phone" class="form-label">Telefone *</label>
-                    <input type="tel" id="phone" name="phone" class="form-input" required>
+                    <input type="tel" id="phone" name="phone" class="form-input" required placeholder="(00) 0.0000-0000">
+                    <span class="error-label" id="phone-error"></span>
                 </div>
                 
                 <div class="form-group">
                     <label for="company" class="form-label">Empresa *</label>
                     <input type="text" id="company" name="company" class="form-input" required>
+                    <span class="error-label" id="company-error"></span>
                 </div>
                 
                 <div class="form-group">
                     <label for="position" class="form-label">Cargo *</label>
                     <input type="text" id="position" name="position" class="form-input" required>
+                    <span class="error-label" id="position-error"></span>
                 </div>
                 
                 <div class="form-group">
@@ -361,11 +366,13 @@
                         <option value="consulting">Consultoria em IA</option>
                         <option value="other">Outro</option>
                     </select>
+                    <span class="error-label" id="interest-error"></span>
                 </div>
                 
                 <div class="form-group">
                     <label for="challenge" class="form-label">Descreva seu principal desafio</label>
                     <textarea id="challenge" name="challenge" class="form-textarea" rows="4" placeholder="Como podemos ajudar sua empresa?"></textarea>
+                    <span class="error-label" id="challenge-error"></span>
                 </div>
                 
                 <button type="submit" class="cta-button">Solicitar Consultoria Gratuita</button>
@@ -519,6 +526,7 @@
             // Inicializa funcionalidades básicas
             setTimeout(() => {
                 initBasicFeatures();
+                setupFormValidation(); // Adicionar validação do formulário
             }, 100);
             
             // Fallback de segurança - garante que o conteúdo seja sempre exibido
@@ -587,6 +595,182 @@
                     }, 300);
                 }
             }, 150); // Atualiza a cada 150ms
+        }
+        
+        // Funções de Validação e Formatação
+        function setupFormValidation() {
+            const form = document.getElementById('leadForm');
+            if (!form) return;
+            
+            // Configurar validação para cada campo
+            setupFieldValidation('name', validateName);
+            setupFieldValidation('email', validateEmail);
+            setupFieldValidation('phone', validatePhone);
+            setupFieldValidation('company', validateCompany);
+            setupFieldValidation('position', validatePosition);
+            setupFieldValidation('interest', validateInterest);
+            
+            // Configurar formatação do telefone
+            setupPhoneFormatting();
+        }
+        
+        function setupFieldValidation(fieldId, validator) {
+            const field = document.getElementById(fieldId);
+            const errorLabel = document.getElementById(fieldId + '-error');
+            
+            if (!field || !errorLabel) return;
+            
+            // Validação em tempo real (blur)
+            field.addEventListener('blur', function() {
+                const result = validator(this.value);
+                showFieldValidation(field, errorLabel, result);
+            });
+            
+            // Limpar erro ao digitar
+            field.addEventListener('input', function() {
+                if (field.classList.contains('error')) {
+                    field.classList.remove('error');
+                    errorLabel.classList.remove('show');
+                }
+            });
+        }
+        
+        function showFieldValidation(field, errorLabel, result) {
+            if (result.isValid) {
+                field.classList.remove('error');
+                field.classList.add('valid');
+                errorLabel.classList.remove('show');
+            } else {
+                field.classList.remove('valid');
+                field.classList.add('error');
+                errorLabel.textContent = result.message;
+                errorLabel.classList.add('show');
+            }
+        }
+        
+        // Validadores
+        function validateName(value) {
+            if (!value || value.trim().length < 2) {
+                return { isValid: false, message: 'Nome deve ter pelo menos 2 caracteres' };
+            }
+            if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(value)) {
+                return { isValid: false, message: 'Nome deve conter apenas letras e espaços' };
+            }
+            return { isValid: true };
+        }
+        
+        function validateEmail(value) {
+            if (!value) {
+                return { isValid: false, message: 'E-mail é obrigatório' };
+            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                return { isValid: false, message: 'E-mail inválido' };
+            }
+            return { isValid: true };
+        }
+        
+        function validatePhone(value) {
+            if (!value) {
+                return { isValid: false, message: 'Telefone é obrigatório' };
+            }
+            // Remover formatação para validar
+            const numbersOnly = value.replace(/\D/g, '');
+            if (numbersOnly.length < 10 || numbersOnly.length > 11) {
+                return { isValid: false, message: 'Telefone deve ter 10 ou 11 dígitos' };
+            }
+            return { isValid: true };
+        }
+        
+        function validateCompany(value) {
+            if (!value || value.trim().length < 2) {
+                return { isValid: false, message: 'Nome da empresa é obrigatório' };
+            }
+            return { isValid: true };
+        }
+        
+        function validatePosition(value) {
+            if (!value || value.trim().length < 2) {
+                return { isValid: false, message: 'Cargo é obrigatório' };
+            }
+            return { isValid: true };
+        }
+        
+        function validateInterest(value) {
+            if (!value) {
+                return { isValid: false, message: 'Selecione uma opção de interesse' };
+            }
+            return { isValid: true };
+        }
+        
+        // Formatação do telefone
+        function setupPhoneFormatting() {
+            const phoneField = document.getElementById('phone');
+            if (!phoneField) return;
+            
+            phoneField.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é número
+                
+                // Limita a 11 dígitos
+                if (value.length > 11) {
+                    value = value.slice(0, 11);
+                }
+                
+                // Aplica formatação
+                if (value.length >= 11) {
+                    // (XX) X.XXXX-XXXX
+                    value = value.replace(/(\d{2})(\d{1})(\d{4})(\d{4})/, '($1) $2.$3-$4');
+                } else if (value.length >= 10) {
+                    // (XX) XXXX-XXXX
+                    value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+                } else if (value.length >= 6) {
+                    // (XX) XXXX-X
+                    value = value.replace(/(\d{2})(\d{4})(\d+)/, '($1) $2-$3');
+                } else if (value.length >= 2) {
+                    // (XX) X
+                    value = value.replace(/(\d{2})(\d+)/, '($1) $2');
+                }
+                
+                e.target.value = value;
+            });
+            
+            // Impedir caracteres não numéricos
+            phoneField.addEventListener('keypress', function(e) {
+                const char = String.fromCharCode(e.which);
+                if (!/[0-9]/.test(char) && ![8, 9, 27, 13, 46].includes(e.which)) {
+                    e.preventDefault();
+                }
+            });
+        }
+        
+        // Validação completa do formulário
+        function validateAllFields() {
+            const fields = [
+                { id: 'name', validator: validateName },
+                { id: 'email', validator: validateEmail },
+                { id: 'phone', validator: validatePhone },
+                { id: 'company', validator: validateCompany },
+                { id: 'position', validator: validatePosition },
+                { id: 'interest', validator: validateInterest }
+            ];
+            
+            let isValid = true;
+            
+            fields.forEach(({ id, validator }) => {
+                const field = document.getElementById(id);
+                const errorLabel = document.getElementById(id + '-error');
+                
+                if (field && errorLabel) {
+                    const result = validator(field.value);
+                    showFieldValidation(field, errorLabel, result);
+                    
+                    if (!result.isValid) {
+                        isValid = false;
+                    }
+                }
+            });
+            
+            return isValid;
         }
         
         function initBasicFeatures() {
@@ -662,6 +846,14 @@
             const submitButton = form.querySelector('button[type="submit"]');
             
             if (submitButton) {
+                // Validar todos os campos antes do envio
+                const isFormValid = validateAllFields();
+                
+                if (!isFormValid) {
+                    showMessage('❌ Por favor, corrija os erros no formulário antes de enviar.', 'error');
+                    return;
+                }
+                
                 const originalText = submitButton.textContent;
                 submitButton.textContent = 'Enviando...';
                 submitButton.disabled = true;
@@ -809,6 +1001,40 @@
             
             .fade-in {
                 animation: fadeIn 0.5s ease-out;
+            }
+            
+            /* Validação de Formulário */
+            .error-label {
+                display: block;
+                color: #e74c3c;
+                font-size: 12px;
+                margin-top: 5px;
+                font-weight: 500;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .error-label.show {
+                opacity: 1;
+            }
+            
+            .form-input.error,
+            .form-select.error,
+            .form-textarea.error {
+                border-color: #e74c3c !important;
+                box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2) !important;
+            }
+            
+            .form-input.valid,
+            .form-select.valid,
+            .form-textarea.valid {
+                border-color: #27ae60 !important;
+                box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.2) !important;
+            }
+            
+            .form-group {
+                position: relative;
+                margin-bottom: 20px;
             }
             
             @keyframes fadeIn {
