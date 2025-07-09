@@ -59,11 +59,15 @@ h3 { font-size: 2rem; }
 h4 { font-size: 1.5rem; }
 
 /* Remove emojis flutuantes e elementos problemáticos */
-.floating-elements,
 .code-blocks,
 .particles-js,
 #particles-js {
     display: none !important;
+}
+
+/* Floating elements específicos da seção de cases são permitidos */
+#cases-section .floating-elements {
+    display: block !important;
 }
 
 p {
@@ -1670,6 +1674,10 @@ html {
         rgba(10, 10, 10, 0.8) 100%);
     overflow: hidden;
     padding: 80px 0;
+    min-height: 800px;
+    display: block !important;
+    visibility: visible !important;
+    z-index: 10;
 }
 
 #cases-section::before {
@@ -1692,6 +1700,8 @@ html {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    display: block !important;
+    visibility: visible !important;
 }
 
 /* Header da seção */
@@ -1728,10 +1738,30 @@ html {
 
 /* Grid dos cases */
 .cases-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 30px;
     margin-bottom: 60px;
+    visibility: visible !important;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsividade do grid */
+@media (max-width: 1200px) {
+    .cases-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        max-width: 800px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cases-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+        max-width: 400px;
+    }
 }
 
 /* Card individual dos cases - Liquid Glass Effect */
@@ -1746,6 +1776,9 @@ html {
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     overflow: hidden;
     cursor: pointer;
+    display: block !important;
+    visibility: visible !important;
+    min-height: 400px;
 }
 
 .case-card::before {
@@ -1824,70 +1857,40 @@ html {
     overflow: hidden;
     margin-bottom: 20px;
     height: 180px;
-    background: linear-gradient(135deg, 
-        rgba(30, 144, 255, 0.1) 0%, 
-        rgba(0, 191, 255, 0.05) 100%);
-}
-
-.video-placeholder {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.video-placeholder:hover {
-    transform: scale(1.02);
-}
-
-.video-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, 
-        rgba(30, 144, 255, 0.2) 0%, 
-        rgba(0, 191, 255, 0.1) 50%, 
-        transparent 100%);
-    transition: all 0.3s ease;
-}
-
-.video-overlay {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.play-button {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: white;
+    -webkit-backdrop-filter: blur(10px);
 }
 
-.play-button:hover {
-    background: rgba(30, 144, 255, 0.3);
-    border-color: rgba(30, 144, 255, 0.5);
-    transform: scale(1.1);
+/* Vídeo dos cases */
+.case-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: brightness(0.9) contrast(1.1);
 }
 
-.play-button svg {
-    margin-left: 3px;
+.case-video:hover {
+    transform: scale(1.02);
+    filter: brightness(1) contrast(1.2);
+}
+
+/* Estados do vídeo */
+.case-video.loading {
+    opacity: 0.5;
+    filter: blur(2px);
+}
+
+.case-video.playing {
+    opacity: 1;
+    filter: brightness(1) contrast(1.1);
+}
+
+.case-video.paused {
+    opacity: 0.7;
+    filter: brightness(0.7) contrast(1);
 }
 
 /* Detalhes do case */

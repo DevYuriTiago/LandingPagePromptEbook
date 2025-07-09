@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - Cases com Vídeos Autoplay</title>
+    <link rel="stylesheet" href="css/prompts360-final.css">
+    <style>
+        body {
+            background: #0a0a0a;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .test-header {
+            background: rgba(30, 144, 255, 0.1);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid rgba(30, 144, 255, 0.3);
+        }
+        
+        .test-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .test-info h3 {
+            color: #00bfff;
+            margin-top: 0;
+        }
+        
+        .test-info ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .test-info li {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            border-left: 4px solid #00bfff;
+        }
+        
+        .scroll-instruction {
+            background: rgba(255, 165, 0, 0.1);
+            border-left-color: #ffa500;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        
+        .spacer {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, rgba(30, 144, 255, 0.1), rgba(0, 191, 255, 0.05));
+        }
+        
+        .spacer h2 {
+            font-size: 2rem;
+            text-align: center;
+            opacity: 0.7;
+        }
+        
+        /* Forçar visibilidade da seção */
+        #cases-section {
+            display: block !important;
+            visibility: visible !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <h1>🎬 Teste - Cases com Vídeos Autoplay</h1>
+        <p>Sistema de vídeos que reproduzem automaticamente quando a seção está visível</p>
+    </div>
+    
+    <div class="test-info">
+        <h3>📋 Como Funciona</h3>
+        <ul>
+            <li>✅ Vídeos reproduzem automaticamente quando a seção entra na viewport</li>
+            <li>⏸️ Vídeos pausam e voltam ao início quando a seção sai da viewport</li>
+            <li>🔄 Vídeos ficam em loop infinito enquanto visíveis</li>
+            <li>🔇 Vídeos são mudos (sem áudio)</li>
+            <li>📱 Funciona em dispositivos móveis e desktop</li>
+        </ul>
+    </div>
+    
+    <div class="test-info">
+        <h3>🎯 Instruções de Teste</h3>
+        <ul>
+            <li class="scroll-instruction">👇 Role para baixo para ver os vídeos iniciarem automaticamente</li>
+            <li>👆 Role para cima para ver os vídeos pausarem</li>
+            <li>🔄 Role para baixo novamente para vê-los reiniciar</li>
+            <li>🖥️ Abra o console do navegador (F12) para ver os logs</li>
+        </ul>
+    </div>
+    
+    <div class="spacer">
+        <h2>👇 Role para baixo para ver os Cases de Sucesso 👇</h2>
+    </div>
+    
+    <!-- Cases de Sucesso Section -->
+    <section class="section" id="cases-section">
+        <div class="section-connector"></div>
+        <div class="cases-container">
+            <div class="cases-header">
+                <h2 class="cases-title animate-on-scroll">
+                    <span class="title-main">Cases de Sucesso</span>
+                    <span class="title-subtitle">Vídeos com Autoplay - Transformações reais com resultados comprovados</span>
+                </h2>
+            </div>
+            
+            <div class="cases-grid">
+                <div class="case-card glass-card animate-on-scroll" data-case-id="case1">
+                    <div class="case-header">
+                        <div class="case-category">E-commerce</div>
+                        <h3 class="case-title">Automação E-commerce</h3>
+                        <div class="case-company">TechStore Brasil</div>
+                    </div>
+                    
+                    <div class="case-content">
+                        <div class="case-video-container">
+                            <video class="case-video" 
+                                   data-src="video/cases/case1.mp4" 
+                                   muted 
+                                   loop 
+                                   playsinline 
+                                   preload="metadata">
+                                <source src="video/cases/case1.mp4" type="video/mp4">
+                                <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: rgba(30, 144, 255, 0.1); color: white; font-size: 14px; text-align: center;">
+                                    📹 Vídeo case1.mp4<br>
+                                    <small>Adicione o arquivo na pasta video/cases/</small>
+                                </div>
+                            </video>
+                        </div>
+                        
+                        <div class="case-details">
+                            <div class="case-challenge">
+                                <h4>Desafio</h4>
+                                <p>Reduzir tempo de atendimento e aumentar conversões</p>
+                            </div>
+                            
+                            <div class="case-solution">
+                                <h4>Solução</h4>
+                                <p>Chatbot inteligente + Automação de vendas</p>
+                            </div>
+                            
+                            <div class="case-results">
+                                <h4>Resultados</h4>
+                                <ul class="results-list">
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>300% ROI</span>
+                                    </li>
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>70% redução no tempo de resposta</span>
+                                    </li>
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>45% aumento nas vendas</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="case-card glass-card animate-on-scroll" data-case-id="case2">
+                    <div class="case-header">
+                        <div class="case-category">Recursos Humanos</div>
+                        <h3 class="case-title">IA para Recursos Humanos</h3>
+                        <div class="case-company">Inovação RH</div>
+                    </div>
+                    
+                    <div class="case-content">
+                        <div class="case-video-container">
+                            <video class="case-video" 
+                                   data-src="video/cases/case2.mp4" 
+                                   muted 
+                                   loop 
+                                   playsinline 
+                                   preload="metadata">
+                                <source src="video/cases/case2.mp4" type="video/mp4">
+                                <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: rgba(30, 144, 255, 0.1); color: white; font-size: 14px; text-align: center;">
+                                    📹 Vídeo case2.mp4<br>
+                                    <small>Adicione o arquivo na pasta video/cases/</small>
+                                </div>
+                            </video>
+                        </div>
+                        
+                        <div class="case-details">
+                            <div class="case-challenge">
+                                <h4>Desafio</h4>
+                                <p>Triagem eficiente de currículos e candidatos</p>
+                            </div>
+                            
+                            <div class="case-solution">
+                                <h4>Solução</h4>
+                                <p>Sistema de IA para análise de perfis</p>
+                            </div>
+                            
+                            <div class="case-results">
+                                <h4>Resultados</h4>
+                                <ul class="results-list">
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>80% redução no tempo de triagem</span>
+                                    </li>
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>95% precisão na seleção</span>
+                                    </li>
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>60% economia de custos</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="case-card glass-card animate-on-scroll" data-case-id="case3">
+                    <div class="case-header">
+                        <div class="case-category">Financeiro</div>
+                        <h3 class="case-title">Análise Preditiva Financeira</h3>
+                        <div class="case-company">FinTech Solutions</div>
+                    </div>
+                    
+                    <div class="case-content">
+                        <div class="case-video-container">
+                            <video class="case-video" 
+                                   data-src="video/cases/case3.mp4" 
+                                   muted 
+                                   loop 
+                                   playsinline 
+                                   preload="metadata">
+                                <source src="video/cases/case3.mp4" type="video/mp4">
+                                <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: rgba(30, 144, 255, 0.1); color: white; font-size: 14px; text-align: center;">
+                                    📹 Vídeo case3.mp4<br>
+                                    <small>Adicione o arquivo na pasta video/cases/</small>
+                                </div>
+                            </video>
+                        </div>
+                        
+                        <div class="case-details">
+                            <div class="case-challenge">
+                                <h4>Desafio</h4>
+                                <p>Prever inadimplência e otimizar crédito</p>
+                            </div>
+                            
+                            <div class="case-solution">
+                                <h4>Solução</h4>
+                                <p>Machine Learning para análise de risco</p>
+                            </div>
+                            
+                            <div class="case-results">
+                                <h4>Resultados</h4>
+                                <ul class="results-list">
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>40% redução na inadimplência</span>
+                                    </li>
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>25% aumento na aprovação</span>
+                                    </li>
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>200% ROI</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cases-stats animate-on-scroll">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="50">50</div>
+                    <div class="stat-label">Projetos Entregues</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="95">95</div>
+                    <div class="stat-label">% Taxa de Sucesso</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="300">300</div>
+                    <div class="stat-label">% ROI Médio</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="floating-elements">
+            <div class="floating-element floating-element-1"></div>
+            <div class="floating-element floating-element-2"></div>
+            <div class="floating-element floating-element-3"></div>
+            <div class="floating-element floating-element-4"></div>
+            <div class="floating-element floating-element-5"></div>
+        </div>
+    </section>
+    
+    <div class="spacer">
+        <h2>👆 Role para cima para ver os vídeos pausarem 👆</h2>
+    </div>
+    
+    <div class="test-info">
+        <h3>🎯 Status do Teste</h3>
+        <div id="test-status">
+            <p>⏳ Aguardando inicialização do sistema...</p>
+        </div>
+    </div>
+    
+    <!-- Script para Vídeos dos Cases com Autoplay -->
+    <script>
+        console.log('🎬 Iniciando sistema de vídeos dos cases com autoplay...');
+        
+        // Configuração do Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3 // 30% da seção deve estar visível
+        };
+        
+        let casesVideos = [];
+        let isInViewport = false;
+        
+        // Função para atualizar status na tela
+        function updateStatus(message) {
+            const statusDiv = document.getElementById('test-status');
+            if (statusDiv) {
+                statusDiv.innerHTML = `<p>${message}</p>`;
+            }
+        }
+        
+        // Função para inicializar os vídeos
+        function initializeCasesVideos() {
+            // Buscar todos os vídeos dos cases
+            casesVideos = document.querySelectorAll('.case-video');
+            
+            console.log(`🎥 Encontrados ${casesVideos.length} vídeos de cases`);
+            updateStatus(`🎥 Encontrados ${casesVideos.length} vídeos de cases`);
+            
+            // Configurar cada vídeo
+            casesVideos.forEach((video, index) => {
+                // Configurações do vídeo
+                video.muted = true;
+                video.loop = true;
+                video.playsInline = true;
+                video.preload = 'metadata';
+                
+                // Adicionar classe de carregamento
+                video.classList.add('loading');
+                
+                // Eventos do vídeo
+                video.addEventListener('loadeddata', () => {
+                    console.log(`✅ Vídeo ${index + 1} carregado`);
+                    video.classList.remove('loading');
+                    
+                    // Se a seção estiver visível, iniciar o vídeo
+                    if (isInViewport) {
+                        playVideo(video);
+                    }
+                });
+                
+                video.addEventListener('playing', () => {
+                    video.classList.add('playing');
+                    video.classList.remove('paused');
+                    console.log(`▶️ Vídeo ${index + 1} iniciado`);
+                });
+                
+                video.addEventListener('pause', () => {
+                    video.classList.add('paused');
+                    video.classList.remove('playing');
+                    console.log(`⏸️ Vídeo ${index + 1} pausado`);
+                });
+                
+                video.addEventListener('error', (e) => {
+                    console.warn(`⚠️ Erro no vídeo ${index + 1}:`, e);
+                    // Ocultar vídeo com erro e mostrar placeholder
+                    video.style.display = 'none';
+                    const container = video.closest('.case-video-container');
+                    if (container) {
+                        container.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; background: rgba(255,0,0,0.1); color: white; font-size: 14px; text-align: center;">❌ Vídeo não encontrado<br><small>Adicione o arquivo na pasta video/cases/</small></div>';
+                    }
+                });
+                
+                console.log(`🎬 Vídeo ${index + 1} configurado:`, video.src || video.dataset.src);
+            });
+        }
+        
+        // Função para reproduzir vídeo
+        function playVideo(video) {
+            if (video && !video.classList.contains('loading')) {
+                video.play().catch(e => {
+                    console.warn('Erro ao reproduzir vídeo:', e);
+                    // Tentar novamente após um breve delay
+                    setTimeout(() => {
+                        video.play().catch(() => {
+                            console.warn('Falha definitiva ao reproduzir vídeo');
+                        });
+                    }, 1000);
+                });
+            }
+        }
+        
+        // Função para pausar vídeo
+        function pauseVideo(video) {
+            if (video && !video.paused) {
+                video.pause();
+                // Resetar para o início
+                video.currentTime = 0;
+            }
+        }
+        
+        // Função para iniciar todos os vídeos
+        function playAllVideos() {
+            isInViewport = true;
+            casesVideos.forEach(video => {
+                playVideo(video);
+            });
+            console.log('▶️ Todos os vídeos iniciados');
+            updateStatus('▶️ Vídeos reproduzindo! A seção está visível.');
+        }
+        
+        // Função para pausar todos os vídeos
+        function pauseAllVideos() {
+            isInViewport = false;
+            casesVideos.forEach(video => {
+                pauseVideo(video);
+            });
+            console.log('⏸️ Todos os vídeos pausados');
+            updateStatus('⏸️ Vídeos pausados. A seção saiu da viewport.');
+        }
+        
+        // Intersection Observer para detectar quando a seção está visível
+        const casesObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    console.log('👀 Seção de cases entrou na viewport');
+                    playAllVideos();
+                } else {
+                    console.log('👋 Seção de cases saiu da viewport');
+                    pauseAllVideos();
+                }
+            });
+        }, observerOptions);
+        
+        // Inicializar quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 DOM carregado, inicializando sistema de vídeos...');
+            updateStatus('🚀 DOM carregado, inicializando sistema de vídeos...');
+            
+            // Aguardar um pouco para garantir que tudo esteja carregado
+            setTimeout(() => {
+                initializeCasesVideos();
+                
+                // Observar a seção de cases
+                const casesSection = document.getElementById('cases-section');
+                if (casesSection) {
+                    casesObserver.observe(casesSection);
+                    console.log('👁️ Observer configurado para a seção de cases');
+                    updateStatus('👁️ Sistema pronto! Role para testar os vídeos.');
+                } else {
+                    console.error('❌ Seção de cases não encontrada!');
+                    updateStatus('❌ Seção de cases não encontrada!');
+                }
+            }, 500);
+        });
+        
+        // Cleanup quando a página for fechada
+        window.addEventListener('beforeunload', () => {
+            pauseAllVideos();
+            casesObserver.disconnect();
+        });
+        
+        // Pausar vídeos quando a página perde o foco
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                pauseAllVideos();
+            } else if (isInViewport) {
+                playAllVideos();
+            }
+        });
+        
+        console.log('✅ Sistema de vídeos dos cases com autoplay carregado');
+    </script>
+</body>
+</html>

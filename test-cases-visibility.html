@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - Seção Cases</title>
+    <link rel="stylesheet" href="css/prompts360-final.css">
+    <style>
+        /* Estilos para debugging */
+        #cases-section {
+            border: 2px solid red !important;
+            min-height: 500px !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+        }
+        
+        .cases-container {
+            border: 2px solid green !important;
+            padding: 20px !important;
+        }
+        
+        .cases-header {
+            border: 2px solid blue !important;
+            padding: 20px !important;
+        }
+        
+        .cases-title {
+            color: white !important;
+            text-align: center !important;
+            font-size: 2rem !important;
+        }
+        
+        .cases-grid {
+            border: 2px solid yellow !important;
+            padding: 20px !important;
+        }
+        
+        .case-card {
+            border: 2px solid purple !important;
+            margin: 10px !important;
+            padding: 20px !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+            min-height: 200px !important;
+        }
+        
+        body {
+            background: #0a0a0a !important;
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: white; text-align: center; padding: 20px;">Teste - Seção Cases de Sucesso</h1>
+    
+    <!-- Cases de Sucesso Section -->
+    <section class="section" id="cases-section">
+        <div class="section-connector"></div>
+        <div class="cases-container">
+            <div class="cases-header">
+                <h2 class="cases-title animate-on-scroll">
+                    <span class="title-main">Cases de Sucesso</span>
+                    <span class="title-subtitle">Transformações reais com resultados comprovados</span>
+                </h2>
+            </div>
+            
+            <div class="cases-grid">
+                <div class="case-card glass-card animate-on-scroll" data-case-id="case1">
+                    <div class="case-header">
+                        <div class="case-category">E-commerce</div>
+                        <h3 class="case-title">Automação E-commerce</h3>
+                        <div class="case-company">TechStore Brasil</div>
+                    </div>
+                    
+                    <div class="case-content">
+                        <div class="case-details">
+                            <div class="case-challenge">
+                                <h4>Desafio</h4>
+                                <p>Reduzir tempo de atendimento e aumentar conversões</p>
+                            </div>
+                            
+                            <div class="case-solution">
+                                <h4>Solução</h4>
+                                <p>Chatbot inteligente + Automação de vendas</p>
+                            </div>
+                            
+                            <div class="case-results">
+                                <h4>Resultados</h4>
+                                <ul class="results-list">
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>300% ROI</span>
+                                    </li>
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>70% redução no tempo de resposta</span>
+                                    </li>
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>45% aumento nas vendas</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="case-card glass-card animate-on-scroll" data-case-id="case2">
+                    <div class="case-header">
+                        <div class="case-category">Recursos Humanos</div>
+                        <h3 class="case-title">IA para Recursos Humanos</h3>
+                        <div class="case-company">Inovação RH</div>
+                    </div>
+                    
+                    <div class="case-content">
+                        <div class="case-details">
+                            <div class="case-challenge">
+                                <h4>Desafio</h4>
+                                <p>Triagem eficiente de currículos e candidatos</p>
+                            </div>
+                            
+                            <div class="case-solution">
+                                <h4>Solução</h4>
+                                <p>Sistema de IA para análise de perfis</p>
+                            </div>
+                            
+                            <div class="case-results">
+                                <h4>Resultados</h4>
+                                <ul class="results-list">
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>80% redução no tempo de triagem</span>
+                                    </li>
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>95% precisão na seleção</span>
+                                    </li>
+                                    <li class="result-item">
+                                        <span class="result-icon">✓</span>
+                                        <span>60% economia de custos</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        console.log('Teste de visibilidade da seção cases');
+        
+        // Verificar se a seção está visível
+        const casesSection = document.getElementById('cases-section');
+        const casesContainer = document.querySelector('.cases-container');
+        
+        setTimeout(() => {
+            console.log('Cases Section:', casesSection);
+            console.log('Cases Container:', casesContainer);
+            
+            if (casesSection) {
+                const styles = getComputedStyle(casesSection);
+                console.log('Display:', styles.display);
+                console.log('Visibility:', styles.visibility);
+                console.log('Height:', styles.height);
+                console.log('Position:', styles.position);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

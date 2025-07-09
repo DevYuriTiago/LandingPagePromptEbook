@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Final - Cases</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .debug-panel {
+            background: rgba(0, 150, 255, 0.1);
+            padding: 20px;
+            border: 1px solid #0096ff;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .debug-panel h3 {
+            color: #0096ff;
+            margin-top: 0;
+        }
+        
+        .action-btn {
+            background: #0096ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .action-btn:hover {
+            background: #0077cc;
+        }
+        
+        .log {
+            background: #111;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #0096ff;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        
+        .highlight {
+            background: rgba(255, 255, 0, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Debug Final - Seção Cases de Sucesso</h1>
+    
+    <div class="debug-panel">
+        <h3>🎯 Ações Rápidas</h3>
+        <a href="index.html" class="action-btn" target="_blank">📄 Abrir Página Principal</a>
+        <a href="index.html#cases-section" class="action-btn" target="_blank">🔗 Ir para Seção Cases</a>
+        <a href="test-cases-simple.html" class="action-btn" target="_blank">🧪 Teste Isolado</a>
+        <button class="action-btn" onclick="injectDebugCSS()">💉 Injetar Debug CSS</button>
+        <button class="action-btn" onclick="analyzeHTML()">🔍 Analisar HTML</button>
+    </div>
+    
+    <div class="debug-panel">
+        <h3>📊 Informações</h3>
+        <div id="info-log" class="log">
+Aguardando análise...
+        </div>
+    </div>
+    
+    <div class="debug-panel">
+        <h3>🎨 CSS de Debug</h3>
+        <p>Este CSS será injetado na página para forçar a visibilidade da seção:</p>
+        <div class="log">
+#cases-section {
+    display: block !important;
+    visibility: visible !important;
+    background: rgba(255, 0, 0, 0.3) !important;
+    border: 5px solid red !important;
+    min-height: 600px !important;
+    position: relative !important;
+    z-index: 9999 !important;
+}
+
+.cases-container {
+    display: block !important;
+    visibility: visible !important;
+    background: rgba(0, 255, 0, 0.2) !important;
+    border: 3px solid green !important;
+}
+
+.cases-grid {
+    display: grid !important;
+    visibility: visible !important;
+    background: rgba(0, 0, 255, 0.2) !important;
+    border: 2px solid blue !important;
+}
+
+.case-card {
+    display: block !important;
+    visibility: visible !important;
+    background: rgba(255, 255, 0, 0.2) !important;
+    border: 1px solid yellow !important;
+    min-height: 200px !important;
+}
+        </div>
+    </div>
+    
+    <script>
+        function log(message) {
+            const logDiv = document.getElementById('info-log');
+            logDiv.textContent += new Date().toLocaleTimeString() + ': ' + message + '\n';
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        function injectDebugCSS() {
+            log('🔧 Injetando CSS de debug...');
+            
+            const debugCSS = `
+                #cases-section {
+                    display: block !important;
+                    visibility: visible !important;
+                    background: rgba(255, 0, 0, 0.3) !important;
+                    border: 5px solid red !important;
+                    min-height: 600px !important;
+                    position: relative !important;
+                    z-index: 9999 !important;
+                }
+                
+                .cases-container {
+                    display: block !important;
+                    visibility: visible !important;
+                    background: rgba(0, 255, 0, 0.2) !important;
+                    border: 3px solid green !important;
+                }
+                
+                .cases-grid {
+                    display: grid !important;
+                    visibility: visible !important;
+                    background: rgba(0, 0, 255, 0.2) !important;
+                    border: 2px solid blue !important;
+                }
+                
+                .case-card {
+                    display: block !important;
+                    visibility: visible !important;
+                    background: rgba(255, 255, 0, 0.2) !important;
+                    border: 1px solid yellow !important;
+                    min-height: 200px !important;
+                }
+            `;
+            
+            // Carregar página principal
+            fetch('index.html')
+                .then(response => response.text())
+                .then(html => {
+                    const modifiedHTML = html.replace('</head>', `<style>${debugCSS}</style></head>`);
+                    const blob = new Blob([modifiedHTML], { type: 'text/html' });
+                    const url = URL.createObjectURL(blob);
+                    window.open(url, '_blank');
+                    log('✅ Página com CSS de debug aberta!');
+                })
+                .catch(error => {
+                    log('❌ Erro: ' + error.message);
+                });
+        }
+        
+        function analyzeHTML() {
+            log('🔍 Analisando estrutura HTML...');
+            
+            fetch('index.html')
+                .then(response => response.text())
+                .then(html => {
+                    // Verificar se a seção existe
+                    if (html.includes('id="cases-section"')) {
+                        log('✅ Seção cases-section encontrada no HTML');
+                        
+                        // Encontrar linha da seção
+                        const lines = html.split('\n');
+                        lines.forEach((line, index) => {
+                            if (line.includes('id="cases-section"')) {
+                                log(`📍 Linha ${index + 1}: ${line.trim()}`);
+                            }
+                        });
+                        
+                        // Verificar elementos filhos
+                        const casesMatches = html.match(/cases-[a-zA-Z-]+/g);
+                        if (casesMatches) {
+                            log('🔍 Classes relacionadas encontradas: ' + [...new Set(casesMatches)].join(', '));
+                        }
+                        
+                    } else {
+                        log('❌ Seção cases-section NÃO encontrada no HTML');
+                    }
+                    
+                    // Verificar CSS
+                    return fetch('css/prompts360-final.css');
+                })
+                .then(response => response.text())
+                .then(css => {
+                    if (css.includes('#cases-section')) {
+                        log('✅ CSS para #cases-section encontrado');
+                        
+                        // Verificar regras importantes
+                        const rules = css.match(/#cases-section[^}]+}/g);
+                        if (rules) {
+                            log('🎨 Regras CSS:');
+                            rules.forEach(rule => {
+                                log('   ' + rule.substring(0, 100) + '...');
+                            });
+                        }
+                    } else {
+                        log('❌ CSS para #cases-section NÃO encontrado');
+                    }
+                })
+                .catch(error => {
+                    log('❌ Erro na análise: ' + error.message);
+                });
+        }
+        
+        // Análise automática ao carregar
+        setTimeout(() => {
+            log('🚀 Iniciando análise automática...');
+            analyzeHTML();
+        }, 1000);
+    </script>
+</body>
+</html>

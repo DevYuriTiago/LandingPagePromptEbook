@@ -1,0 +1,72 @@
+{
+  "cases": [
+    {
+      "id": "case1",
+      "title": "Automação E-commerce",
+      "company": "TechStore Brasil",
+      "category": "E-commerce",
+      "challenge": "Reduzir tempo de atendimento e aumentar conversões",
+      "solution": "Chatbot inteligente + Automação de vendas",
+      "results": [
+        "300% ROI",
+        "70% redução no tempo de resposta",
+        "45% aumento nas vendas"
+      ],
+      "video": {
+        "type": "local",
+        "id": "case1",
+        "thumbnail": "img/cases/case1-thumb.jpg",
+        "poster": "img/cases/case1-poster.jpg",
+        "local_file": "video/cases/case1.mp4"
+      }
+    },
+    {
+      "id": "case2",
+      "title": "IA para Recursos Humanos",
+      "company": "Inovação RH",
+      "category": "Recursos Humanos",
+      "challenge": "Triagem eficiente de currículos e candidatos",
+      "solution": "Sistema de IA para análise de perfis",
+      "results": [
+        "80% redução no tempo de triagem",
+        "95% precisão na seleção",
+        "60% economia de custos"
+      ],
+      "video": {
+        "type": "youtube",
+        "id": "dQw4w9WgXcQ",
+        "thumbnail": "img/cases/case2-thumb.jpg",
+        "poster": "img/cases/case2-poster.jpg",
+        "local_file": "video/cases/case2.mp4"
+      }
+    },
+    {
+      "id": "case3",
+      "title": "Análise Preditiva Financeira",
+      "company": "FinTech Solutions",
+      "category": "Financeiro",
+      "challenge": "Prever inadimplência e otimizar crédito",
+      "solution": "Machine Learning para análise de risco",
+      "results": [
+        "40% redução na inadimplência",
+        "25% aumento na aprovação",
+        "200% ROI"
+      ],
+      "video": {
+        "type": "vimeo",
+        "id": "123456789",
+        "thumbnail": "img/cases/case3-thumb.jpg",
+        "poster": "img/cases/case3-poster.jpg",
+        "local_file": "video/cases/case3.mp4"
+      }
+    }
+  ],
+  "video_settings": {
+    "default_type": "youtube",
+    "autoplay": false,
+    "controls": true,
+    "muted": false,
+    "loop": false,
+    "preload": "metadata"
+  }
+}

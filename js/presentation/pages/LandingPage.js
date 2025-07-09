@@ -7,7 +7,7 @@ import { LoadingScreen } from '../components/LoadingScreen.js';
 import { Header } from '../components/Header.js';
 import { LeadForm } from '../components/LeadForm.js';
 import { ScrollAnimations } from '../components/ScrollAnimations.js';
-// import { CasesSectionSimple } from '../components/CasesSectionSimple.js';
+import { CasesSectionIntegrated } from '../components/CasesSectionIntegrated.js';
 import { TrackAnalyticsUseCase } from '../../application/TrackAnalyticsUseCase.js';
 import { CONFIG } from '../../core/config.js';
 import { utils } from '../../core/utils.js';
@@ -67,9 +67,9 @@ export class LandingPage {
         this.components.leadForm = new LeadForm();
         await this.components.leadForm.init();
         
-        // 4. Cases Section (cases de sucesso) - Temporariamente desabilitado
+        // 4. Cases Section (cases de sucesso) - Usando HTML direto
         // console.log('🔍 Inicializando CasesSection...');
-        // this.components.casesSection = new CasesSectionSimple();
+        // this.components.casesSection = new CasesSectionIntegrated();
         // await this.components.casesSection.init();
         // console.log('✅ CasesSection inicializada!');
         
