@@ -30,6 +30,7 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="css/prompts360-final.css">
+    <link rel="stylesheet" href="css/emergency.css">
     
     <!-- Framer Motion for animations -->
     <script src="https://unpkg.com/framer-motion@11.3.19/dist/framer-motion.js"></script>
@@ -121,38 +122,25 @@
 
     <!-- Hero Section with Cinematic Effects -->
     <section class="hero cinematic-hero">
-        <!-- Meteors Background -->
-        <div class="meteors-container">
-            <div class="meteors-wrapper">
-                <span class="meteor meteor-1"></span>
-                <span class="meteor meteor-2"></span>
-                <span class="meteor meteor-3"></span>
-                <span class="meteor meteor-4"></span>
-                <span class="meteor meteor-5"></span>
-                <span class="meteor meteor-6"></span>
-                <span class="meteor meteor-7"></span>
-                <span class="meteor meteor-8"></span>
-                <span class="meteor meteor-9"></span>
-                <span class="meteor meteor-10"></span>
-            </div>
+        <!-- Video Background -->
+        <div class="hero-video-background">
+            <video class="hero-background-video" 
+                   autoplay 
+                   muted 
+                   loop 
+                   playsinline 
+                   preload="auto">
+                <source src="video/backgrounds/video_back.mp4" type="video/mp4">
+            </video>
+            <div class="hero-video-overlay"></div>
         </div>
         
-        <!-- Retro Grid Background -->
-        <div class="retro-grid-container">
-            <div class="retro-grid-overlay"></div>
-            <div class="retro-grid-pattern"></div>
-        </div>
-        
-        <!-- Particles Background -->
-        <div class="particles-container" id="particles-hero">
-            <canvas class="particles-canvas"></canvas>
-        </div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
                     <!-- Aurora Text Effect -->
                     <h1 class="aurora-title">
-                        <span class="aurora-text" data-text="Transformamos sua Clínica, Escola ou Escritório Jurídico">Transformamos sua Clínica, Escola ou Escritório Jurídico</span>
+                        <span class="aurora-text" data-text="Transformamos sua Clínica, Escola ou Escritório Jurídico">Transformamos sua Clínica, Escola ou Escritório Jurídico com</span>
                         <br>
                         <span class="aurora-text morphing-text" data-text="em uma Máquina de Crescimento com IA">em uma Máquina de Crescimento com IA</span>
                     </h1>
@@ -232,16 +220,6 @@
 
     <!-- Services Section with Cinematic Effects -->
     <section class="section cinematic-section" id="services">
-        <!-- Animated Grid Pattern Background -->
-        <div class="animated-grid-background">
-            <div class="animated-grid-pattern"></div>
-        </div>
-        
-        <!-- Flickering Grid Overlay -->
-        <div class="flickering-grid-overlay">
-            <canvas class="flickering-grid"></canvas>
-        </div>
-        
         <div class="section-connector"></div>
         <div class="container">
             <div class="section-header">
@@ -498,6 +476,7 @@
                                        muted 
                                        loop 
                                        playsinline 
+                                       autoplay
                                        preload="metadata">
                                     <source src="video/cases/case1.mp4" type="video/mp4">
                                     Seu navegador não suporta vídeos HTML5.
@@ -1047,8 +1026,8 @@
                 <div class="footer-section">
                     <h4>Contato</h4>
                     <p>Email: contato@prompts360.com</p>
-                    <p>Telefone: (11) 99999-9999</p>
-                    <p>Local: São Paulo, Brasil</p>
+                    <p>Telefone: (81) 97100-9601</p>
+                    <p>Local: Recife, Brasil</p>
                 </div>
             </div>
             
@@ -1954,7 +1933,7 @@
             const morphingTexts = document.querySelectorAll('.morphing-text');
             
             morphingTexts.forEach(element => {
-                const texts = ['com IA Avançada', 'com Automação', 'com Inovação', 'com Tecnologia'];
+                const texts = ['IA Avançada', 'Automação', 'Inovação', 'Tecnologia'];
                 let currentIndex = 0;
                 
                 function morphText() {
@@ -1997,6 +1976,26 @@
         }
 
         console.log('✨ Efeitos cinematográficos carregados');
+    </script>
+
+    <!-- Video Speed Controller -->
+    <script>
+        // Controla a velocidade do vídeo de background
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroVideo = document.querySelector('.hero-background-video');
+            if (heroVideo) {
+                // Define a velocidade para 0.5 (metade da velocidade original)
+                // Isso fará um vídeo de 8s durar 16s
+                heroVideo.playbackRate = 0.5;
+                
+                // Garante que o vídeo esteja carregado e tocando
+                heroVideo.addEventListener('loadeddata', function() {
+                    heroVideo.playbackRate = 0.5;
+                });
+                
+                console.log('🎥 Velocidade do vídeo definida para 0.5x (16 segundos)');
+            }
+        });
     </script>
 
     <!-- Marquee Snap-to-Card Controller -->

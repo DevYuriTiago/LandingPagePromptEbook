@@ -58,12 +58,7 @@ h2 { font-size: 2.5rem; }
 h3 { font-size: 2rem; }
 h4 { font-size: 1.5rem; }
 
-/* Remove emojis flutuantes e elementos problemáticos */
-.code-blocks,
-.particles-js,
-#particles-js {
-    display: none !important;
-}
+
 
 /* Floating elements específicos da seção de cases são permitidos */
 #cases-section .floating-elements {
@@ -164,27 +159,69 @@ p {
 /* Hero Section */
 .hero {
     padding: 120px 0 80px;
-    background: radial-gradient(ellipse at center, rgba(30,144,255,0.1) 0%, transparent 50%);
     position: relative;
     overflow: hidden;
 }
 
-.hero::before {
+/* Transição suave inferior do hero */
+.hero::after {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(30,144,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-    animation: float 20s ease-in-out infinite;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(10, 10, 10, 0.8) 50%,
+        var(--bg-color) 100%
+    );
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Hero Video Background */
+.hero-video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hero-background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 0;
+    filter: brightness(0.8) contrast(1.1);
+}
+
+.hero-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        rgba(10, 10, 10, 0.6) 40%,
+        rgba(10, 10, 10, 0.4) 60%,
+        rgba(10, 10, 10, 0.6) 80%,
+        rgba(10, 10, 10, 0.9) 100%
+    );
     z-index: 1;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(1deg); }
-}
 
 .hero-content {
     display: grid;
@@ -397,17 +434,6 @@ p {
     box-shadow: 0 0 40px rgba(30,144,255,0.6);
 }
 
-.cta-button-secondary {
-    background: transparent;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
-}
-
-.cta-button-secondary:hover {
-    background: var(--primary-color);
-    color: white;
-}
-
 /* Botão especial para compra do E-book - mais chamativo */
 .cta-button-ebook {
     display: inline-block;
@@ -490,27 +516,6 @@ p {
     color: var(--text-secondary);
     max-width: 600px;
     margin: 0 auto;
-}
-
-/* Grid de Serviços */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-@media (max-width: 992px) {
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 576px) {
-    .services-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
 }
 
 .service-card {
@@ -679,32 +684,6 @@ p {
     color: var(--text-muted);
 }
 
-/* Mensagens de Alerta */
-.alert {
-    padding: 15px 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    font-weight: 500;
-    animation: slideInDown 0.3s ease;
-}
-
-.alert-success {
-    background: rgba(0, 255, 136, 0.1);
-    border: 1px solid var(--success-color);
-    color: var(--success-color);
-}
-
-.alert-error {
-    background: rgba(255, 71, 87, 0.1);
-    border: 1px solid var(--error-color);
-    color: var(--error-color);
-}
-
-.alert-warning {
-    background: rgba(255, 149, 0, 0.1);
-    border: 1px solid var(--warning-color);
-    color: var(--warning-color);
-}
 
 @keyframes slideInDown {
     from {
@@ -717,15 +696,7 @@ p {
     }
 }
 
-/* Mobile Menu (for future implementation) */
-.mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--text-color);
-    font-size: 1.5rem;
-    cursor: pointer;
-}
+
 
 /* Seção Inicial com Logo e Linha Animada */
 .intro-section {
@@ -830,26 +801,8 @@ p {
     /* Removido transition para eliminar movimento */
 }
 
-.connection-line .main-path {
-    fill: none;
-    stroke: url(#lineGradient);
-    stroke-width: 2; /* Mesma espessura da seta (2px) */
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    filter: drop-shadow(0 0 6px rgba(30,144,255,0.2)); /* Glow sutil */
-    stroke-dasharray: 0, 10000; /* Começa invisível */
-    stroke-dashoffset: 0;
-    transition: stroke-dasharray 0.3s ease-out; /* Transição suave para mudanças */
-}
 
-/* Fallback: linha sempre visível para debug */
-.connection-line.debug .main-path {
-    stroke-dasharray: none !important;
-    stroke-dashoffset: 0 !important;
-    stroke: #1E90FF !important;
-    stroke-width: 3 !important;
-    opacity: 0.8 !important;
-}
+
 
 /* Conectores das seções removidos - usando linha SVG */
 
@@ -888,36 +841,10 @@ p {
     100% { transform: scale(1.5); opacity: 0; }
 }
 
-/* Garantir que todas as seções fiquem sobre a linha de conexão */
-.hero-section,
-.services-section,
-.benefits-section,
-.cases-section,
-.testimonials-section,
-.faq-section,
-.cta-section,
-.footer {
-    position: relative;
-    z-index: 10;
-    background: var(--bg-color); /* Garante fundo sólido */
-}
-
 /* Seção especial do ebook com z-index ainda maior */
 .ebook-bonus-section {
     position: relative;
     z-index: 50 !important;
-}
-
-/* Elementos específicos que precisam ficar visíveis */
-.section-header,
-.section-content,
-.card,
-.testimonial-card,
-.faq-item,
-.form-group,
-.btn {
-    position: relative;
-    z-index: 5;
 }
 
 /* Melhorias na responsividade */
@@ -954,17 +881,7 @@ p {
         font-size: 1rem;
     }
     
-    .services-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .benefit-item,
-    .case-card,
-    .faq-item {
-        padding: 1rem;
-    }
-    
+   
     .cta-button {
         font-size: 1rem;
         padding: 0.9rem 1.8rem;
@@ -975,32 +892,11 @@ p {
     .form-group {
         margin-bottom: 1rem;
     }
-    
-    .form-control {
-        padding: 0.8rem;
-        font-size: 1rem;
-    }
-    
-    /* Cursor responsivo - esconder em touch devices */
-    .custom-cursor,
-    .cursor-trail {
-        display: none !important;
-    }
 }
 
 /* Ajustes para tablets */
 @media (min-width: 577px) and (max-width: 992px) {
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .price-comparison {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        max-width: 400px;
-        margin: 3rem auto;
-    }
-    
+       
     .hero-content {
         flex-direction: column;
         text-align: center;
@@ -1014,11 +910,7 @@ p {
 
 /* Responsividade para seção do e-book */
 @media (max-width: 768px) {
-    .price-comparison {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        margin: 3rem 0;
-    }
+   
     
     .ebook-bonus-section {
         padding: 2rem 1rem;
@@ -1052,14 +944,7 @@ p {
         flex-direction: column;
     }
     
-    .ebook-preview {
-        margin: 1rem 0;
-        order: -1; /* Imagem primeiro em mobile */
-    }
-    
-    .ebook-preview img {
-        max-width: 250px !important;
-    }
+   
     
     .cta-button-ebook {
         font-size: 1rem;
@@ -1072,11 +957,7 @@ p {
 
 /* Responsividade para dispositivos muito pequenos */
 @media (max-width: 480px) {
-    .price-comparison {
-        gap: 1.5rem;
-        margin: 2rem 0;
-    }
-    
+      
     .price-option {
         padding: 2rem 1rem 1.5rem;
         max-width: 100%;
@@ -1095,10 +976,6 @@ p {
         transform: translateX(-50%);
     }
     
-    .price-promo {
-        font-size: 1.8rem;
-    }
-    
     .price-original {
         font-size: 0.9rem;
     }
@@ -1107,11 +984,7 @@ p {
         font-size: 0.95rem;
         padding: 0.8rem 1.5rem;
     }
-    
-    .ebook-preview img {
-        max-width: 200px !important;
-    }
-    
+  
     .hero-benefits {
         flex-direction: column;
         gap: 1rem;
@@ -1174,11 +1047,6 @@ html {
     justify-content: center;
     z-index: 9999;
     transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-.loading-screen.hidden {
-    opacity: 0;
-    visibility: hidden;
 }
 
 .loading-container {
@@ -1736,34 +1604,6 @@ html {
     opacity: 0.9;
 }
 
-/* Grid dos cases */
-.cases-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 30px;
-    margin-bottom: 60px;
-    visibility: visible !important;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Responsividade do grid */
-@media (max-width: 1200px) {
-    .cases-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        max-width: 800px;
-    }
-}
-
-@media (max-width: 768px) {
-    .cases-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px;
-        max-width: 400px;
-    }
-}
-
 /* Card individual dos cases - Liquid Glass Effect */
 .case-card {
     position: relative;
@@ -1772,7 +1612,7 @@ html {
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
-    padding: 25px;
+    padding: 15px;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     overflow: hidden;
     cursor: pointer;
@@ -1813,7 +1653,7 @@ html {
 .case-header {
     position: relative;
     z-index: 2;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .case-category {
@@ -1855,8 +1695,8 @@ html {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    margin-bottom: 20px;
-    height: 180px;
+    margin-bottom: 12px;
+    height: 220px;
     background: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -1897,7 +1737,7 @@ html {
 .case-details {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 8px;
 }
 
 .case-challenge h4,
@@ -2041,37 +1881,9 @@ html {
     }
 }
 
-/* Estados de vídeo */
-.video-placeholder.loading {
-    opacity: 0.6;
-}
-
-.video-placeholder.loading::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30px;
-    height: 30px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-top: 3px solid var(--primary-color);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-.video-placeholder.playing {
-    background: rgba(30, 144, 255, 0.2);
-}
-
 @keyframes spin {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
     100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* Efeito parallax */
-.parallax-active .floating-element {
-    animation-play-state: running;
 }
 
 /* Responsividade */
@@ -2084,10 +1896,6 @@ html {
         font-size: 2rem;
     }
     
-    .cases-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
     
     .case-card {
         padding: 20px;
@@ -2121,10 +1929,6 @@ html {
         height: 140px;
     }
     
-    .play-button {
-        width: 50px;
-        height: 50px;
-    }
     
     .cases-stats {
         gap: 20px;
@@ -2148,7 +1952,7 @@ html {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: 1;
+    z-index: 3;
     pointer-events: none;
 }
 
@@ -2215,7 +2019,7 @@ html {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: 0;
+    z-index: 4;
     pointer-events: none;
 }
 
@@ -2260,7 +2064,7 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 5;
     pointer-events: none;
 }
 
@@ -2470,18 +2274,6 @@ html {
    ============================ */
 
 /* Slideshow Container for all screen sizes */
-.services-grid {
-    display: block;
-    position: relative;
-    overflow: hidden;
-    padding-bottom: 3rem;
-}
-
-.services-grid-wrapper {
-    display: flex;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    width: fit-content;
-}
 
 .service-card {
     flex-shrink: 0;
@@ -2508,171 +2300,6 @@ html {
     }
 }
 
-/* Slideshow Navigation */
-.slideshow-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
-    gap: 1.5rem;
-}
-
-.slideshow-btn {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 1.4rem;
-    font-weight: 600;
-    box-shadow: 0 6px 20px rgba(30, 144, 255, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.slideshow-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.5s;
-}
-
-.slideshow-btn:hover {
-    transform: scale(1.1) translateY(-2px);
-    box-shadow: 0 10px 30px rgba(30, 144, 255, 0.5);
-}
-
-.slideshow-btn:hover::before {
-    left: 100%;
-}
-
-.slideshow-btn:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-/* Mobile adjustments for buttons */
-@media (max-width: 768px) {
-    .slideshow-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-    }
-}
-
-/* Slideshow Indicators */
-.slideshow-indicators {
-    display: flex;
-    justify-content: center;
-    gap: 0.8rem;
-    margin-top: 1.5rem;
-}
-
-.slideshow-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(30, 144, 255, 0.3);
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-}
-
-.slideshow-dot::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: var(--primary-color);
-    transition: all 0.3s ease;
-}
-
-.slideshow-dot.active::after {
-    width: 100%;
-    height: 100%;
-}
-
-.slideshow-dot:hover {
-    background: rgba(30, 144, 255, 0.5);
-    transform: scale(1.3);
-}
-
-/* Counter */
-.slideshow-counter {
-    background: rgba(30, 144, 255, 0.1);
-    color: var(--primary-color);
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    font-size: 1rem;
-    font-weight: 700;
-    border: 2px solid rgba(30, 144, 255, 0.2);
-    backdrop-filter: blur(10px);
-}
-
-@media (max-width: 768px) {
-    .slideshow-counter {
-        font-size: 0.9rem;
-        padding: 0.6rem 1.2rem;
-    }
-}
-
-/* Auto-scroll progress indicator */
-.slideshow-progress {
-    width: 100%;
-    height: 4px;
-    background: rgba(30, 144, 255, 0.2);
-    border-radius: 2px;
-    margin-top: 1.5rem;
-    overflow: hidden;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.slideshow-progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    border-radius: 2px;
-    width: 0%;
-    transition: width 0.1s linear;
-    box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
-}
-
-/* Smooth scrolling and touch optimization */
-.services-grid-wrapper {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Hide scrollbar */
-.services-grid::-webkit-scrollbar {
-    display: none;
-}
-
-.services-grid {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-/* Touch gestures optimization */
-.services-grid {
-    touch-action: pan-x;
-}
-
 .service-card {
     user-select: none;
     -webkit-user-select: none;
@@ -2680,10 +2307,6 @@ html {
     -ms-user-select: none;
 }
 
-/* Animation for card entrance */
-.service-card.slide-in {
-    animation: slideInCard 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
 
 @keyframes slideInCard {
     from {
@@ -2704,20 +2327,6 @@ html {
     }
 }
 
-/* Cases Grid Slideshow */
-.cases-grid {
-    display: block;
-    position: relative;
-    overflow: hidden;
-    padding-bottom: 3rem;
-}
-
-.cases-grid-wrapper {
-    display: flex;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    width: fit-content;
-}
-
 .case-card {
     flex-shrink: 0;
     margin-right: 2rem;
@@ -2728,57 +2337,6 @@ html {
     .case-card {
         min-width: 300px;
         margin-right: 1rem;
-    }
-}
-
-/* Slideshow controls styling enhancements */
-.slideshow-nav .slideshow-btn {
-    position: relative;
-    z-index: 10;
-}
-
-.slideshow-controls-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-/* Enhanced visual feedback */
-.slideshow-dot.active {
-    background: var(--primary-color);
-    box-shadow: 0 0 15px rgba(30, 144, 255, 0.6);
-    transform: scale(1.2);
-}
-
-/* Performance optimizations */
-.services-grid-wrapper,
-.cases-grid-wrapper {
-    will-change: transform;
-    transform: translateZ(0);
-}
-
-/* Accessibility improvements */
-.slideshow-btn:focus {
-    outline: 3px solid rgba(30, 144, 255, 0.5);
-    outline-offset: 2px;
-}
-
-.slideshow-dot:focus {
-    outline: 2px solid rgba(30, 144, 255, 0.5);
-    outline-offset: 3px;
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    .services-grid-wrapper,
-    .cases-grid-wrapper,
-    .slideshow-btn,
-    .slideshow-dot,
-    .service-card {
-        transition: none !important;
-        animation: none !important;
     }
 }
 
@@ -2840,10 +2398,6 @@ html {
     will-change: transform;
     backface-visibility: hidden;
     transform: translateZ(0); /* Force hardware acceleration */
-}
-
-.marquee-track.reverse {
-    animation-direction: reverse;
 }
 
 /* Hover effects */
@@ -3017,55 +2571,6 @@ html {
     }
 }
 
-.benefits-marquee .benefit-card {
-    min-width: 320px;
-    max-width: 320px;
-    flex-shrink: 0;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    text-align: center;
-}
-
-.benefits-marquee .benefit-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.benefits-marquee .benefit-number {
-    width: 50px;
-    height: 50px;
-    margin: 0 auto 1.5rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: white;
-}
-
-.benefits-marquee .benefit-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 1rem;
-    line-height: 1.4;
-}
-
-.benefits-marquee .benefit-description {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
-}
-
 /* ========================================
    CASES SECTION MARQUEE
 ======================================== */
@@ -3138,13 +2643,13 @@ html {
 }
 
 .cases-marquee .case-content {
-    padding: 0 1.5rem 1.5rem;
+    padding: 0 1rem 1rem;
 }
 
 .cases-marquee .case-video-container {
     width: 100%;
-    height: 120px;
-    margin-bottom: 1.5rem;
+    height: 160px;
+    margin-bottom: 1rem;
     border-radius: 8px;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.1);
@@ -3160,7 +2665,7 @@ html {
     font-size: 0.9rem;
     font-weight: 600;
     color: white;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 .cases-marquee .case-details p {
@@ -3211,11 +2716,7 @@ html {
         --gap: 1.5rem;
     }
     
-    .benefits-marquee .benefit-card {
-        min-width: 280px;
-        max-width: 280px;
-        padding: 1.5rem;
-    }
+
     
     .cases-marquee {
         --duration: 35s;
@@ -3227,22 +2728,4 @@ html {
         max-width: 350px;
     }
     
-    .marquee-fade-left,
-    .marquee-fade-right {
-        width: 50px;
-    }
-}
-
-@media (max-width: 480px) {
-    .services-marquee .service-card,
-    .benefits-marquee .benefit-card,
-    .cases-marquee .case-card {
-        min-width: 280px;
-        max-width: 280px;
-    }
-    
-    .marquee-fade-left,
-    .marquee-fade-right {
-        width: 30px;
-    }
 }
