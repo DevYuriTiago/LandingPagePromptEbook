@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Prompts360 - Agência especializada em automação com IA e desenvolvimento de sistemas inteligentes. Transforme seu negócio com soluções personalizadas de inteligência artificial.">
-    <meta name="keywords" content="agência ia, automação com ia, prompts personalizados, consultoria ia, chatgpt para empresas, automação de processos, ia para negócios, prompts360, engenharia de prompts, soluções em ia">
-    <title>Prompts360 - Agência Especializada em Automação com IA | Transforme seu Negócio</title>
+    <meta name="description" content="Prompts360 - Modernizamos Clínicas, Escolas e Escritórios Jurídicos com IA e Automação. ROI médio de 300% em 90 dias. Diagnóstico gratuito limitado.">
+    <meta name="keywords" content="automação clínicas, tecnologia educação, sistema jurídico, ia para clínicas, automação escolas, marketing jurídico, modernização empresas, prompts360">
+    <title>Prompts360 - Modernize sua Clínica, Escola ou Escritório Jurídico com IA | ROI 300%</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
@@ -30,6 +30,9 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="css/prompts360-final.css">
+    
+    <!-- Framer Motion for animations -->
+    <script src="https://unpkg.com/framer-motion@11.3.19/dist/framer-motion.js"></script>
     
     <!-- Meta Pixel Code - Comentado temporariamente -->
     <!--
@@ -111,54 +114,88 @@
                     <li><a href="#cases" class="nav-link">Cases</a></li>
                     <li><a href="#contact" class="nav-link">Contato</a></li>
                 </ul>
-                <a href="#lead-form" class="nav-cta">Consultoria Gratuita</a>
+                <a href="#lead-form" class="nav-cta">Diagnóstico Gratuito</a>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- Hero Section with Cinematic Effects -->
+    <section class="hero cinematic-hero">
+        <!-- Meteors Background -->
+        <div class="meteors-container">
+            <div class="meteors-wrapper">
+                <span class="meteor meteor-1"></span>
+                <span class="meteor meteor-2"></span>
+                <span class="meteor meteor-3"></span>
+                <span class="meteor meteor-4"></span>
+                <span class="meteor meteor-5"></span>
+                <span class="meteor meteor-6"></span>
+                <span class="meteor meteor-7"></span>
+                <span class="meteor meteor-8"></span>
+                <span class="meteor meteor-9"></span>
+                <span class="meteor meteor-10"></span>
+            </div>
+        </div>
+        
+        <!-- Retro Grid Background -->
+        <div class="retro-grid-container">
+            <div class="retro-grid-overlay"></div>
+            <div class="retro-grid-pattern"></div>
+        </div>
+        
+        <!-- Particles Background -->
+        <div class="particles-container" id="particles-hero">
+            <canvas class="particles-canvas"></canvas>
+        </div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Transforme seu Negócio com Soluções de IA Personalizadas</h1>
-                    <p class="hero-subtitle">A Prompts360 é uma agência especializada em desenvolvimento de sistemas inteligentes, automação avançada e chatbots que revolucionam empresas. Mais de 50 projetos entregues com resultados comprovados.</p>
+                    <!-- Aurora Text Effect -->
+                    <h1 class="aurora-title">
+                        <span class="aurora-text" data-text="Transformamos sua Clínica, Escola ou Escritório Jurídico">Transformamos sua Clínica, Escola ou Escritório Jurídico</span>
+                        <br>
+                        <span class="aurora-text morphing-text" data-text="em uma Máquina de Crescimento com IA">em uma Máquina de Crescimento com IA</span>
+                    </h1>
+                    <!-- Animated Gradient Text -->
+                    <p class="hero-subtitle animated-gradient-text">
+                        <strong>Pare de perder dinheiro</strong> com processos manuais e desorganizados. Modernizamos empresas de serviços com IA, Automação e Tecnologia para gerar <strong>mais vendas, menos desperdício e total controle</strong> do seu negócio. Especialistas em digitalizar mais de 50 negócios como o seu com ROI médio de 300%.
+                    </p>
                     
                     <div class="hero-benefits">
-                        <div class="benefit-item">
-                            <span class="benefit-icon">⚡</span>
-                            <span>Implementação em 30 dias</span>
+                        <div class="benefit-item magic-card">
+                            <span class="benefit-icon sparkles-icon">💰</span>
+                            <span class="shiny-text">ROI médio de 300% em 90 dias</span>
                         </div>
                         <div class="benefit-item">
-                            <span class="benefit-icon">�</span>
-                            <span>ROI médio de 300%</span>
+                            <span class="benefit-icon sparkles-icon">⚡</span>
+                            <span class="shiny-text">Redução de 60% nos custos operacionais</span>
                         </div>
-                        <div class="benefit-item">
-                            <span class="benefit-icon">🎯</span>
-                            <span>Suporte 24/7 incluso</span>
+                        <div class="benefit-item magic-card">
+                            <span class="benefit-icon sparkles-icon">📈</span>
+                            <span class="shiny-text">Aumento de 45% na receita mensal</span>
                         </div>
                     </div>
                     
                     <div class="hero-stats">
-                        <div class="stat">
-                            <span class="stat-number">50+</span>
-                            <span class="stat-label">Projetos Entregues</span>
+                        <div class="stat shine-border">
+                            <span class="stat-number number-ticker" data-value="50">0</span>
+                            <span class="stat-label">Empresas Modernizadas</span>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number">95%</span>
-                            <span class="stat-label">Taxa de Sucesso</span>
+                        <div class="stat shine-border">
+                            <span class="stat-number number-ticker" data-value="300">0</span>
+                            <span class="stat-label">% ROI Médio</span>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number">4x</span>
-                            <span class="stat-label">Aumento de Eficiência</span>
+                        <div class="stat shine-border">
+                            <span class="stat-number number-ticker" data-value="45">0</span>
+                            <span class="stat-label">% Aumento em Vendas</span>
                         </div>
                     </div>
                     
-                    <a href="#lead-form" class="cta-button">Quero uma Consultoria Gratuita</a>
+                    <a href="#lead-form" class="cta-button rainbow-button">Quero Modernizar Meu Negócio Agora</a>
                 </div>
                 
                 <div class="hero-visual">
-                    <div class="dashboard-mockup">
+                    <div class="dashboard-mockup neon-gradient-card">
                         <div class="dashboard-header">
                             <div class="dashboard-title">Sistema IA - Dashboard</div>
                             <div class="dashboard-status">
@@ -193,86 +230,174 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="section" id="services">
+    <!-- Services Section with Cinematic Effects -->
+    <section class="section cinematic-section" id="services">
+        <!-- Animated Grid Pattern Background -->
+        <div class="animated-grid-background">
+            <div class="animated-grid-pattern"></div>
+        </div>
+        
+        <!-- Flickering Grid Overlay -->
+        <div class="flickering-grid-overlay">
+            <canvas class="flickering-grid"></canvas>
+        </div>
+        
         <div class="section-connector"></div>
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Nossos Serviços de IA</h2>
-                <p class="section-subtitle">Desenvolvemos soluções completas de inteligência artificial para transformar processos e impulsionar resultados</p>
+                <h2 class="section-title text-reveal">Como Modernizamos Clínicas, Escolas e Escritórios Jurídicos</h2>
+                <p class="section-subtitle hyper-text">Soluções de IA e Automação personalizadas para gerar mais lucro, reduzir custos e aumentar a eficiência operacional</p>
             </div>
             
-            <div class="services-grid">
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">AI</div>
-                    <h3 class="service-title">Desenvolvimento de Sistemas IA</h3>
-                    <p class="service-description">Criamos sistemas inteligentes personalizados que automatizam processos complexos e tomam decisões estratégicas.</p>
-                    <ul class="service-features">
-                        <li>Machine Learning personalizado</li>
-                        <li>Processamento de linguagem natural</li>
-                        <li>Análise preditiva avançada</li>
-                        <li>Integração com sistemas existentes</li>
-                    </ul>
+            <div class="marquee-container services-marquee">
+                <!-- Primeira repetição do track -->
+                <div class="marquee-track pause-on-hover">
+                    <div class="service-card">
+                        <div class="service-icon aurora-text">🏥</div>
+                        <h3 class="service-title animated-shiny-text">Automação para Clínicas</h3>
+                        <p class="service-description">Sistema inteligente que automatiza agendamentos, prontuários eletrônicos e gestão de pacientes, aumentando a receita em até 40%.</p>
+                        <ul class="service-features">
+                            <li>Agendamento inteligente 24/7</li>
+                            <li>Prontuário eletrônico com IA</li>
+                            <li>Gestão automática de seguros</li>
+                            <li>Dashboard de receita em tempo real</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon aurora-text">🎓</div>
+                        <h3 class="service-title animated-shiny-text">Tecnologia para Educação</h3>
+                        <p class="service-description">Plataforma educacional com IA que personaliza o aprendizado, automatiza avaliações e melhora a retenção de alunos em 50%.</p>
+                        <ul class="service-features">
+                            <li>Tutoria inteligente personalizada</li>
+                            <li>Correção automática de provas</li>
+                            <li>Chatbot para atendimento estudantil</li>
+                            <li>Análise de performance acadêmica</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon aurora-text">⚖️</div>
+                        <h3 class="service-title animated-shiny-text">Automação Jurídica</h3>
+                        <p class="service-description">Sistema jurídico inteligente que automatiza contratos, processos e gestão de clientes, reduzindo tempo operacional em 70%.</p>
+                        <ul class="service-features">
+                            <li>Automação de contratos e petições</li>
+                            <li>Gestão inteligente de prazos</li>
+                            <li>Análise de jurisprudência com IA</li>
+                            <li>CRM jurídico automatizado</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon aurora-text">📊</div>
+                        <h3 class="service-title animated-shiny-text">Business Intelligence & Analytics</h3>
+                        <p class="service-description">Dashboard inteligente que transforma dados em insights acionáveis, aumentando a margem de lucro em até 35%.</p>
+                        <ul class="service-features">
+                            <li>Dashboard executivo em tempo real</li>
+                            <li>Análise preditiva de receita</li>
+                            <li>Relatórios automáticos de performance</li>
+                            <li>KPIs personalizados por setor</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon aurora-text">🚀</div>
+                        <h3 class="service-title animated-shiny-text">Marketing Digital Inteligente</h3>
+                        <p class="service-description">Sistema de marketing com IA que automatiza campanhas e aumenta conversões em 60%, gerando mais leads qualificados.</p>
+                        <ul class="service-features">
+                            <li>Automação de marketing multicanal</li>
+                            <li>Segmentação inteligente de leads</li>
+                            <li>Landing pages de alta conversão</li>
+                            <li>A/B testing automatizado</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon aurora-text">💬</div>
+                        <h3 class="service-title animated-shiny-text">Atendimento Inteligente 24/7</h3>
+                        <p class="service-description">Chatbot especializado que atende seus clientes 24/7, reduz tempo de resposta em 80% e aumenta a satisfação.</p>
+                        <ul class="service-features">
+                            <li>Atendimento personalizado por setor</li>
+                            <li>Integração com agenda e sistemas</li>
+                            <li>Suporte multilíngue</li>
+                            <li>Escalação inteligente para humanos</li>
+                        </ul>
+                    </div>
                 </div>
                 
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">BOT</div>
-                    <h3 class="service-title">Chatbots & Assistentes Virtuais</h3>
-                    <p class="service-description">Desenvolvemos assistentes inteligentes que revolucionam o atendimento e melhoram a experiência do cliente.</p>
-                    <ul class="service-features">
-                        <li>Chatbots multi-plataforma</li>
-                        <li>Processamento de linguagem natural</li>
-                        <li>Integração com CRM e bancos de dados</li>
-                        <li>Análise de sentimentos em tempo real</li>
-                    </ul>
-                </div>
-                
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">AUTO</div>
-                    <h3 class="service-title">Automação de Processos</h3>
-                    <p class="service-description">Automatizamos workflows complexos com IA, reduzindo custos operacionais e aumentando a eficiência.</p>
-                    <ul class="service-features">
-                        <li>RPA com inteligência artificial</li>
-                        <li>Automação de documentos</li>
-                        <li>Workflows inteligentes</li>
-                        <li>Monitoramento em tempo real</li>
-                    </ul>
-                </div>
-                
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">DATA</div>
-                    <h3 class="service-title">Analytics & BI com IA</h3>
-                    <p class="service-description">Transformamos dados em insights acionáveis com dashboards inteligentes e análises preditivas.</p>
-                    <ul class="service-features">
-                        <li>Dashboards inteligentes</li>
-                        <li>Análise preditiva de tendências</li>
-                        <li>Relatórios automatizados</li>
-                        <li>Visualização avançada de dados</li>
-                    </ul>
-                </div>
-                
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">LAND</div>
-                    <h3 class="service-title">Landing Pages Personalizadas</h3>
-                    <p class="service-description">Criamos landing pages de alta conversão com IA integrada para maximizar seus resultados de marketing.</p>
-                    <ul class="service-features">
-                        <li>Design responsivo otimizado</li>
-                        <li>A/B testing automatizado</li>
-                        <li>Chatbots integrados</li>
-                        <li>Analytics avançado</li>
-                    </ul>
-                </div>
-                
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">LOVE</div>
-                    <h3 class="service-title">Sites de Casamentos</h3>
-                    <p class="service-description">Desenvolvemos sites únicos para casamentos com funcionalidades inteligentes para o grande dia.</p>
-                    <ul class="service-features">
-                        <li>RSVP automatizado</li>
-                        <li>Lista de presentes inteligente</li>
-                        <li>Galeria de fotos com IA</li>
-                        <li>Chatbot para convidados</li>
-                    </ul>
+                <!-- Segunda repetição do track -->
+                <div class="marquee-track pause-on-hover">
+                    <div class="service-card">
+                        <div class="service-icon aurora-text">🏥</div>
+                        <h3 class="service-title animated-shiny-text">Automação para Clínicas</h3>
+                        <p class="service-description">Sistema inteligente que automatiza agendamentos, prontuários eletrônicos e gestão de pacientes, aumentando a receita em até 40%.</p>
+                        <ul class="service-features">
+                            <li>Agendamento inteligente 24/7</li>
+                            <li>Prontuário eletrônico com IA</li>
+                            <li>Gestão automática de seguros</li>
+                            <li>Dashboard de receita em tempo real</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon aurora-text">🎓</div>
+                        <h3 class="service-title animated-shiny-text">Tecnologia para Educação</h3>
+                        <p class="service-description">Plataforma educacional com IA que personaliza o aprendizado, automatiza avaliações e melhora a retenção de alunos em 50%.</p>
+                        <ul class="service-features">
+                            <li>Tutoria inteligente personalizada</li>
+                            <li>Correção automática de provas</li>
+                            <li>Chatbot para atendimento estudantil</li>
+                            <li>Análise de performance acadêmica</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon aurora-text">⚖️</div>
+                        <h3 class="service-title animated-shiny-text">Automação Jurídica</h3>
+                        <p class="service-description">Sistema jurídico inteligente que automatiza contratos, processos e gestão de clientes, reduzindo tempo operacional em 70%.</p>
+                        <ul class="service-features">
+                            <li>Automação de contratos e petições</li>
+                            <li>Gestão inteligente de prazos</li>
+                            <li>Análise de jurisprudência com IA</li>
+                            <li>CRM jurídico automatizado</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon aurora-text">📊</div>
+                        <h3 class="service-title animated-shiny-text">Business Intelligence & Analytics</h3>
+                        <p class="service-description">Dashboard inteligente que transforma dados em insights acionáveis, aumentando a margem de lucro em até 35%.</p>
+                        <ul class="service-features">
+                            <li>Dashboard executivo em tempo real</li>
+                            <li>Análise preditiva de receita</li>
+                            <li>Relatórios automáticos de performance</li>
+                            <li>KPIs personalizados por setor</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon aurora-text">🚀</div>
+                        <h3 class="service-title animated-shiny-text">Marketing Digital Inteligente</h3>
+                        <p class="service-description">Sistema de marketing com IA que automatiza campanhas e aumenta conversões em 60%, gerando mais leads qualificados.</p>
+                        <ul class="service-features">
+                            <li>Automação de marketing multicanal</li>
+                            <li>Segmentação inteligente de leads</li>
+                            <li>Landing pages de alta conversão</li>
+                            <li>A/B testing automatizado</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon aurora-text">💬</div>
+                        <h3 class="service-title animated-shiny-text">Atendimento Inteligente 24/7</h3>
+                        <p class="service-description">Chatbot especializado que atende seus clientes 24/7, reduz tempo de resposta em 80% e aumenta a satisfação.</p>
+                        <ul class="service-features">
+                            <li>Atendimento personalizado por setor</li>
+                            <li>Integração com agenda e sistemas</li>
+                            <li>Suporte multilíngue</li>
+                            <li>Escalação inteligente para humanos</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -283,33 +408,63 @@
         <div class="section-connector"></div>
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Por que Escolher a Prompts360?</h2>
-                <p class="section-subtitle">Somos especialistas em transformar desafios complexos em soluções inteligentes e rentáveis</p>
+                <h2 class="section-title">Por que Clínicas, Escolas e Escritórios Jurídicos Escolhem a Prompts360?</h2>
+                <p class="section-subtitle">Somos especialistas em modernizar empresas de serviços com foco em ROI, eficiência e crescimento sustentável</p>
             </div>
             
-            <div class="services-grid">
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">✓</div>
-                    <h3 class="service-title">Resultados Comprovados</h3>
-                    <p class="service-description">Mais de 50 projetos entregues com ROI médio de 300% e 95% de taxa de sucesso em implementações.</p>
+            <div class="marquee-container benefits-marquee">
+                <!-- Primeira repetição do track -->
+                <div class="marquee-track pause-on-hover">
+                    <div class="service-card">
+                        <div class="service-icon">💰</div>
+                        <h3 class="service-title">ROI Médio de 300% em 90 Dias</h3>
+                        <p class="service-description">Nossos clientes recuperam o investimento em 3 meses e têm retorno de 3x o valor investido, com aumento médio de 45% na receita mensal.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">⚡</div>
+                        <h3 class="service-title">Redução de 60% nos Custos Operacionais</h3>
+                        <p class="service-description">Automatizamos processos manuais e repetitivos, liberando sua equipe para focar em atividades de alto valor e atendimento estratégico.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">🎯</div>
+                        <h3 class="service-title">Especialistas no Seu Setor</h3>
+                        <p class="service-description">Entendemos as peculiaridades de clínicas, escolas e escritórios jurídicos. Soluções pensadas especificamente para seu nicho.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">📈</div>
+                        <h3 class="service-title">Previsibilidade de Crescimento</h3>
+                        <p class="service-description">Dashboard executivo com métricas em tempo real que permitem prever receita, controlar custos e tomar decisões estratégicas com dados precisos.</p>
+                    </div>
                 </div>
                 
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">⚡</div>
-                    <h3 class="service-title">Implementação Rápida</h3>
-                    <p class="service-description">Metodologia ágil que garante entrega em até 30 dias, com suporte completo durante todo o processo.</p>
-                </div>
-                
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">+</div>
-                    <h3 class="service-title">Soluções Personalizadas</h3>
-                    <p class="service-description">Cada projeto é único. Desenvolvemos soluções sob medida para suas necessidades específicas.</p>
-                </div>
-                
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">24/7</div>
-                    <h3 class="service-title">Suporte 24/7</h3>
-                    <p class="service-description">Equipe especializada disponível 24 horas para garantir que suas soluções funcionem perfeitamente.</p>
+                <!-- Segunda repetição do track -->
+                <div class="marquee-track pause-on-hover">
+                    <div class="service-card">
+                        <div class="service-icon">💰</div>
+                        <h3 class="service-title">ROI Médio de 300% em 90 Dias</h3>
+                        <p class="service-description">Nossos clientes recuperam o investimento em 3 meses e têm retorno de 3x o valor investido, com aumento médio de 45% na receita mensal.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">⚡</div>
+                        <h3 class="service-title">Redução de 60% nos Custos Operacionais</h3>
+                        <p class="service-description">Automatizamos processos manuais e repetitivos, liberando sua equipe para focar em atividades de alto valor e atendimento estratégico.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">🎯</div>
+                        <h3 class="service-title">Especialistas no Seu Setor</h3>
+                        <p class="service-description">Entendemos as peculiaridades de clínicas, escolas e escritórios jurídicos. Soluções pensadas especificamente para seu nicho.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">📈</div>
+                        <h3 class="service-title">Previsibilidade de Crescimento</h3>
+                        <p class="service-description">Dashboard executivo com métricas em tempo real que permitem prever receita, controlar custos e tomar decisões estratégicas com dados precisos.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -326,158 +481,320 @@
                 </h2>
             </div>
             
-            <div class="cases-grid">
-                <div class="case-card glass-card animate-on-scroll" data-case-id="case1">
-                    <div class="case-header">
-                        <div class="case-category">E-commerce</div>
-                        <h3 class="case-title">Automação E-commerce</h3>
-                        <div class="case-company">TechStore Brasil</div>
-                    </div>
-                    
-                    <div class="case-content">
-                        <div class="case-video-container">
-                            <video class="case-video" 
-                                   data-src="video/cases/case1.mp4" 
-                                   muted 
-                                   loop 
-                                   playsinline 
-                                   preload="metadata">
-                                <source src="video/cases/case1.mp4" type="video/mp4">
-                                Seu navegador não suporta vídeos HTML5.
-                            </video>
+            <div class="marquee-container cases-marquee">
+                <!-- Primeira repetição do track -->
+                <div class="marquee-track pause-on-hover">
+                    <div class="case-card glass-card" data-case-id="case1">
+                        <div class="case-header">
+                            <div class="case-category">Clínica Médica</div>
+                            <h3 class="case-title">Automação para Clínica</h3>
+                            <div class="case-company">Clínica São Paulo</div>
                         </div>
                         
-                        <div class="case-details">
-                            <div class="case-challenge">
-                                <h4>Desafio</h4>
-                                <p>Reduzir tempo de atendimento e aumentar conversões</p>
+                        <div class="case-content">
+                            <div class="case-video-container">
+                                <video class="case-video" 
+                                       data-src="video/cases/case1.mp4" 
+                                       muted 
+                                       loop 
+                                       playsinline 
+                                       preload="metadata">
+                                    <source src="video/cases/case1.mp4" type="video/mp4">
+                                    Seu navegador não suporta vídeos HTML5.
+                                </video>
                             </div>
                             
-                            <div class="case-solution">
-                                <h4>Solução</h4>
-                                <p>Chatbot inteligente + Automação de vendas</p>
+                            <div class="case-details">
+                                <div class="case-challenge">
+                                    <h4>Desafio</h4>
+                                    <p>Agendamentos manuais causavam conflitos e perda de pacientes</p>
+                                </div>
+                                
+                                <div class="case-solution">
+                                    <h4>Solução</h4>
+                                    <p>Sistema inteligente de agendamento + IA para triagem</p>
+                                </div>
+                                
+                                <div class="case-results">
+                                    <h4>Resultados</h4>
+                                    <ul class="results-list">
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>40% aumento na receita</span>
+                                        </li>
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>80% redução em conflitos</span>
+                                        </li>
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>95% satisfação dos pacientes</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="case-card glass-card" data-case-id="case2">
+                        <div class="case-header">
+                            <div class="case-category">Educação</div>
+                            <h3 class="case-title">Plataforma Educacional IA</h3>
+                            <div class="case-company">Colégio Futuro</div>
+                        </div>
+                        
+                        <div class="case-content">
+                            <div class="case-video-container">
+                                <video class="case-video" 
+                                       data-src="video/cases/case2.mp4" 
+                                       muted 
+                                       loop 
+                                       playsinline 
+                                       preload="metadata">
+                                    <source src="video/cases/case2.mp4" type="video/mp4">
+                                    Seu navegador não suporta vídeos HTML5.
+                                </video>
                             </div>
                             
-                            <div class="case-results">
-                                <h4>Resultados</h4>
-                                <ul class="results-list">
-                                    <li class="result-item">
-                                        <span class="result-icon">✓</span>
-                                        <span>300% ROI</span>
-                                    </li>
-                                    <li class="result-item">
-                                        <span class="result-icon">✓</span>
-                                        <span>70% redução no tempo de resposta</span>
-                                    </li>
-                                    <li class="result-item">
-                                        <span class="result-icon">✓</span>
-                                        <span>45% aumento nas vendas</span>
-                                    </li>
-                                </ul>
+                            <div class="case-details">
+                                <div class="case-challenge">
+                                    <h4>Desafio</h4>
+                                    <p>Alta evasão escolar e dificuldade no acompanhamento individual</p>
+                                </div>
+                                
+                                <div class="case-solution">
+                                    <h4>Solução</h4>
+                                    <p>IA personalizada para aprendizado + Dashboard preditivo</p>
+                                </div>
+                                
+                                <div class="case-results">
+                                    <h4>Resultados</h4>
+                                    <ul class="results-list">
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>50% redução na evasão</span>
+                                        </li>
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>30% melhoria nas notas</span>
+                                        </li>
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>90% satisfação dos pais</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="case-card glass-card" data-case-id="case3">
+                        <div class="case-header">
+                            <div class="case-category">Jurídico</div>
+                            <h3 class="case-title">Automação Jurídica</h3>
+                            <div class="case-company">Advocacia & Cia</div>
+                        </div>
+                        
+                        <div class="case-content">
+                            <div class="case-video-container">
+                                <video class="case-video" 
+                                       data-src="video/cases/case3.mp4" 
+                                       muted 
+                                       loop 
+                                       playsinline 
+                                       preload="metadata">
+                                    <source src="video/cases/case3.mp4" type="video/mp4">
+                                    Seu navegador não suporta vídeos HTML5.
+                                </video>
+                            </div>
+                            
+                            <div class="case-details">
+                                <div class="case-challenge">
+                                    <h4>Desafio</h4>
+                                    <p>Perda de prazos e contratos manuais ineficientes</p>
+                                </div>
+                                
+                                <div class="case-solution">
+                                    <h4>Solução</h4>
+                                    <p>IA para contratos + Sistema de alertas inteligentes</p>
+                                </div>
+                                
+                                <div class="case-results">
+                                    <h4>Resultados</h4>
+                                    <ul class="results-list">
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>70% redução no tempo</span>
+                                        </li>
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>0% perda de prazos</span>
+                                        </li>
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>200% aumento em clientes</span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="case-card glass-card animate-on-scroll" data-case-id="case2">
-                    <div class="case-header">
-                        <div class="case-category">Recursos Humanos</div>
-                        <h3 class="case-title">IA para Recursos Humanos</h3>
-                        <div class="case-company">Inovação RH</div>
-                    </div>
-                    
-                    <div class="case-content">
-                        <div class="case-video-container">
-                            <video class="case-video" 
-                                   data-src="video/cases/case2.mp4" 
-                                   muted 
-                                   loop 
-                                   playsinline 
-                                   preload="metadata">
-                                <source src="video/cases/case2.mp4" type="video/mp4">
-                                Seu navegador não suporta vídeos HTML5.
-                            </video>
+                <!-- Segunda repetição do track -->
+                <div class="marquee-track pause-on-hover">
+                    <div class="case-card glass-card" data-case-id="case1">
+                        <div class="case-header">
+                            <div class="case-category">Clínica Médica</div>
+                            <h3 class="case-title">Automação para Clínica</h3>
+                            <div class="case-company">Clínica São Paulo</div>
                         </div>
                         
-                        <div class="case-details">
-                            <div class="case-challenge">
-                                <h4>Desafio</h4>
-                                <p>Triagem eficiente de currículos e candidatos</p>
+                        <div class="case-content">
+                            <div class="case-video-container">
+                                <video class="case-video" 
+                                       data-src="video/cases/case1.mp4" 
+                                       muted 
+                                       loop 
+                                       playsinline 
+                                       preload="metadata">
+                                    <source src="video/cases/case1.mp4" type="video/mp4">
+                                    Seu navegador não suporta vídeos HTML5.
+                                </video>
                             </div>
                             
-                            <div class="case-solution">
-                                <h4>Solução</h4>
-                                <p>Sistema de IA para análise de perfis</p>
-                            </div>
-                            
-                            <div class="case-results">
-                                <h4>Resultados</h4>
-                                <ul class="results-list">
-                                    <li class="result-item">
-                                        <span class="result-icon">✓</span>
-                                        <span>80% redução no tempo de triagem</span>
-                                    </li>
-                                    <li class="result-item">
-                                        <span class="result-icon">✓</span>
-                                        <span>95% precisão na seleção</span>
-                                    </li>
-                                    <li class="result-item">
-                                        <span class="result-icon">✓</span>
-                                        <span>60% economia de custos</span>
-                                    </li>
-                                </ul>
+                            <div class="case-details">
+                                <div class="case-challenge">
+                                    <h4>Desafio</h4>
+                                    <p>Agendamentos manuais causavam conflitos e perda de pacientes</p>
+                                </div>
+                                
+                                <div class="case-solution">
+                                    <h4>Solução</h4>
+                                    <p>Sistema inteligente de agendamento + IA para triagem</p>
+                                </div>
+                                
+                                <div class="case-results">
+                                    <h4>Resultados</h4>
+                                    <ul class="results-list">
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>40% aumento na receita</span>
+                                        </li>
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>80% redução em conflitos</span>
+                                        </li>
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>95% satisfação dos pacientes</span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="case-card glass-card animate-on-scroll" data-case-id="case3">
-                    <div class="case-header">
-                        <div class="case-category">Financeiro</div>
-                        <h3 class="case-title">Análise Preditiva Financeira</h3>
-                        <div class="case-company">FinTech Solutions</div>
                     </div>
                     
-                    <div class="case-content">
-                        <div class="case-video-container">
-                            <video class="case-video" 
-                                   data-src="video/cases/case3.mp4" 
-                                   muted 
-                                   loop 
-                                   playsinline 
-                                   preload="metadata">
-                                <source src="video/cases/case3.mp4" type="video/mp4">
-                                Seu navegador não suporta vídeos HTML5.
-                            </video>
+                    <div class="case-card glass-card" data-case-id="case2">
+                        <div class="case-header">
+                            <div class="case-category">Educação</div>
+                            <h3 class="case-title">Plataforma Educacional IA</h3>
+                            <div class="case-company">Colégio Futuro</div>
                         </div>
                         
-                        <div class="case-details">
-                            <div class="case-challenge">
-                                <h4>Desafio</h4>
-                                <p>Prever inadimplência e otimizar crédito</p>
+                        <div class="case-content">
+                            <div class="case-video-container">
+                                <video class="case-video" 
+                                       data-src="video/cases/case2.mp4" 
+                                       muted 
+                                       loop 
+                                       playsinline 
+                                       preload="metadata">
+                                    <source src="video/cases/case2.mp4" type="video/mp4">
+                                    Seu navegador não suporta vídeos HTML5.
+                                </video>
                             </div>
                             
-                            <div class="case-solution">
-                                <h4>Solução</h4>
-                                <p>Machine Learning para análise de risco</p>
+                            <div class="case-details">
+                                <div class="case-challenge">
+                                    <h4>Desafio</h4>
+                                    <p>Alta evasão escolar e dificuldade no acompanhamento individual</p>
+                                </div>
+                                
+                                <div class="case-solution">
+                                    <h4>Solução</h4>
+                                    <p>IA personalizada para aprendizado + Dashboard preditivo</p>
+                                </div>
+                                
+                                <div class="case-results">
+                                    <h4>Resultados</h4>
+                                    <ul class="results-list">
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>50% redução na evasão</span>
+                                        </li>
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>30% melhoria nas notas</span>
+                                        </li>
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>90% satisfação dos pais</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="case-card glass-card" data-case-id="case3">
+                        <div class="case-header">
+                            <div class="case-category">Jurídico</div>
+                            <h3 class="case-title">Automação Jurídica</h3>
+                            <div class="case-company">Advocacia & Cia</div>
+                        </div>
+                        
+                        <div class="case-content">
+                            <div class="case-video-container">
+                                <video class="case-video" 
+                                       data-src="video/cases/case3.mp4" 
+                                       muted 
+                                       loop 
+                                       playsinline 
+                                       preload="metadata">
+                                    <source src="video/cases/case3.mp4" type="video/mp4">
+                                    Seu navegador não suporta vídeos HTML5.
+                                </video>
                             </div>
                             
-                            <div class="case-results">
-                                <h4>Resultados</h4>
-                                <ul class="results-list">
-                                    <li class="result-item">
-                                        <span class="result-icon">✓</span>
-                                        <span>40% redução na inadimplência</span>
-                                    </li>
-                                    <li class="result-item">
-                                        <span class="result-icon">✓</span>
-                                        <span>25% aumento na aprovação</span>
-                                    </li>
-                                    <li class="result-item">
-                                        <span class="result-icon">✓</span>
-                                        <span>200% ROI</span>
-                                    </li>
-                                </ul>
+                            <div class="case-details">
+                                <div class="case-challenge">
+                                    <h4>Desafio</h4>
+                                    <p>Perda de prazos e contratos manuais ineficientes</p>
+                                </div>
+                                
+                                <div class="case-solution">
+                                    <h4>Solução</h4>
+                                    <p>IA para contratos + Sistema de alertas inteligentes</p>
+                                </div>
+                                
+                                <div class="case-results">
+                                    <h4>Resultados</h4>
+                                    <ul class="results-list">
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>70% redução no tempo</span>
+                                        </li>
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>0% perda de prazos</span>
+                                        </li>
+                                        <li class="result-item">
+                                            <span class="result-icon">✓</span>
+                                            <span>200% aumento em clientes</span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -514,8 +831,8 @@
         <div class="section-connector"></div>
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Consultoria Gratuita</h2>
-                <p class="section-subtitle">Descubra como a IA pode transformar seu negócio. Agende uma conversa com nossos especialistas.</p>
+                <h2 class="section-title">🎯 Diagnóstico Gratuito: Descubra Quanto Sua Empresa Pode Lucrar com IA</h2>
+                <p class="section-subtitle">Análise personalizada mostra exatamente onde você está perdendo dinheiro e como a IA pode gerar mais receita. <strong>Limitado a 20 empresas por mês.</strong></p>
             </div>
             
             <form class="lead-form" id="leadForm">
@@ -550,29 +867,29 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="interest" class="form-label">Principal Interesse *</label>
+                    <label for="interest" class="form-label">Tipo de Empresa *</label>
                     <select id="interest" name="interest" class="form-select" required>
-                        <option value="">Selecione uma opção</option>
-                        <option value="chatbots">Chatbots & Assistentes Virtuais</option>
-                        <option value="automation">Automação de Processos</option>
-                        <option value="analytics">Analytics & BI com IA</option>
-                        <option value="custom-ai">Desenvolvimento de Sistemas</option>
-                        <option value="consulting">Consultoria em IA</option>
-                        <option value="other">Outro</option>
+                        <option value="">Selecione seu setor</option>
+                        <option value="clinica">Clínica Médica / Odontológica / Veterinária</option>
+                        <option value="educacao">Escola / Universidade / Curso</option>
+                        <option value="juridico">Escritório Jurídico / Advocacia</option>
+                        <option value="consultoria">Consultoria / Prestação de Serviços</option>
+                        <option value="other">Outro setor de serviços</option>
                     </select>
                     <span class="error-label" id="interest-error"></span>
                 </div>
                 
                 <div class="form-group">
-                    <label for="challenge" class="form-label">Descreva seu principal desafio</label>
-                    <textarea id="challenge" name="challenge" class="form-textarea" rows="4" placeholder="Como podemos ajudar sua empresa?"></textarea>
+                    <label for="challenge" class="form-label">Qual seu maior desafio hoje? *</label>
+                    <textarea id="challenge" name="challenge" class="form-textarea" rows="4" placeholder="Ex: Muitos processos manuais, dificuldade em controlar custos, falta de relatórios gerenciais, etc." required></textarea>
                     <span class="error-label" id="challenge-error"></span>
                 </div>
                 
-                <button type="submit" class="cta-button">Solicitar Consultoria Gratuita</button>
+                <button type="submit" class="cta-button">Quero Meu Diagnóstico Gratuito Agora</button>
                 
                 <p class="text-center text-muted mt-2">
-                    <small>Seus dados estão seguros. Não compartilhamos informações com terceiros.</small>
+                    <small>🔒 Seus dados estão seguros. Não compartilhamos informações com terceiros.</small><br>
+                    <small>⚡ <strong>Apenas 20 diagnósticos gratuitos por mês.</strong> Garante o seu!</small>
                 </p>
             </form>
         </div>
@@ -649,7 +966,7 @@
                             <span class="amount">0,00</span>
                         </div>
                         <p class="price-description">E-book incluído gratuitamente em qualquer projeto da Prompts360</p>
-                        <a href="#lead-form" class="cta-button cta-primary">Quero Consultoria + E-book</a>
+                        <a href="#lead-form" class="cta-button cta-primary">Quero Diagnóstico + E-book Grátis</a>
                     </div>
                     
                     <div class="price-option standalone">
@@ -670,18 +987,50 @@
         </div>
     </section>
 
+    <!-- Final CTA Section -->
+    <section class="section final-cta-section" style="background: linear-gradient(135deg, #1e90ff, #8a2be2); color: white; text-align: center; padding: 4rem 0;">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700;">
+                Pronto para Transformar seu Negócio em uma Máquina de Lucro?
+            </h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                Junte-se aos <strong>50+ empresas</strong> que já modernizaram com IA e aumentaram sua receita em <strong>45%</strong>
+            </p>
+            <div style="margin-bottom: 2rem;">
+                <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 25px; margin: 0 1rem; display: inline-block;">
+                    ⚡ ROI de 300% garantido
+                </span>
+                <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 25px; margin: 0 1rem; display: inline-block;">
+                    🎯 Apenas 20 vagas/mês
+                </span>
+                <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 25px; margin: 0 1rem; display: inline-block;">
+                    🔒 100% Gratuito
+                </span>
+            </div>
+            <a href="#lead-form" class="cta-button" style="background: #fff; color: #1e90ff; font-size: 1.2rem; padding: 1rem 2rem; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                Quero Meu Diagnóstico Gratuito Agora
+            </a>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                ⏰ <strong>Restam apenas 12 vagas este mês.</strong> Não perca esta oportunidade!
+            </p>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <img src="logo_prompts360.png" alt="Prompts360 Logo" class="logo mb-2">
-                    <p>Agência especializada em automação com IA e desenvolvimento de sistemas inteligentes.</p>
+                    <p>Modernizamos Clínicas, Escolas e Escritórios Jurídicos com IA, Automação e Tecnologia para gerar mais lucro e eficiência.</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Serviços</h4>
-                    <a href="#services">Desenvolvimento de Sistemas IA</a>
+                    <h4>Soluções por Setor</h4>
+                    <a href="#services">Automação para Clínicas</a>
+                    <a href="#services">Tecnologia para Educação</a>
+                    <a href="#services">Automação Jurídica</a>
+                    <a href="#services">Marketing Digital Inteligente</a>
                     <a href="#services">Chatbots & Assistentes</a>
                     <a href="#services">Automação de Processos</a>
                     <a href="#services">Analytics & BI</a>
@@ -692,7 +1041,7 @@
                     <a href="#benefits">Sobre Nós</a>
                     <a href="#cases">Cases de Sucesso</a>
                     <a href="#contact">Contato</a>
-                    <a href="#lead-form">Consultoria Gratuita</a>
+                    <a href="#lead-form">Diagnóstico Gratuito</a>
                 </div>
                 
                 <div class="footer-section">
@@ -1445,5 +1794,212 @@
         
         console.log('✅ Sistema de vídeos dos cases com autoplay carregado');
     </script>
+
+    <!-- Cinematic Effects Script -->
+    <script type="module">
+        /**
+         * ============================
+         * CINEMATIC EFFECTS JAVASCRIPT
+         * Magic UI Components Integration
+         * ============================
+         */
+
+        // Magic Card Mouse Tracking
+        function initMagicCards() {
+            const magicCards = document.querySelectorAll('.magic-card');
+            
+            magicCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    
+                    card.style.setProperty('--mouse-x', `${x}%`);
+                    card.style.setProperty('--mouse-y', `${y}%`);
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.setProperty('--mouse-x', '50%');
+                    card.style.setProperty('--mouse-y', '50%');
+                });
+            });
+        }
+
+        // Number Ticker Animation
+        function initNumberTickers() {
+            const tickers = document.querySelectorAll('.number-ticker');
+            
+            tickers.forEach(ticker => {
+                const targetValue = parseInt(ticker.dataset.value);
+                const duration = 2000; // 2 seconds
+                const startTime = performance.now();
+                
+                function updateNumber(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    // Easing function for smooth animation
+                    const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                    const currentValue = Math.floor(easeOutQuart * targetValue);
+                    
+                    // Format number based on original text
+                    if (ticker.closest('.stat').textContent.includes('Taxa')) {
+                        ticker.textContent = currentValue + '%';
+                    } else if (ticker.closest('.stat').textContent.includes('Aumento')) {
+                        ticker.textContent = currentValue + 'x';
+                    } else {
+                        ticker.textContent = currentValue + '+';
+                    }
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(updateNumber);
+                    }
+                }
+                
+                // Start animation when element comes into view
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            requestAnimationFrame(updateNumber);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                observer.observe(ticker);
+            });
+        }
+
+        // Particles Background Effect
+        function initParticlesBackground() {
+            const particlesContainers = document.querySelectorAll('.particles-container');
+            
+            particlesContainers.forEach(container => {
+                const canvas = container.querySelector('.particles-canvas');
+                if (!canvas) return;
+                
+                const ctx = canvas.getContext('2d');
+                let particles = [];
+                
+                // Set canvas size
+                function resizeCanvas() {
+                    canvas.width = container.offsetWidth;
+                    canvas.height = container.offsetHeight;
+                }
+                
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+                
+                // Particle class
+                class Particle {
+                    constructor() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = Math.random() * canvas.height;
+                        this.vx = (Math.random() - 0.5) * 2;
+                        this.vy = (Math.random() - 0.5) * 2;
+                        this.size = Math.random() * 3 + 1;
+                        this.opacity = Math.random() * 0.5 + 0.3;
+                    }
+                    
+                    update() {
+                        this.x += this.vx;
+                        this.y += this.vy;
+                        
+                        // Wrap around edges
+                        if (this.x < 0) this.x = canvas.width;
+                        if (this.x > canvas.width) this.x = 0;
+                        if (this.y < 0) this.y = canvas.height;
+                        if (this.y > canvas.height) this.y = 0;
+                    }
+                    
+                    draw() {
+                        ctx.save();
+                        ctx.globalAlpha = this.opacity;
+                        ctx.fillStyle = '#1E90FF';
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                        
+                        // Add glow effect
+                        ctx.shadowBlur = 20;
+                        ctx.shadowColor = '#1E90FF';
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                }
+                
+                // Create particles
+                for (let i = 0; i < 50; i++) {
+                    particles.push(new Particle());
+                }
+                
+                // Animation loop
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    
+                    particles.forEach(particle => {
+                        particle.update();
+                        particle.draw();
+                    });
+                    
+                    requestAnimationFrame(animate);
+                }
+                
+                animate();
+            });
+        }
+
+        // Morphing Text Effect
+        function initMorphingText() {
+            const morphingTexts = document.querySelectorAll('.morphing-text');
+            
+            morphingTexts.forEach(element => {
+                const texts = ['com IA Avançada', 'com Automação', 'com Inovação', 'com Tecnologia'];
+                let currentIndex = 0;
+                
+                function morphText() {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        currentIndex = (currentIndex + 1) % texts.length;
+                        element.textContent = texts[currentIndex];
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, 300);
+                }
+                
+                // Change text every 3 seconds
+                setInterval(morphText, 3000);
+            });
+        }
+
+        // Initialize all cinematic effects
+        function initCinematicEffects() {
+            // Check for reduced motion preference
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            if (!prefersReducedMotion) {
+                initMagicCards();
+                initParticlesBackground();
+                initMorphingText();
+            }
+            
+            // Always initialize number tickers (low motion impact)
+            initNumberTickers();
+        }
+
+        // Initialize cinematic effects when DOM is loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initCinematicEffects);
+        } else {
+            initCinematicEffects();
+        }
+
+        console.log('✨ Efeitos cinematográficos carregados');
+    </script>
+
+    <!-- Marquee Snap-to-Card Controller -->
+    <script src="js/marquee-snap.js"></script>
 </body>
 </html>
