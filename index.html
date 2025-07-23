@@ -12,9 +12,7 @@
     <link rel="icon" type="image/png" href="img/favicon.png">
     
     <!-- Preload critical resources -->
-    <link rel="preload" href="css/prompts360-final.css" as="style">
     <link rel="preload" href="logo_prompts360.png" as="image" fetchpriority="high">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
     
     <!-- DNS prefetch -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
@@ -23,17 +21,57 @@
     <!-- <link rel="dns-prefetch" href="https://www.googletagmanager.com"> -->
     <!-- <link rel="dns-prefetch" href="https://connect.facebook.net"> -->
     
-    <!-- Fonts -->
+    <!-- Fonts - Optimized loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
     
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/prompts360-final.css">
-    <link rel="stylesheet" href="css/emergency.css">
+    <!-- Styles - Optimized loading -->
+    <link rel="stylesheet" href="css/prompts360-final.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/prompts360-final.css"></noscript>
     
-    <!-- Framer Motion for animations -->
-    <script src="https://unpkg.com/framer-motion@11.3.19/dist/framer-motion.js"></script>
+    <!-- Critical CSS Inline for faster loading -->
+    <style>
+        /* Critical styles for above-the-fold content */
+        :root {
+            --bg-color: #0d0d18;
+            --text-color: #e8eaed;
+            --primary-color: #1e90ff;
+        }
+        
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
     
     <!-- Meta Pixel Code - Comentado temporariamente -->
     <!--
@@ -112,8 +150,8 @@
                 <ul class="nav-menu">
                     <li><a href="#services" class="nav-link">Serviços</a></li>
                     <li><a href="#benefits" class="nav-link">Benefícios</a></li>
-                    <li><a href="#cases" class="nav-link">Cases</a></li>
-                    <li><a href="#contact" class="nav-link">Contato</a></li>
+                    <li><a href="#cases-section" class="nav-link">Cases</a></li>
+                    <li><a href="#footer" class="nav-link">Contato</a></li>
                 </ul>
                 <a href="#lead-form" class="nav-cta">Diagnóstico Gratuito</a>
             </nav>
@@ -183,35 +221,38 @@
                 </div>
                 
                 <div class="hero-visual">
-                    <div class="dashboard-mockup neon-gradient-card">
-                        <div class="dashboard-header">
-                            <div class="dashboard-title">Sistema IA - Dashboard</div>
-                            <div class="dashboard-status">
-                                <span class="status-dot"></span>
-                                Online
+                    <!-- 3D CSS Scene Alternative -->
+                    <div class="css-3d-scene">
+                        <div class="floating-elements">
+                            <div class="cube cube-1">
+                                <div class="face front">IA</div>
+                                <div class="face back">AI</div>
+                                <div class="face right">🤖</div>
+                                <div class="face left">💡</div>
+                                <div class="face top">⚡</div>
+                                <div class="face bottom">🚀</div>
                             </div>
+                            <div class="cube cube-2">
+                                <div class="face front">WEB</div>
+                                <div class="face back">SITE</div>
+                                <div class="face right">🌐</div>
+                                <div class="face left">💻</div>
+                                <div class="face top">📱</div>
+                                <div class="face bottom">⭐</div>
+                            </div>
+                            <div class="cube cube-3">
+                                <div class="face front">ROI</div>
+                                <div class="face back">300%</div>
+                                <div class="face right">📈</div>
+                                <div class="face left">💰</div>
+                                <div class="face top">🎯</div>
+                                <div class="face bottom">✨</div>
+                            </div>
+                            <div class="sphere sphere-1"></div>
+                            <div class="sphere sphere-2"></div>
+                            <div class="sphere sphere-3"></div>
                         </div>
-                        <div class="dashboard-metrics">
-                            <div class="metric">
-                                <span class="metric-value">98.7%</span>
-                                <span class="metric-label">Precisão</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">2.3s</span>
-                                <span class="metric-label">Resposta</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">1.2M</span>
-                                <span class="metric-label">Processados</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">24/7</span>
-                                <span class="metric-label">Disponível</span>
-                            </div>
-                        </div>
-                        <div class="dashboard-chart">
-                            <div class="chart-line"></div>
-                        </div>
+                        <div class="scene-overlay"></div>
                     </div>
                 </div>
             </div>
@@ -495,14 +536,14 @@
                         
                         <div class="case-content">
                             <div class="case-video-container">
-                                <video class="case-video" 
+                                <video class="case-video lazy-video" 
                                        data-src="video/cases/case1.mp4" 
                                        muted 
                                        loop 
                                        playsinline 
-                                       autoplay
-                                       preload="metadata">
-                                    <source src="video/cases/case1.mp4" type="video/mp4">
+                                       preload="none"
+                                       loading="lazy">
+                                    <source data-src="video/cases/case1.mp4" type="video/mp4">
                                     Seu navegador não suporta vídeos HTML5.
                                 </video>
                             </div>
@@ -829,112 +870,270 @@
         </div>
     </section>
 
-    <!-- Lead Form Section -->
-    <section class="section" id="lead-form">
+    <!-- Plans Section -->
+    <section class="section" id="plans">
         <div class="section-connector"></div>
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">🎯 Diagnóstico Gratuito: Descubra Quanto Seu Negócio Pode Crescer com IA</h2>
-                <p class="section-subtitle">Análise personalizada mostra exatamente onde você está perdendo dinheiro e como a IA pode gerar mais receita. <strong>Limitado a 20 empresas por mês.</strong></p>
+                <h2 class="section-title">🏆 Nossos Planos de Transformação Digital e Crescimento</h2>
+                <p class="section-subtitle">Aqui você encontra soluções completas para transformar, modernizar e escalar o seu negócio. Cada plano foi pensado para atender a diferentes estágios e objetivos de crescimento — desde quem está começando até quem busca estrutura robusta para faturar mais.</p>
             </div>
             
-            <form class="lead-form" id="leadForm">
-                <div class="form-group">
-                    <label for="name" class="form-label">Nome Completo *</label>
-                    <input type="text" id="name" name="name" class="form-input" required>
-                    <span class="error-label" id="name-error"></span>
+            <!-- Infinity Plans -->
+            <div class="plans-container">
+                <div class="plans-category">
+                    <h3 class="category-title">360 Infinity | Estrutura Completa para Crescimento</h3>
+                    
+                    <div class="plans-grid">
+                        <div class="plan-card">
+                            <div class="plan-header">
+                                <div class="plan-icon">🔵</div>
+                                <h4 class="plan-title">Plano Infinity Start</h4>
+                                <p class="plan-subtitle">Estrutura Inicial Inteligente</p>
+                            </div>
+                            
+                            <div class="plan-content">
+                                <p class="plan-description">Ideal para negócios que precisam dar os primeiros passos com presença digital profissional e estrutura básica para começar a crescer.</p>
+                                
+                                <div class="plan-features">
+                                    <h5>Inclui:</h5>
+                                    <ul>
+                                        <li>Site institucional moderno e responsivo</li>
+                                        <li>Estrutura básica de automação e captação de leads</li>
+                                        <li>Suporte técnico e hospedagem inclusa</li>
+                                        <li>Atualizações e manutenções essenciais</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="plan-target">
+                                    <strong>Indicado para:</strong>
+                                    <p>Quem precisa validar seu negócio no ambiente digital com segurança e profissionalismo.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="plan-card featured">
+                            <div class="plan-header">
+                                <div class="plan-icon">🟢</div>
+                                <h4 class="plan-title">Plano Infinity Growth</h4>
+                                <p class="plan-subtitle">Estrutura para Crescimento Acelerado</p>
+                                <div class="plan-badge">Mais Popular</div>
+                            </div>
+                            
+                            <div class="plan-content">
+                                <p class="plan-description">Feito para negócios que querem acelerar vendas e consolidar sua presença digital com tecnologia, marketing e inteligência integrada.</p>
+                                
+                                <div class="plan-features">
+                                    <h5>Inclui:</h5>
+                                    <ul>
+                                        <li>Site completo com CMS para gestão de conteúdo</li>
+                                        <li>Landing Pages estratégicas para vendas e captação</li>
+                                        <li>IA aplicada a conteúdos, e-mails e automações</li>
+                                        <li>Funis de vendas, automações e campanhas de tráfego</li>
+                                        <li>Consultoria mensal e relatórios de performance</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="plan-target">
+                                    <strong>Indicado para:</strong>
+                                    <p>Quem deseja sair do amadorismo e construir uma máquina de vendas previsível.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="plan-card premium">
+                            <div class="plan-header">
+                                <div class="plan-icon">🔴</div>
+                                <h4 class="plan-title">Plano Infinity Performance</h4>
+                                <p class="plan-subtitle">Estrutura Completa para Escala</p>
+                                <div class="plan-badge premium">Premium</div>
+                            </div>
+                            
+                            <div class="plan-content">
+                                <p class="plan-description">Nosso plano mais completo, pensado para negócios que querem operar com tecnologia de ponta, processos otimizados e vendas automatizadas.</p>
+                                
+                                <div class="plan-features">
+                                    <h5>Inclui:</h5>
+                                    <ul>
+                                        <li>Tudo do plano Growth</li>
+                                        <li>Estrutura avançada de IA para automação e segmentação</li>
+                                        <li>Funis múltiplos, remarketing, dashboards de performance</li>
+                                        <li>Produção de vídeos, conteúdos premium e automações internas</li>
+                                        <li>Consultoria sênior e suporte contínuo</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="plan-target">
+                                    <strong>Indicado para:</strong>
+                                    <p>Negócios que querem escalar com inteligência e previsibilidade.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="email" class="form-label">E-mail Corporativo *</label>
-                    <input type="email" id="email" name="email" class="form-input" required>
-                    <span class="error-label" id="email-error"></span>
+                <!-- Clubes 360 Plans -->
+                <div class="plans-category">
+                    <h3 class="category-title">🟡 Clubes 360 PRO | Soluções Modulares e Específicas</h3>
+                    <p class="category-subtitle">Para quem quer resolver uma dor pontual com liberdade e flexibilidade.</p>
+                    
+                    <div class="clubes-grid">
+                        <div class="clube-card">
+                            <div class="clube-header">
+                                <div class="clube-icon">🔧</div>
+                                <h4 class="clube-title">Clube Tech 360</h4>
+                            </div>
+                            <p class="clube-description">Desenvolvimento, manutenção e evolução contínua de sites, sistemas e plataformas.</p>
+                        </div>
+                        
+                        <div class="clube-card">
+                            <div class="clube-header">
+                                <div class="clube-icon">📈</div>
+                                <h4 class="clube-title">Clube Marketing 360</h4>
+                            </div>
+                            <p class="clube-description">Gestão de tráfego, redes sociais, funis, automações e marketing de performance.</p>
+                        </div>
+                        
+                        <div class="clube-card">
+                            <div class="clube-header">
+                                <div class="clube-icon">🧠</div>
+                                <h4 class="clube-title">Clube Inteligência 360</h4>
+                            </div>
+                            <p class="clube-description">Consultoria estratégica, monetização, IA aplicada, diagnósticos e revisões de estratégia.</p>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="phone" class="form-label">Telefone *</label>
-                    <input type="tel" id="phone" name="phone" class="form-input" required placeholder="(00) 0.0000-0000">
-                    <span class="error-label" id="phone-error"></span>
+                <!-- Why Plans Section -->
+                <div class="why-plans">
+                    <div class="why-plans-content">
+                        <h3>💡 Por que trabalhamos com planos?</h3>
+                        <p>Porque acreditamos que negócios crescem com visão, estrutura e estratégia contínua — não com soluções soltas e pontuais.</p>
+                        <p><strong>Nosso trabalho é construir resultados sólidos e acompanhar a evolução do seu negócio, lado a lado.</strong></p>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="company" class="form-label">Empresa *</label>
-                    <input type="text" id="company" name="company" class="form-input" required>
-                    <span class="error-label" id="company-error"></span>
-                </div>
-                
-                <div class="form-group">
-                    <label for="position" class="form-label">Cargo *</label>
-                    <input type="text" id="position" name="position" class="form-input" required>
-                    <span class="error-label" id="position-error"></span>
-                </div>
-                
-                <div class="form-group">
-                    <label for="interest" class="form-label">Tipo de Empresa *</label>
-                    <select id="interest" name="interest" class="form-select" required>
-                        <option value="">Selecione seu setor</option>
-                        <option value="clinica">Clínica Médica / Odontológica / Veterinária</option>
-                        <option value="educacao">Escola / Universidade / Curso</option>
-                        <option value="juridico">Escritório Jurídico / Advocacia</option>
-                        <option value="consultoria">Consultoria / Prestação de Serviços</option>
-                        <option value="other">Outro setor de serviços</option>
-                    </select>
-                    <span class="error-label" id="interest-error"></span>
-                </div>
-                
-                <div class="form-group">
-                    <label for="challenge" class="form-label">Qual seu maior desafio hoje? *</label>
-                    <textarea id="challenge" name="challenge" class="form-textarea" rows="4" placeholder="Ex: Muitos processos manuais, dificuldade em controlar custos, falta de relatórios gerenciais, etc." required></textarea>
-                    <span class="error-label" id="challenge-error"></span>
-                </div>
-                
-                <button type="submit" class="cta-button">Quero Meu Diagnóstico Gratuito Agora</button>
-                
-                <p class="text-center text-muted mt-2">
-                    <small>🔒 Seus dados estão seguros. Não compartilhamos informações com terceiros.</small><br>
-                    <small>⚡ <strong>Apenas 20 diagnósticos gratuitos por mês.</strong> Garante o seu!</small>
-                </p>
-            </form>
+            </div>
         </div>
     </section>
 
-    <!-- Ebook Section -->
-    <section class="section ebook-section">
+    <!-- Ebook & Form Combined Section -->
+    <section class="section ebook-section" id="lead-form">
+        <div class="cool-blob-1"></div>
+        <div class="cool-blob-2"></div>
         <div class="section-connector"></div>
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">📚 E-book Exclusivo</h2>
-                <p class="section-subtitle">Guia completo de prompts para IA que transformará sua produtividade</p>
+                <h2 class="section-title">🎯 Diagnóstico Gratuito / E-book Exclusivo</h2>
+                <p class="section-subtitle">Receba uma análise personalizada do seu negócio e ganhe nosso guia completo de prompts para IA</p>
             </div>
             
+            <!-- Layout com duas colunas: Formulário + E-book -->
+            <div class="ebook-form-wrapper">
+                <!-- Coluna Esquerda: Formulário -->
+                <div class="form-section">
+                    <div class="form-header">
+                        <h3>🔍 Análise Gratuita</h3>
+                        <p>Descubra quanto seu negócio pode crescer com IA</p>
+                    </div>
+                    
+                    <form class="lead-form glass-effect" id="leadForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Nome Completo *</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                            <span class="error-label" id="name-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">E-mail Corporativo *</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                            <span class="error-label" id="email-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Telefone *</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" required placeholder="(00) 0.0000-0000">
+                            <span class="error-label" id="phone-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company" class="form-label">Empresa *</label>
+                            <input type="text" id="company" name="company" class="form-input" required>
+                            <span class="error-label" id="company-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="position" class="form-label">Cargo *</label>
+                            <input type="text" id="position" name="position" class="form-input" required>
+                            <span class="error-label" id="position-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interest" class="form-label">Tipo de Empresa *</label>
+                            <select id="interest" name="interest" class="form-select" required>
+                                <option value="">Selecione seu setor</option>
+                                <option value="clinica">Clínica Médica / Odontológica / Veterinária</option>
+                                <option value="educacao">Escola / Universidade / Curso</option>
+                                <option value="juridico">Escritório Jurídico / Advocacia</option>
+                                <option value="consultoria">Consultoria / Prestação de Serviços</option>
+                                <option value="other">Outro setor de serviços</option>
+                            </select>
+                            <span class="error-label" id="interest-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="challenge" class="form-label">Qual seu maior desafio hoje? *</label>
+                            <textarea id="challenge" name="challenge" class="form-textarea" rows="3" placeholder="Ex: Muitos processos manuais, dificuldade em controlar custos..." required></textarea>
+                            <span class="error-label" id="challenge-error"></span>
+                        </div>
+                        
+                        <button type="submit" class="cta-button">Quero Meu Diagnóstico</button>
+                        
+                        <p class="form-disclaimer">
+                            <small>🔒 Seus dados estão seguros • ⚡ Apenas 20 diagnósticos por mês</small>
+                        </p>
+                    </form>
+                </div>
+                
+                <!-- Coluna Direita: E-book -->
+                <div class="ebook-section-right">
+            
             <div class="ebook-bonus-section">
-                <div class="ebook-content-wrapper">
-                    <!-- Lado Esquerdo: Informações do E-book -->
-                    <div class="ebook-info">
-                        <div class="bonus-highlight">🎁 GRÁTIS para quem fechar projeto!</div>
+                <!-- Layout horizontal: Imagem + Info lado a lado -->
+                <div class="ebook-horizontal-layout">
+                    <!-- Imagem do E-book (esquerda) -->
+                    <div class="ebook-visual-compact">
+                        <div class="ebook-image-container">
+                            <img src="foto_ebook.webp" alt="E-book Guia de Prompts" class="ebook-image">
+                            <div class="ebook-glow"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Informações do E-book (direita) -->
+                    <div class="ebook-info-compact">
+                        <div class="bonus-highlight">🎁 Últimas unidades!</div>
                         
                         <h3 class="ebook-title">E-book: "Guia Definitivo de Prompts para IA"</h3>
                         <p class="ebook-description">
-                            Um guia prático com mais de 200 prompts testados e aprovados para ChatGPT, Claude, 
-                            Gemini e outras IAs, organizados por área de negócio para máxima eficiência.
+                            Mais de 200 prompts testados para ChatGPT, Claude, Gemini e outras IAs, organizados por área de negócio.
                         </p>
                         
-                        <div class="ebook-features">
-                            <div class="feature-item">
+                        <!-- Features em linha horizontal -->
+                        <div class="ebook-features-horizontal">
+                            <div class="feature-item-compact">
                                 <span class="feature-icon">📊</span>
                                 <div class="feature-text">
                                     <strong>200+ Prompts</strong>
                                     <span>Testados e aprovados</span>
                                 </div>
                             </div>
-                            <div class="feature-item">
+                            <div class="feature-item-compact">
                                 <span class="feature-icon">🎯</span>
                                 <div class="feature-text">
                                     <strong>Por Categoria</strong>
                                     <span>Organizados por área</span>
                                 </div>
                             </div>
-                            <div class="feature-item">
+                            <div class="feature-item-compact">
                                 <span class="feature-icon">⚡</span>
                                 <div class="feature-text">
                                     <strong>Aplicação Prática</strong>
@@ -946,15 +1145,7 @@
                         <div class="ebook-how-it-works">
                             <h4>🔥 Como Funciona:</h4>
                             <p>Feche qualquer projeto conosco e receba o e-book <strong>gratuitamente</strong> como bônus. 
-                            Não quer fechar projeto agora? Pode adquirir separadamente por apenas R$ 10,00.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Lado Direito: Imagem do E-book -->
-                    <div class="ebook-visual">
-                        <div class="ebook-image-container">
-                            <img src="foto_ebook.webp" alt="E-book Guia de Prompts" class="ebook-image">
-                            <div class="ebook-glow"></div>
+                            Não quer fechar projeto agora? Pode adquirir separadamente por apenas R$ 9,97.</p>
                         </div>
                     </div>
                 </div>
@@ -963,13 +1154,12 @@
                 <div class="pricing-cards">
                     <div class="price-option bonus">
                         <div class="price-tag bonus">BÔNUS GRÁTIS</div>
-                        <h4>Com Projeto</h4>
+                        <h4>Para quem é cliente</h4>
                         <div class="price-value">
                             <span class="currency">R$</span>
                             <span class="amount">0,00</span>
                         </div>
-                        <p class="price-description">E-book incluído gratuitamente em qualquer projeto da Prompts360</p>
-                        <a href="#lead-form" class="cta-button cta-primary">Quero Diagnóstico + E-book Grátis</a>
+                        <p class="price-description">E-book incluso na adesão de qualquer plano ou projeto</p>
                     </div>
                     
                     <div class="price-option standalone">
@@ -978,13 +1168,15 @@
                         <div class="price-original">De R$ 49,90</div>
                         <div class="price-value special">
                             <span class="currency">R$</span>
-                            <span class="amount">10,00</span>
+                            <span class="amount">9,97</span>
                         </div>
                         <div class="price-limited">⚡ Oferta limitada!</div>
                         <a href="https://pay.kiwify.com.br/aeYGH77" class="cta-button-ebook" target="_blank">
-                            🚀 Comprar Agora por R$ 10,00
+                            🚀 Comprar Agora por apenas R$ 9,97
                         </a>
                     </div>
+                </div>
+            </div>
                 </div>
             </div>
         </div>
@@ -1020,7 +1212,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" id="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
@@ -1042,8 +1234,8 @@
                 <div class="footer-section">
                     <h4>Empresa</h4>
                     <a href="#benefits">Sobre Nós</a>
-                    <a href="#cases">Cases de Sucesso</a>
-                    <a href="#contact">Contato</a>
+                    <a href="#cases-section">Cases de Sucesso</a>
+                    <a href="#footer">Contato</a>
                     <a href="#lead-form">Diagnóstico Gratuito</a>
                 </div>
                 
@@ -1639,164 +1831,8 @@
         document.head.appendChild(style);
     </script>
 
-    <!-- Script para Vídeos dos Cases com Autoplay -->
-    <script>
-        console.log('🎬 Iniciando sistema de vídeos dos cases com autoplay...');
-        
-        // Configuração do Intersection Observer
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.3 // 30% da seção deve estar visível
-        };
-        
-        let casesVideos = [];
-        let isInViewport = false;
-        
-        // Função para inicializar os vídeos
-        function initializeCasesVideos() {
-            // Buscar todos os vídeos dos cases
-            casesVideos = document.querySelectorAll('.case-video');
-            
-            console.log(`🎥 Encontrados ${casesVideos.length} vídeos de cases`);
-            
-            // Configurar cada vídeo
-            casesVideos.forEach((video, index) => {
-                // Configurações do vídeo
-                video.muted = true;
-                video.loop = true;
-                video.playsInline = true;
-                video.preload = 'metadata';
-                
-                // Adicionar classe de carregamento
-                video.classList.add('loading');
-                
-                // Eventos do vídeo
-                video.addEventListener('loadeddata', () => {
-                    console.log(`✅ Vídeo ${index + 1} carregado`);
-                    video.classList.remove('loading');
-                    
-                    // Se a seção estiver visível, iniciar o vídeo
-                    if (isInViewport) {
-                        playVideo(video);
-                    }
-                });
-                
-                video.addEventListener('playing', () => {
-                    video.classList.add('playing');
-                    video.classList.remove('paused');
-                });
-                
-                video.addEventListener('pause', () => {
-                    video.classList.add('paused');
-                    video.classList.remove('playing');
-                });
-                
-                video.addEventListener('error', (e) => {
-                    console.warn(`⚠️ Erro no vídeo ${index + 1}:`, e);
-                    // Ocultar vídeo com erro e mostrar placeholder
-                    video.style.display = 'none';
-                    const container = video.closest('.case-video-container');
-                    if (container) {
-                        container.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; background: rgba(0,0,0,0.3); color: white; font-size: 14px;">Vídeo não disponível</div>';
-                    }
-                });
-                
-                console.log(`🎬 Vídeo ${index + 1} configurado:`, video.src || video.dataset.src);
-            });
-        }
-        
-        // Função para reproduzir vídeo
-        function playVideo(video) {
-            if (video && !video.classList.contains('loading')) {
-                video.play().catch(e => {
-                    console.warn('Erro ao reproduzir vídeo:', e);
-                    // Tentar novamente após um breve delay
-                    setTimeout(() => {
-                        video.play().catch(() => {
-                            console.warn('Falha definitiva ao reproduzir vídeo');
-                        });
-                    }, 1000);
-                });
-            }
-        }
-        
-        // Função para pausar vídeo
-        function pauseVideo(video) {
-            if (video && !video.paused) {
-                video.pause();
-                // Resetar para o início
-                video.currentTime = 0;
-            }
-        }
-        
-        // Função para iniciar todos os vídeos
-        function playAllVideos() {
-            isInViewport = true;
-            casesVideos.forEach(video => {
-                playVideo(video);
-            });
-            console.log('▶️ Todos os vídeos iniciados');
-        }
-        
-        // Função para pausar todos os vídeos
-        function pauseAllVideos() {
-            isInViewport = false;
-            casesVideos.forEach(video => {
-                pauseVideo(video);
-            });
-            console.log('⏸️ Todos os vídeos pausados');
-        }
-        
-        // Intersection Observer para detectar quando a seção está visível
-        const casesObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    console.log('👀 Seção de cases entrou na viewport');
-                    playAllVideos();
-                } else {
-                    console.log('👋 Seção de cases saiu da viewport');
-                    pauseAllVideos();
-                }
-            });
-        }, observerOptions);
-        
-        // Inicializar quando o DOM estiver carregado
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('🚀 DOM carregado, inicializando sistema de vídeos...');
-            
-            // Aguardar um pouco para garantir que tudo esteja carregado
-            setTimeout(() => {
-                initializeCasesVideos();
-                
-                // Observar a seção de cases
-                const casesSection = document.getElementById('cases-section');
-                if (casesSection) {
-                    casesObserver.observe(casesSection);
-                    console.log('👁️ Observer configurado para a seção de cases');
-                } else {
-                    console.error('❌ Seção de cases não encontrada!');
-                }
-            }, 500);
-        });
-        
-        // Cleanup quando a página for fechada
-        window.addEventListener('beforeunload', () => {
-            pauseAllVideos();
-            casesObserver.disconnect();
-        });
-        
-        // Pausar vídeos quando a página perde o foco
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                pauseAllVideos();
-            } else if (isInViewport) {
-                playAllVideos();
-            }
-        });
-        
-        console.log('✅ Sistema de vídeos dos cases com autoplay carregado');
-    </script>
+    <!-- Sistema de Lazy Loading para Vídeos -->
+    <script src="js/video-lazy-loading.js"></script>
 
     <!-- Cinematic Effects Script -->
     <script type="module">
@@ -1998,8 +2034,6 @@
         } else {
             initCinematicEffects();
         }
-
-        console.log('✨ Efeitos cinematográficos carregados');
     </script>
 
     <!-- Video Speed Controller -->
@@ -2016,13 +2050,14 @@
                 heroVideo.addEventListener('loadeddata', function() {
                     heroVideo.playbackRate = 0.5;
                 });
-                
-                console.log('🎥 Velocidade do vídeo definida para 0.5x (16 segundos)');
             }
         });
     </script>
 
     <!-- Marquee Snap-to-Card Controller -->
     <script src="js/marquee-snap.js"></script>
+    
+    <!-- Force Edge-to-Edge Effect -->
+    <script src="js/force-edge-to-edge.js"></script>
 </body>
 </html>
