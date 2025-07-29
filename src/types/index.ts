@@ -65,7 +65,7 @@ export interface AnalyticsEvent {
 // Tipos para componentes
 export interface BaseComponentProps {
   className?: string;
-  children?: React.ReactNode;
+  children?: any;
 }
 
 export interface SectionProps extends BaseComponentProps {

@@ -1,38 +1,51 @@
 {
-  "name": "landing-page-prompt-ebook",
+  "name": "prompts360-react",
   "version": "1.0.0",
-  "description": "Landing page para ebook de engenharia de prompts",
-  "main": "index.html",
+  "private": true,
+  "description": "Landing Page Prompts360 - React Version",
   "scripts": {
-    "test": "jest",
-    "test:e2e": "cypress open",
-    "test:a11y": "pa11y-ci",
-    "test:lighthouse": "lhci autorun",
-    "test:performance": "lighthouse http://localhost:3000 --output-path=./test-results/performance.html --view",
-    "test:all": "npm run test && npm run test:e2e:headless && npm run test:a11y && npm run test:lighthouse",
-    "test:e2e:headless": "cypress run",
-    "dev": "http-server -p 3000"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint src --ext js,jsx,ts,tsx --fix",
+    "type-check": "tsc --noEmit",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
   },
-  "keywords": [
-    "landing-page",
-    "ebook",
-    "prompts",
-    "ia"
-  ],
-  "author": "Yuri Tiago",
-  "license": "MIT",
+  "dependencies": {
+    "@splinetool/react-spline": "^4.1.0",
+    "@splinetool/runtime": "^1.10.38",
+    "clsx": "^2.1.1",
+    "framer-motion": "^10.18.0",
+    "lucide-react": "^0.294.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-intersection-observer": "^9.5.2",
+    "react-player": "^2.13.0",
+    "tailwind-merge": "^2.6.0"
+  },
   "devDependencies": {
-    "@lhci/cli": "^0.14.0",
-    "@testing-library/dom": "^8.19.0",
-    "@testing-library/jest-dom": "^5.16.5",
-    "cypress": "^12.3.0",
-    "http-server": "^14.1.1",
-    "jest": "^29.3.1",
-    "jest-environment-jsdom": "^29.3.1",
-    "lighthouse": "^9.6.8",
-    "pa11y-ci": "^3.0.1"
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "@vitejs/plugin-react": "^4.1.0",
+    "@vitest/coverage-v8": "^0.34.6",
+    "@vitest/ui": "^0.34.6",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.53.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.4",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0",
+    "vitest": "^0.34.6"
   },
-  "directories": {
-    "test": "tests"
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

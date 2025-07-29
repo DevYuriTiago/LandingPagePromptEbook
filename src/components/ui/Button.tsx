@@ -15,10 +15,10 @@ interface ButtonProps {
 }
 
 const buttonVariants = {
-  primary: 'bg-primary-600 hover:bg-primary-700 text-white',
+  primary: 'bg-blue-600 hover:bg-blue-700 text-white',
   secondary: 'bg-gray-600 hover:bg-gray-700 text-white',
-  outline: 'border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white',
-  ghost: 'text-primary-600 hover:bg-primary-600/10',
+  outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white',
+  ghost: 'text-blue-600 hover:bg-blue-600/10',
 }
 
 const buttonSizes = {
@@ -39,7 +39,7 @@ export function Button({
   target,
   type = 'button',
 }: ButtonProps) {
-  const baseClasses = 'font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-950 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none'
+  const baseClasses = 'font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none'
   
   const classes = cn(
     baseClasses,

@@ -5,7 +5,7 @@ import { useIntersectionObserver } from '@/hooks'
 import { cn, scrollToElement } from '@/utils'
 
 export function Hero() {
-  const { ref, isIntersecting } = useIntersectionObserver(0.3, '0px', true)
+  const { ref, isIntersecting } = useIntersectionObserver()
 
   const handleCTAClick = () => {
     scrollToElement('contact')
