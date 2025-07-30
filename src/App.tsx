@@ -55,7 +55,7 @@ function App() {
       <div id="loading-screen" className="loading-screen">
         <div className="loading-container">
           <div className="loading-logo">
-            <img src="/img/loading.png" alt="Prompts360 Loading" className="loading-image" />
+            <img src="/assets/img/loading.png" alt="Prompts360 Loading" className="loading-image" />
           </div>
           <div className="loading-text">
             <h2>Prompts360</h2>
@@ -81,7 +81,7 @@ function App() {
 
       {/* Seção Inicial com Logo */}
       <section className="intro-section">
-        <img src="/logo_prompts360.png" alt="Prompts360 Logo" className="intro-logo" />
+        <img src="/assets/images/logo_prompts360.png" alt="Prompts360 Logo" className="intro-logo" />
         <div className="scroll-indicator">
           <span className="scroll-text">Role para descobrir</span>
           <div className="scroll-arrow"></div>
@@ -92,7 +92,7 @@ function App() {
       <header className={`header ${headerVisible ? 'visible' : ''}`} id="header">
         <div className="container">
           <nav className="navbar">
-            <img src="/logo_prompts360.png" alt="Prompts360 Logo" className="logo" />
+            <img src="/assets/images/logo_prompts360.png" alt="Prompts360 Logo" className="logo" />
             <ul className="nav-menu">
               <li><a href="#services" className="nav-link">Serviços</a></li>
               <li><a href="#benefits" className="nav-link">Benefícios</a></li>
@@ -109,7 +109,7 @@ function App() {
         {/* Video Background */}
         <div className="hero-video-background">
           <video className="hero-background-video" autoPlay muted loop playsInline>
-            <source src="/video/backgrounds/video_back.mp4" type="video/mp4" />
+            <source src="/assets/video/backgrounds/video_back.mp4" type="video/mp4" />
           </video>
           <div className="hero-video-overlay"></div>
         </div>
@@ -512,12 +512,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case1.mp4" 
+                           src="/assets/video/cases/case1.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case1.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case1.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -564,12 +564,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case2.mp4" 
+                           src="/assets/video/cases/case2.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case2.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case2.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -616,12 +616,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case3.mp4" 
+                           src="/assets/video/cases/case3.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case3.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case3.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -668,12 +668,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case1.mp4" 
+                           src="/assets/video/cases/case1.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case1.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case1.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -720,12 +720,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case2.mp4" 
+                           src="/assets/video/cases/case2.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case2.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case2.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -772,12 +772,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case3.mp4" 
+                           src="/assets/video/cases/case3.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case3.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case3.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -827,12 +827,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case1.mp4" 
+                           src="/assets/video/cases/case1.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case1.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case1.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -879,12 +879,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case2.mp4" 
+                           src="/assets/video/cases/case2.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case2.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case2.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -931,12 +931,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case3.mp4" 
+                           src="/assets/video/cases/case3.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case3.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case3.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -984,12 +984,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case1.mp4" 
+                           src="/assets/video/cases/case1.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case1.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case1.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -1036,12 +1036,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case2.mp4" 
+                           src="/assets/video/cases/case2.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case2.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case2.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -1088,12 +1088,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case3.mp4" 
+                           src="/assets/video/cases/case3.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case3.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case3.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -1143,12 +1143,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case1.mp4" 
+                           src="/assets/video/cases/case1.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case1.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case1.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -1195,12 +1195,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case2.mp4" 
+                           src="/assets/video/cases/case2.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case2.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case2.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -1247,12 +1247,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case3.mp4" 
+                           src="/assets/video/cases/case3.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case3.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case3.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -1299,12 +1299,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case1.mp4" 
+                           src="/assets/video/cases/case1.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case1.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case1.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -1351,12 +1351,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case2.mp4" 
+                           src="/assets/video/cases/case2.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case2.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case2.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -1403,12 +1403,12 @@ function App() {
                 <div className="case-content">
                   <div className="case-video-container">
                     <video className="case-video lazy-video" 
-                           src="/video/cases/case3.mp4" 
+                           src="/assets/video/cases/case3.mp4" 
                            muted 
                            loop 
                            playsInline 
                            preload="none">
-                      <source src="/video/cases/case3.mp4" type="video/mp4" />
+                      <source src="/assets/video/cases/case3.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -1476,7 +1476,7 @@ function App() {
                 transition: 'transform 0.3s ease'
               }}>
                 <img 
-                  src="/foto_ebook.webp" 
+                  src="/assets/images/foto_ebook.webp" 
                   alt="E-book Guia de Prompts" 
                   style={{
                     maxWidth: '280px',
@@ -1803,7 +1803,7 @@ function App() {
                   {/* Imagem do E-book (esquerda) */}
                   <div className="ebook-visual-compact">
                     <div className="ebook-image-container">
-                      <img src="/foto_ebook.webp" alt="E-book Guia de Prompts" className="ebook-image" />
+                      <img src="/assets/images/foto_ebook.webp" alt="E-book Guia de Prompts" className="ebook-image" />
                       <div className="ebook-glow"></div>
                     </div>
                   </div>
@@ -1967,7 +1967,7 @@ function App() {
         <div className="container">
           <div className="footer-content">
             <div className="footer-section">
-              <img src="/logo_prompts360.png" alt="Prompts360 Logo" className="logo mb-2" />
+              <img src="/assets/images/logo_prompts360.png" alt="Prompts360 Logo" className="logo mb-2" />
               <p>Modernizamos Clínicas, Escolas e Escritórios Jurídicos com IA, Automação e Tecnologia para gerar mais lucro e eficiência.</p>
             </div>
             
@@ -2031,7 +2031,7 @@ function App() {
           <div style={{
             width: '40px',
             height: '50px',
-            background: 'url(/foto_ebook_tiny.webp) center/cover',
+            background: 'url(/assets/images/foto_ebook_tiny.webp) center/cover',
             borderRadius: '4px',
             flexShrink: 0
           }}></div>

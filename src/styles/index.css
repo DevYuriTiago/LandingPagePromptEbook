@@ -11,19 +11,6 @@
     text-rendering: optimizeLegibility;
 }
 
-/* Força a aceleração de hardware para elementos animados */
-.hero-content,
-.spline-3d-container,
-.cta-button,
-.rainbow-button,
-.scrolling-container,
-.animated-element {
-    transform: translateZ(0);
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
-
 /* Otimização para containers de Spline */
 .spline-3d-container {
     contain: layout style paint;
@@ -124,11 +111,6 @@ p {
 
 .header.visible {
     transform: translateY(0);
-}
-
-.header.scrolled {
-    background: rgba(5, 5, 5, 0.98);
-    box-shadow: var(--shadow-deep);
 }
 
 .navbar {

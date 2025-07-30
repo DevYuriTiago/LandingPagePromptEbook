@@ -1,6 +1,7 @@
 {
   "name": "prompts360-react",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "description": "Landing Page Prompts360 - React Version",
   "scripts": {
