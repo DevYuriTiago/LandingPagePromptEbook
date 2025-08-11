@@ -5,6 +5,7 @@ export type LeadPayload = {
 	company: string
 	position: string
 	interest: string
+	sector?: string
 	challenge: string
 	source?: string
 }
@@ -29,6 +30,7 @@ export async function submitLead(payload: LeadPayload & { timestamp?: string; so
 	params.set('company', payload.company)
 	params.set('position', payload.position)
 	params.set('interest', payload.interest)
+	if (payload.sector) params.set('sector', payload.sector)
 	params.set('challenge', payload.challenge)
 	params.set('timestamp', payload.timestamp || new Date().toISOString())
 	params.set('source', payload.source || (typeof window !== 'undefined' ? window.location.href : ''))

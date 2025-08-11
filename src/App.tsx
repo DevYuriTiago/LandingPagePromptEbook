@@ -1784,7 +1784,17 @@ function App() {
                 const phone = String(data.get('phone') || '').trim()
                 const company = String(data.get('company') || '').trim()
                 const position = String(data.get('position') || '').trim()
-                const interest = String(data.get('interest') || '').trim()
+                // setor selecionado (valor de exibição), e mapeamos para um interesse padrão esperado pelo backend
+                const sector = String(data.get('sector') || data.get('interest') || '').trim()
+                // mapear setores para categorias genéricas esperadas pela planilha (fallback: other)
+                const sectorToInterest: Record<string, string> = {
+                  clinica: 'consulting',
+                  educacao: 'consulting',
+                  juridico: 'consulting',
+                  consultoria: 'consulting',
+                  other: 'other',
+                }
+                const interest = sectorToInterest[sector as keyof typeof sectorToInterest] || 'other'
                 const challenge = String(data.get('challenge') || '').trim()
 
                 // validações básicas
@@ -1793,12 +1803,12 @@ function App() {
                 if (!isValidPhone(phone)) return setFormError('Informe um telefone válido.')
                 if (!company) return setFormError('Informe sua empresa.')
                 if (!position) return setFormError('Informe seu cargo.')
-                if (!interest) return setFormError('Selecione o tipo de empresa.')
+                if (!sector) return setFormError('Selecione o tipo de empresa.')
                 if (!challenge) return setFormError('Descreva seu principal desafio.')
 
                 setFormLoading(true)
                 try {
-                  await submitLead({ name, email, phone, company, position, interest, challenge, source: 'landing' })
+                  await submitLead({ name, email, phone, company, position, interest, sector, challenge, source: 'landing' })
                   setFormSuccess(true)
                   form.reset()
                 } catch (err) {
@@ -1838,8 +1848,8 @@ function App() {
                 </div>
                 
                 <div className="form-group">
-                  <label htmlFor="interest" className="form-label">Tipo de Empresa *</label>
-                  <select id="interest" name="interest" className="form-select" required>
+                  <label htmlFor="sector" className="form-label">Tipo de Empresa *</label>
+                  <select id="sector" name="sector" className="form-select" required>
                     <option value="">Selecione seu setor</option>
                     <option value="clinica">Clínica Médica / Odontológica / Veterinária</option>
                     <option value="educacao">Escola / Universidade / Curso</option>
@@ -1847,7 +1857,7 @@ function App() {
                     <option value="consultoria">Consultoria / Prestação de Serviços</option>
                     <option value="other">Outro setor de serviços</option>
                   </select>
-                  <span className="error-label" id="interest-error"></span>
+                  <span className="error-label" id="sector-error"></span>
                 </div>
                 
                 <div className="form-group">
