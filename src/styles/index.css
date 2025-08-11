@@ -1,3 +1,8 @@
+/* Tailwind base layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Prompts360 Agency - Design Profissional Final */
 
 /* Performance Optimizations */

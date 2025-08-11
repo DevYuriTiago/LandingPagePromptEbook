@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 // Tipos para dados da aplicação
 export interface Lead {
   name: string;
@@ -54,18 +56,18 @@ export interface PricingPlan {
   badge?: string;
 }
 
-export interface AnalyticsEvent {
+export interface AnalyticsEvent<T extends Record<string, unknown> = Record<string, unknown>> {
   event: string;
   category: string;
   label?: string;
   value?: number;
-  customParameters?: Record<string, any>;
+  customParameters?: T;
 }
 
 // Tipos para componentes
 export interface BaseComponentProps {
   className?: string;
-  children?: any;
+  children?: ReactNode;
 }
 
 export interface SectionProps extends BaseComponentProps {
@@ -191,7 +193,7 @@ export interface MediaBreakpoints {
 }
 
 // Tipos para resposta da API
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
@@ -209,9 +211,7 @@ export interface AppContextType {
 // Tipos de eventos customizados
 export interface CustomEventDetail {
   type: string;
-  payload?: any;
+  payload?: unknown;
 }
 
-export interface CustomEvent {
-  detail: CustomEventDetail;
-}
+export interface CustomEvent { detail: CustomEventDetail }

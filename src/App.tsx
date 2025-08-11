@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { Button } from '@/components/ui/Button'
-import { SimpleSpline } from '@/components/ui/SimpleSpline'
+const SimpleSpline = lazy(() => import('@/components/ui/SimpleSpline').then(m => ({ default: m.SimpleSpline })))
+import { isValidEmail, isValidPhone, formatPhone } from '@/utils'
 import './styles/index.css'
 
 function App() {
@@ -9,6 +10,9 @@ function App() {
   const [mainVisible, setMainVisible] = useState(false)
   const [headerVisible, setHeaderVisible] = useState(false)
   const [showFloatingCTA, setShowFloatingCTA] = useState(false)
+  const [formLoading, setFormLoading] = useState(false)
+  const [formError, setFormError] = useState<string | null>(null)
+  const [formSuccess, setFormSuccess] = useState<boolean>(false)
 
   useEffect(() => {
     // Simulate loading progress
@@ -81,7 +85,7 @@ function App() {
 
       {/* Seção Inicial com Logo */}
       <section className="intro-section">
-        <img src="/assets/images/logo_prompts360.png" alt="Prompts360 Logo" className="intro-logo" />
+  <img src="/assets/images/logo_prompts360.png" alt="Prompts360 Logo" className="intro-logo" loading="lazy" />
         <div className="scroll-indicator">
           <span className="scroll-text">Role para descobrir</span>
           <div className="scroll-arrow"></div>
@@ -92,7 +96,7 @@ function App() {
       <header className={`header ${headerVisible ? 'visible' : ''}`} id="header">
         <div className="container">
           <nav className="navbar">
-            <img src="/assets/images/logo_prompts360.png" alt="Prompts360 Logo" className="logo" />
+            <img src="/assets/images/logo_prompts360.png" alt="Prompts360 Logo" className="logo" loading="lazy" />
             <ul className="nav-menu">
               <li><a href="#services" className="nav-link">Serviços</a></li>
               <li><a href="#benefits" className="nav-link">Benefícios</a></li>
@@ -143,7 +147,9 @@ function App() {
                 transform: 'scale(1.1)',
                 transformOrigin: 'center center'
               }}>
-                <SimpleSpline />
+                <Suspense fallback={null}>
+                  <SimpleSpline />
+                </Suspense>
                 {/* Efeito de fade na parte inferior */}
                 <div style={{
                   position: 'absolute',
@@ -229,7 +235,9 @@ function App() {
                 zIndex: -1000,
                 transformOrigin: 'center center'
               }}>
-                <SimpleSpline />                
+                <Suspense fallback={null}>
+                  <SimpleSpline />
+                </Suspense>
               </div>
             </div>
           </div>
@@ -1485,6 +1493,7 @@ function App() {
                     boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
                     border: '3px solid rgba(255,255,255,0.2)'
                   }}
+                  loading="lazy"
                 />
                 <div style={{
                   position: 'absolute',
@@ -1585,7 +1594,7 @@ function App() {
                   🎁 GANHAR E-BOOK GRÁTIS + Projeto
                 </a>
                 
-                <a href="https://pay.kiwify.com.br/seu-link-ebook" target="_blank" style={{
+                <a href="https://pay.kiwify.com.br/seu-link-ebook" target="_blank" rel="noreferrer" style={{
                   background: 'transparent',
                   color: 'white',
                   border: '2px solid white',
@@ -1737,7 +1746,41 @@ function App() {
                 <p>Descubra quanto seu negócio pode crescer com IA</p>
               </div>
               
-              <form className="lead-form glass-effect" id="leadForm">
+              <form className="lead-form glass-effect" id="leadForm" onSubmit={async (e) => {
+                e.preventDefault()
+                setFormError(null)
+                setFormSuccess(false)
+                const form = e.target as HTMLFormElement
+                const data = new FormData(form)
+                const name = String(data.get('name') || '').trim()
+                const email = String(data.get('email') || '').trim()
+                const phone = String(data.get('phone') || '').trim()
+                const company = String(data.get('company') || '').trim()
+                const position = String(data.get('position') || '').trim()
+                const interest = String(data.get('interest') || '').trim()
+                const challenge = String(data.get('challenge') || '').trim()
+
+                // validações básicas
+                if (!name) return setFormError('Informe seu nome.')
+                if (!isValidEmail(email)) return setFormError('Informe um e-mail válido.')
+                if (!isValidPhone(phone)) return setFormError('Informe um telefone válido.')
+                if (!company) return setFormError('Informe sua empresa.')
+                if (!position) return setFormError('Informe seu cargo.')
+                if (!interest) return setFormError('Selecione o tipo de empresa.')
+                if (!challenge) return setFormError('Descreva seu principal desafio.')
+
+                setFormLoading(true)
+                try {
+                  // TODO: integrar com endpoint (Apps Script/Serverless)
+                  await new Promise(r => setTimeout(r, 1200))
+                  setFormSuccess(true)
+                  form.reset()
+                } catch (err) {
+                  setFormError('Não foi possível enviar. Tente novamente.')
+                } finally {
+                  setFormLoading(false)
+                }
+              }}>
                 <div className="form-group">
                   <label htmlFor="name" className="form-label">Nome Completo *</label>
                   <input type="text" id="name" name="name" className="form-input" required />
@@ -1752,7 +1795,7 @@ function App() {
                 
                 <div className="form-group">
                   <label htmlFor="phone" className="form-label">Telefone *</label>
-                  <input type="tel" id="phone" name="phone" className="form-input" required placeholder="(00) 0.0000-0000" />
+                  <input type="tel" id="phone" name="phone" className="form-input" required placeholder="(00) 0.0000-0000" onBlur={(e)=>{ e.currentTarget.value = formatPhone(e.currentTarget.value) }} />
                   <span className="error-label" id="phone-error"></span>
                 </div>
                 
@@ -1787,7 +1830,15 @@ function App() {
                   <span className="error-label" id="challenge-error"></span>
                 </div>
                 
-                <Button type="submit" className="cta-button">Quero Meu Diagnóstico</Button>
+                <Button type="submit" className="cta-button" disabled={formLoading}>
+                  {formLoading ? 'Enviando...' : 'Quero Meu Diagnóstico'}
+                </Button>
+                {formError && (
+                  <p className="form-error" role="alert" style={{ color: '#ff6b6b', marginTop: '0.5rem' }}>{formError}</p>
+                )}
+                {formSuccess && (
+                  <p className="form-success" role="status" style={{ color: '#00ff88', marginTop: '0.5rem' }}>Recebemos seus dados! Entraremos em contato.</p>
+                )}
                 
                 <p className="form-disclaimer">
                   <small>🔒 Seus dados estão seguros • ⚡ Apenas 20 diagnósticos por mês</small>
@@ -1803,7 +1854,7 @@ function App() {
                   {/* Imagem do E-book (esquerda) */}
                   <div className="ebook-visual-compact">
                     <div className="ebook-image-container">
-                      <img src="/assets/images/foto_ebook.webp" alt="E-book Guia de Prompts" className="ebook-image" />
+                      <img src="/assets/images/foto_ebook.webp" alt="E-book Guia de Prompts" className="ebook-image" loading="lazy" />
                       <div className="ebook-glow"></div>
                     </div>
                   </div>
@@ -1864,7 +1915,7 @@ function App() {
                           🎁 Quero o E-book GRÁTIS + Projeto
                         </a>
                         
-                        <a href="https://pay.kiwify.com.br/seu-link-ebook" target="_blank" className="cta-button secondary-ebook-cta" style={{
+                        <a href="https://pay.kiwify.com.br/seu-link-ebook" target="_blank" rel="noreferrer" className="cta-button secondary-ebook-cta" style={{
                           background: 'transparent',
                           color: '#ff6b6b',
                           border: '2px solid #ff6b6b',
@@ -1967,7 +2018,7 @@ function App() {
         <div className="container">
           <div className="footer-content">
             <div className="footer-section">
-              <img src="/assets/images/logo_prompts360.png" alt="Prompts360 Logo" className="logo mb-2" />
+              <img src="/assets/images/logo_prompts360.png" alt="Prompts360 Logo" className="logo mb-2" loading="lazy" />
               <p>Modernizamos Clínicas, Escolas e Escritórios Jurídicos com IA, Automação e Tecnologia para gerar mais lucro e eficiência.</p>
             </div>
             
@@ -2070,7 +2121,7 @@ function App() {
           }}>
             GRÁTIS
           </a>
-          <a href="https://pay.kiwify.com.br/seu-link-ebook" target="_blank" style={{
+          <a href="https://pay.kiwify.com.br/seu-link-ebook" target="_blank" rel="noreferrer" style={{
             background: 'rgba(255,255,255,0.9)',
             color: '#ff6b6b',
             padding: '0.4rem 0.8rem',
