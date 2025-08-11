@@ -1,7 +1,8 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { Button } from '@/components/ui/Button'
 const SimpleSpline = lazy(() => import('@/components/ui/SimpleSpline').then(m => ({ default: m.SimpleSpline })))
-import { isValidEmail, isValidPhone, formatPhone } from '@/utils'
+import { isValidEmail, isValidPhone, formatPhone, isMobile, isTouchDevice } from '@/utils'
+import { submitLead } from '@/utils/googleSheets'
 import './styles/index.css'
 
 function App() {
@@ -53,6 +54,28 @@ function App() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [loading])
+
+  // Lazy play/pause de vídeos dos cases
+  useEffect(() => {
+    const videos = Array.from(document.querySelectorAll<HTMLVideoElement>('video.lazy-video'))
+    if (!('IntersectionObserver' in window) || videos.length === 0) return
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const vid = entry.target as HTMLVideoElement
+        if (entry.isIntersecting) {
+          // força load antes de play
+          if (vid.preload === 'none') {
+            vid.preload = 'metadata'
+          }
+          vid.play().catch(() => {})
+        } else {
+          vid.pause()
+        }
+      })
+    }, { threshold: 0.25 })
+    videos.forEach(v => obs.observe(v))
+    return () => obs.disconnect()
+  }, [])
 
   if (loading) {
     return (
@@ -147,9 +170,11 @@ function App() {
                 transform: 'scale(1.1)',
                 transformOrigin: 'center center'
               }}>
-                <Suspense fallback={null}>
-                  <SimpleSpline />
-                </Suspense>
+                {!isMobile() && !isTouchDevice() && (
+                  <Suspense fallback={null}>
+                    <SimpleSpline />
+                  </Suspense>
+                )}
                 {/* Efeito de fade na parte inferior */}
                 <div style={{
                   position: 'absolute',
@@ -235,9 +260,11 @@ function App() {
                 zIndex: -1000,
                 transformOrigin: 'center center'
               }}>
-                <Suspense fallback={null}>
-                  <SimpleSpline />
-                </Suspense>
+                {!isMobile() && !isTouchDevice() && (
+                  <Suspense fallback={null}>
+                    <SimpleSpline />
+                  </Suspense>
+                )}
               </div>
             </div>
           </div>
@@ -1771,8 +1798,7 @@ function App() {
 
                 setFormLoading(true)
                 try {
-                  // TODO: integrar com endpoint (Apps Script/Serverless)
-                  await new Promise(r => setTimeout(r, 1200))
+                  await submitLead({ name, email, phone, company, position, interest, challenge, source: 'landing' })
                   setFormSuccess(true)
                   form.reset()
                 } catch (err) {
