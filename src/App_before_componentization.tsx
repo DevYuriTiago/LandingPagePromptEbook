@@ -1,119 +1,145 @@
-import { useState, useEffect, lazy, Suspense } from 'react'
-import { Button } from '@/components/ui/Button'
-const SimpleSpline = lazy(() => import('@/components/ui/SimpleSpline').then(m => ({ default: m.SimpleSpline })))
-import { isValidEmail, isValidPhone, formatPhone, isMobile, isTouchDevice } from '@/utils'
-import { submitLead } from '@/utils/googleSheets'
-import { useLoadingProgress, useScrollEffects, usePerformanceOptimizations, useVideoObserver } from '@/hooks'
+import { useState, useEffect } from 'react'
+import { isMobile, isTouchDevice } from '@/utils'
+import { 
+  LoadingScreen,
+  Header, 
+  HeroSection, 
+  ServicesSection, 
+  BenefitsSection,
+  IntroSection,
+  CasesSection,
+  EbookSection,
+  LeadFormSection,
+  FinalCTASection,
+  Footer,
+  FloatingEbookCTA
+} from '@/sections'
 import './styles/index.css'
 
 function App() {
-  // Hooks organizados para melhor legibilidade
-  const { loading, progress, mainVisible } = useLoadingProgress()
-  const { headerVisible, showFloatingCTA } = useScrollEffects()
-  usePerformanceOptimizations()
-  useVideoObserver(mainVisible)
+  const [loading, setLoading] = useState(true)
+  const [progress, setProgress] = useState(0)
+  const [mainVisible, setMainVisible] = useState(false)
+  const [headerVisible, setHeaderVisible] = useState(false)
+  const [showFloatingCTA, setShowFloatingCTA] = useState(false)
 
-  // Estados do formulário
-  const [formLoading, setFormLoading] = useState(false)
-  const [formError, setFormError] = useState<string | null>(null)
-  const [formSuccess, setFormSuccess] = useState<boolean>(false)
-
-  // Estados dos campos do formulário
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    position: '',
-    sector: '',
-    challenge: ''
-  })
-
-  // Função de validação do formulário
-  const validateForm = () => {
-    const { name, email, phone, company, position, challenge } = formData
-    
-    if (!name.trim()) return 'Nome é obrigatório'
-    if (!email.trim() || !isValidEmail(email)) return 'Email válido é obrigatório'
-    if (!phone.trim() || !isValidPhone(phone)) return 'Telefone válido é obrigatório'
-    if (!company.trim()) return 'Empresa é obrigatória'
-    if (!position.trim()) return 'Cargo é obrigatório'
-    if (!challenge.trim()) return 'Desafio é obrigatório'
-    
-    return null
-  }
-
-  // Função de envio do formulário
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    const validationError = validateForm()
-    if (validationError) {
-      setFormError(validationError)
-      return
+  // Reduzir animações em mobile/touch e para quem prefere menos movimento
+  useEffect(() => {
+    const isTouch = isTouchDevice?.() || isMobile?.()
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (isTouch || prefersReduced) {
+      document.body.classList.add('reduce-motion')
+    } else {
+      document.body.classList.remove('reduce-motion')
     }
+  }, [])
 
-    setFormLoading(true)
-    setFormError(null)
+  // Pausar marquees quando fora da tela (IntersectionObserver)
+  useEffect(() => {
+    const marquees = Array.from(document.querySelectorAll<HTMLElement>('.marquee-track'))
+    if (!('IntersectionObserver' in window) || marquees.length === 0) return
+    const obs = new window.IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('paused')
+        } else {
+          entry.target.classList.add('paused')
+        }
+      })
+    }, { threshold: 0.1 })
+    marquees.forEach(m => obs.observe(m))
+    return () => marquees.forEach(m => obs.unobserve(m))
+  }, [])
 
-    try {
-      // Mapear setor para interesse
-      const interestMapping: Record<string, string> = {
-        'tecnologia': 'Tecnologia e Inovação',
-        'consultoria': 'Consultoria Empresarial',
-        'educacao': 'Educação e Treinamento',
-        'saude': 'Saúde e Bem-estar',
-        'financeiro': 'Serviços Financeiros',
-        'ecommerce': 'E-commerce e Varejo',
-        'marketing': 'Marketing e Publicidade',
-        'outro': 'Outros Setores'
+  // Scroll suave para navegação entre seções
+  useEffect(() => {
+    function handleSmoothScroll(e: Event) {
+      const target = e.target as HTMLElement
+      if (target.tagName === 'A') {
+        const anchor = target as HTMLAnchorElement
+        if (anchor.hash && anchor.hash.startsWith('#')) {
+          const section = document.querySelector(anchor.hash)
+          if (section) {
+            e.preventDefault()
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }
+        }
+      }
+    }
+    const nav = document.querySelector('.navbar')
+    nav?.addEventListener('click', handleSmoothScroll)
+    const cta = document.querySelector('.nav-cta')
+    cta?.addEventListener('click', handleSmoothScroll)
+    return () => {
+      nav?.removeEventListener('click', handleSmoothScroll)
+      cta?.removeEventListener('click', handleSmoothScroll)
+    }
+  }, [])
+
+  useEffect(() => {
+    // Simulate loading progress
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval)
+          setTimeout(() => {
+            setLoading(false)
+            setMainVisible(true) // Torna visível imediatamente após loading
+          }, 500)
+          return 100
+        }
+        return prev + Math.random() * 10
+      })
+    }, 100)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      if (scrollY > 50) { // Header só aparece após 50px de scroll
+        setHeaderVisible(true)
+      } else {
+        setHeaderVisible(false) // Desaparece quando volta ao topo
       }
 
-      await submitLead({
-        ...formData,
-        phone: formatPhone(formData.phone),
-        interest: interestMapping[formData.sector] || 'Outros Setores'
-      })
-
-      setFormSuccess(true)
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        position: '',
-        sector: '',
-        challenge: ''
-      })
-    } catch (error) {
-      setFormError('Erro ao enviar formulário. Tente novamente.')
-    } finally {
-      setFormLoading(false)
+      // Controla a visibilidade do CTA flutuante - só aparece após a seção Hero
+      if (scrollY > window.innerHeight * 0.8) { // 80% da altura da tela (final do Hero)
+        setShowFloatingCTA(true)
+      } else {
+        setShowFloatingCTA(false)
+      }
     }
-  }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [loading])
+
+  // Lazy play/pause de vídeos dos cases
+  useEffect(() => {
+    const videos = Array.from(document.querySelectorAll<HTMLVideoElement>('video.lazy-video'))
+    if (!('IntersectionObserver' in window) || videos.length === 0) return
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const vid = entry.target as HTMLVideoElement
+        if (entry.isIntersecting) {
+          // força load antes de play
+          if (vid.preload === 'none') {
+            vid.preload = 'metadata'
+          }
+          vid.play().catch(() => {})
+        } else {
+          vid.pause()
+        }
+      })
+    }, { threshold: 0.25 })
+    videos.forEach(v => obs.observe(v))
+    return () => obs.disconnect()
+  }, [])
 
   if (loading) {
-    return (
-      <div id="loading-screen" className="loading-screen">
-        <div className="loading-container">
-          <div className="loading-logo">
-            <img src="/assets/img/loading.png" alt="Prompts360 Loading" className="loading-image" />
-          </div>
-          <div className="loading-text">
-            <h2>Prompts360</h2>
-            <p>Carregando experiência inteligente...</p>
-          </div>
-          <div className="progress-container">
-            <div className="progress-bar">
-              <div className="progress-fill" style={{ width: `${progress}%` }}></div>
-            </div>
-            <div className="progress-text">
-              <span>{Math.round(progress)}%</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
+    return <LoadingScreen progress={progress} />
   }
 
   return (

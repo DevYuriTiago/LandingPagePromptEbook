@@ -1,0 +1,203 @@
+/* Mobile Optimization Styles */
+
+/* Global Mobile Optimizations */
+@media (max-width: 768px) {
+  /* Typography responsive */
+  h1 { font-size: clamp(1.8rem, 6vw, 2.5rem) !important; }
+  h2 { font-size: clamp(1.5rem, 5vw, 2rem) !important; }
+  h3 { font-size: clamp(1.2rem, 4vw, 1.5rem) !important; }
+  
+  /* Section spacing */
+  .section {
+    padding: 4rem 0 !important;
+  }
+  
+  /* Container responsive */
+  .container {
+    padding: 0 1rem !important;
+    max-width: 100% !important;
+  }
+  
+  /* Form optimizations */
+  .ebook-form-wrapper {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  .ebook-horizontal-layout {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  
+  .ebook-visual-compact {
+    align-self: center !important;
+  }
+  
+  .ebook-features-horizontal {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  
+  /* ScrollReveal optimizations */
+  .scroll-reveal {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  
+  /* Performance: Disable complex animations on mobile */
+  .hero-background-video,
+  .spline-3d-container,
+  .marquee-container {
+    display: none !important;
+  }
+  
+  /* Button optimizations */
+  .cta-button {
+    padding: 1rem 1.5rem !important;
+    font-size: 1rem !important;
+    width: 100% !important;
+    margin: 0.5rem 0 !important;
+  }
+  
+  /* Grid responsive */
+  .hero-stats {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .hero-benefits {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  /* Modal/Form responsive */
+  .glass-effect {
+    padding: 1.5rem !important;
+    margin: 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small screens */
+  .section {
+    padding: 3rem 0 !important;
+  }
+  
+  .container {
+    padding: 0 0.75rem !important;
+  }
+  
+  h1 { font-size: clamp(1.5rem, 8vw, 2rem) !important; }
+  h2 { font-size: clamp(1.3rem, 6vw, 1.8rem) !important; }
+  
+  /* Form inputs */
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: 16px !important; /* Prevent zoom on iOS */
+    padding: 0.875rem !important;
+  }
+  
+  .glass-effect {
+    padding: 1rem !important;
+    margin: 0.5rem !important;
+  }
+  
+  /* Cases section mobile */
+  .case-card {
+    margin: 0.25rem !important;
+    padding: 1rem !important;
+    min-height: 200px !important;
+  }
+  
+  /* Ebook section mobile */
+  .ebook-image-container {
+    width: 100px !important;
+  }
+  
+  .feature-item-compact {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 0.25rem !important;
+  }
+}
+
+/* Touch optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .cta-button:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  .case-card:hover {
+    transform: none !important;
+  }
+  
+  /* Larger touch targets */
+  .cta-button {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  .form-input,
+  .form-select,
+  .form-textarea {
+    min-height: 48px;
+  }
+}
+
+/* Performance optimizations for slow connections */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
+  
+  .aurora-text,
+  .animated-gradient-text,
+  .shimmer-button {
+    animation: none !important;
+    background: var(--primary-color) !important;
+  }
+}
+
+/* Dark mode considerations */
+@media (prefers-color-scheme: dark) {
+  .form-input,
+  .form-select,
+  .form-textarea {
+    color: white !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+  }
+}
+
+/* Landscape phone optimization */
+@media (max-height: 500px) and (orientation: landscape) {
+  .section {
+    padding: 2rem 0 !important;
+  }
+  
+  .hero-content {
+    min-height: 80vh !important;
+  }
+}
+
+/* Loading optimization */
+.lazy-load {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lazy-load.loaded {
+  opacity: 1;
+}
+
+/* Critical path optimization */
+.above-fold {
+  will-change: auto;
+  contain: layout style;
+}
+
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: 500px;
+}

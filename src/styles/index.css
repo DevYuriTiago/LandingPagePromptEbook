@@ -31,6 +31,11 @@
         transition-duration: 0.01ms !important;
     }
 }
+.reduce-motion * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+}
 
 /* Variáveis e Reset */
 :root {
@@ -2989,7 +2994,7 @@ body .marquee-container {
 
 /* Pausa animação quando elemento não está visível */
 .marquee-track.paused {
-    animation-play-state: paused;
+    animation-play-state: paused !important;
 }
 
 /* Performance otimizada para dispositivos com movimento reduzido */
