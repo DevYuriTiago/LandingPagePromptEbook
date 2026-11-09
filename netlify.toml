@@ -1,0 +1,25 @@
+[build]
+  publish = "."
+
+# www vai para o domínio sem www
+[[redirects]]
+  from = "https://www.prompts360.com.br/*"
+  to = "https://prompts360.com.br/:splat"
+  status = 301
+  force = true
+
+# Endereços do site antigo
+[[redirects]]
+  from = "/politica-privacidade.html"
+  to = "/politica-de-privacidade.html"
+  status = 301
+
+[[redirects]]
+  from = "/termos-de-uso.html"
+  to = "/politica-de-privacidade.html"
+  status = 301
+
+[[redirects]]
+  from = "/teste.html"
+  to = "/"
+  status = 301

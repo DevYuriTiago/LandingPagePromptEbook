@@ -1,29 +1,3 @@
-# Arquivos do sistema
+node_modules/
 .DS_Store
 Thumbs.db
-
-# Dependências
-node_modules/
-package-lock.json
-
-# Arquivos de ambiente
-.env
-.env.local
-.env.*.local
-
-# Arquivos de IDE/Editor
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Arquivos de build/dist
-dist/
-build/
-out/
-
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
