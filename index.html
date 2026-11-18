@@ -123,7 +123,7 @@
 <script src="/assets/js/medicao.js"></script>
 <style>
 /* Prompts360 · Sala de Comando em ritmo de venda. Cada seção tem um fundo próprio: ônix, aurora, gelo, navy, faixa em degradê. */
-:root{--onix:#06080E;--grafite:#0D121C;--navy:#071731;--gelo:#EEF2F8;--azul:#107BFF;--teal:#00D1C2;--violeta:#8C7BFF;--txt:#A9B6CC;--claro:#F2F5FA;--tinta:#0A1A33;--dim:#6F84A6;--linha:rgba(255,255,255,.09);--grad:linear-gradient(90deg,#107BFF,#00D1C2);--max:1220px}
+:root{--onix:#06080E;--grafite:#0D121C;--navy:#071731;--gelo:#EEF2F8;--azul:#107BFF;--teal:#00D1C2;--violeta:#8C7BFF;--txt:#A9B6CC;--claro:#F2F5FA;--tinta:#0A1A33;--dim:#6F84A6;--linha:rgba(255,255,255,.09);--grad:linear-gradient(90deg,#107BFF,#00D1C2 55%,#8C7BFF);--max:1220px}
 *{margin:0;padding:0;box-sizing:border-box}
 html{overflow-x:clip}
 html.lenis,html.lenis body{height:auto}
@@ -197,7 +197,7 @@ section{position:relative;padding:clamp(96px,12vw,160px) 0;overflow:clip}
 .heroi h1{font-size:clamp(46px,6.2vw,100px);letter-spacing:-.06em;line-height:.92;margin:24px 0 26px}
 .heroi h1 .l{display:block;overflow:hidden;padding-bottom:.06em}
 .heroi h1 .l>span{display:inline-block}
-.heroi h1 .serif{font-size:1.04em;background:linear-gradient(90deg,#9CCBFF,#00D1C2);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.06em}
+.heroi h1 .serif{font-size:1.04em;background:linear-gradient(90deg,#9CCBFF,#00D1C2 55%,#C9BFFF);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.06em}
 .heroi .lead{color:#C4CFE0}
 .acoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
 /* Cartão de diagnóstico no herói */
@@ -423,7 +423,7 @@ section{position:relative;padding:clamp(96px,12vw,160px) 0;overflow:clip}
 .faq details p{padding:0 0 20px;font-size:15.5px;max-width:64ch}
 
 /* ===== 13. Final: faixa clara em degradê ===== */
-.final{text-align:center;background:linear-gradient(120deg,#107BFF 0%,#2E9BFF 35%,#00D1C2 100%);color:#04203F}
+.final{text-align:center;background:linear-gradient(120deg,#107BFF 0%,#00D1C2 55%,#8C7BFF 100%);color:#04203F}
 .final::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 80% at 50% 0%,rgba(255,255,255,.35),transparent 60%)}
 .final h2{color:#04122A;margin-left:auto;margin-right:auto;font-size:clamp(44px,7vw,104px);max-width:14ch}
 .final .rot{color:#04122A}
