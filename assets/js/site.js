@@ -309,9 +309,26 @@
       if (comContato && f) { d.nome = f.nome.value.trim(); d.whatsapp = "55" + f.whatsapp.value.replace(/\D/g, ""); d.empresa = f.empresa.value.trim(); d.consentimento = f.consentimento.checked; d.consentimento_texto = "Aceito receber contato da Prompts360 pelo WhatsApp sobre o meu diagnóstico."; }
       return d;
     }
+    // Devolve a resposta do CRM (com a análise e a mensagem para o WhatsApp) ou null quando não deu.
     function enviar(d) {
-      if (!window.P360_ENDPOINT) return Promise.resolve(false);
-      return fetch(window.P360_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(d), keepalive: true }).then(function (r) { return r.ok; }).catch(function () { return false; });
+      if (!window.P360_ENDPOINT) return Promise.resolve(null);
+      return fetch(window.P360_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(d), keepalive: true })
+        .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+    }
+    function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]; }); }
+    // Tela final: o diagnóstico na hora e o botão do WhatsApp (caso o navegador bloqueie a nova aba).
+    function telaFinal(r, url) {
+      var a = r && r.analise, h = "";
+      if (a) {
+        h = '<p class="rotulo">SEU DIAGNÓSTICO' + (r.codigo ? " · CÓDIGO " + esc(r.codigo) : "") + "</p><h3>" + esc(a.titulo) + '</h3><p class="lead" style="margin-top:10px">' + esc(a.porque) + "</p>" +
+          '<div class="rec-por" style="margin-top:22px"><div><h4>O que as suas respostas mostram</h4><ul>' + a.pontos.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") +
+          "</ul></div><div><h4>Primeiros passos sugeridos</h4><ul>" + a.passos.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></div></div>" +
+          (a.ritmo ? '<p class="lead" style="margin-top:18px">' + esc(a.ritmo) + "</p>" : "");
+      } else {
+        h = "<strong>Diagnóstico a caminho.</strong><p>Um sócio da Prompts360 analisa as suas respostas e chama você no WhatsApp com o plano e um horário para conversar.</p>";
+      }
+      h += '<div class="acoes" style="margin-top:22px"><a class="btn principal" href="' + url + '" target="_blank" rel="noopener">Abrir conversa no WhatsApp</a></div><p class="nota">A conversa abre com o seu código. Responda por lá para receber a análise completa e marcar o horário.</p>';
+      ok.innerHTML = h; ok.classList.add("com-diagnostico");
     }
     function linkWhats(d) {
       var t = "Olá! Fiz o diagnóstico de crescimento no site da Prompts360.\n\nNome: " + d.nome + "\nEmpresa: " + d.empresa + "\nRecomendação: " + d.recomendacao.join(" + ") +
@@ -323,19 +340,23 @@
       var f = document.getElementById("captura"), tel = f.whatsapp, nota = document.getElementById("notaErro");
       tel.addEventListener("input", function () { var d = tel.value.replace(/\D/g, "").slice(0, 11); tel.value = d.length > 6 ? "(" + d.slice(0, 2) + ") " + d.slice(2, d.length - 4) + "-" + d.slice(-4) : d.length > 2 ? "(" + d.slice(0, 2) + ") " + d.slice(2) : d; });
       document.getElementById("refazer").addEventListener("click", function () { resp = {}; idx = 0; res.hidden = true; res.innerHTML = ""; nav.hidden = false; mostra(); foco(); });
-      f.addEventListener("submit", function (ev) {
-        ev.preventDefault(); nota.textContent = "";
+      f.addEventListener("submit", function (e) {
+        e.preventDefault(); nota.textContent = "";
         var a = valida(f.nome, f.nome.value.trim().length > 1), b = valida(tel, tel.value.replace(/\D/g, "").length >= 10), c = valida(f.empresa, f.empresa.value.trim().length > 1);
         if (!(a && b && c)) { f.querySelector(".invalido input").focus(); return; }
         if (!f.consentimento.checked) { nota.textContent = "Marque a autorização de contato pelo WhatsApp para receber o diagnóstico."; f.consentimento.focus(); return; }
         var d = payload(true), bt = document.getElementById("enviar");
         ev("gerar_lead", { recomendacao: d.recomendacao.join(" + "), nota: d.nota, faturamento: d.respostas.faturamento });
-        var fim = function () { res.hidden = true; ok.hidden = false; ok.focus(); };
-        if (!window.P360_ENDPOINT) { window.open(linkWhats(d), "_blank", "noopener"); fim(); return; }
-        bt.disabled = true; bt.textContent = "Enviando...";
-        enviar(d).then(function (sucesso) {
+        // A aba do WhatsApp é aberta já no clique (senão o navegador bloqueia) e recebe o endereço quando o CRM responde.
+        var janela = null; try { janela = window.open("", "_blank"); if (janela) janela.opener = null; } catch (x) { janela = null; }
+        bt.disabled = true; bt.textContent = "Gerando o seu diagnóstico...";
+        enviar(d).then(function (r) {
           bt.disabled = false; bt.textContent = "Quero o diagnóstico completo";
-          if (sucesso) fim(); else nota.innerHTML = 'Não conseguimos enviar agora. <a href="' + linkWhats(d) + '" target="_blank" rel="noopener" style="text-decoration:underline;color:#F2F5FA">Envie pelo WhatsApp</a> que respondemos em seguida.';
+          var url = r && r.ok && r.mensagemCliente ? "https://wa.me/" + WHATS + "?text=" + encodeURIComponent(r.mensagemCliente) : linkWhats(d);
+          telaFinal(r && r.ok ? r : null, url);
+          res.hidden = true; ok.hidden = false; ok.focus();
+          if (window.__lenis) window.__lenis.scrollTo(raiz, { offset: -90 }); else raiz.scrollIntoView({ behavior: reduz ? "auto" : "smooth" });
+          if (janela) janela.location.href = url; else setTimeout(function () { location.href = url; }, 1800);
         });
       });
     }

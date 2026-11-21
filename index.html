@@ -402,6 +402,8 @@ section{position:relative;padding:clamp(96px,12vw,160px) 0;overflow:clip}
 .nota{font-size:13px;color:#FF8A8A;margin-top:10px}
 .sucesso{text-align:center;padding:30px 0}
 .sucesso[hidden]{display:none}
+.sucesso.com-diagnostico{text-align:left;padding:8px 0}
+.sucesso.com-diagnostico .acoes{justify-content:flex-start}
 .sucesso .ok{width:68px;height:68px;margin:0 auto;border-radius:50%;background:var(--grad);display:grid;place-items:center}
 .sucesso strong{display:block;font-size:30px;color:var(--claro);letter-spacing:-.03em;margin:14px 0 8px}
 
@@ -811,12 +813,12 @@ footer{border-top:1px solid var(--linha);padding:56px 0 40px;background:var(--on
 <div class="cta-fixo vidro forte" id="ctaFixo"><a class="btn principal" href="#diagnostico">Quero meu diagnóstico grátis</a></div>
 
 <script>
-/* Endereço que recebe os leads no CRM. Enquanto estiver vazio, o envio abre o WhatsApp com as respostas. */
-window.P360_ENDPOINT = "";
+/* Endereço que recebe os leads no CRM: grava o lead, devolve o diagnóstico e o site leva a pessoa ao WhatsApp. */
+window.P360_ENDPOINT = "https://crm.prompts360.com.br/api/site/diagnostico";
 </script>
 <script src="assets/js/gsap.min.js" defer></script>
 <script src="assets/js/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/lenis.min.js" defer></script>
-<script src="assets/js/site.js" defer></script>
+<script src="assets/js/site.js?v=20261119" defer></script>
 </body>
 </html>
