@@ -324,8 +324,9 @@
       var pct = {}, obj = Object.keys(P[0].op[resp.objetivo || 0][1])[0];
       ["G", "A", "L"].forEach(function (k) { var max = 0; P.forEach(function (p) { max += Math.max.apply(null, p.op.map(function (o) { return o[1][k] || 0; })); }); pct[k] = Math.min(100, Math.round(s[k] / (max || 1) * 100)); });
       var ordem = ["G", "A", "L"].sort(function (a, b) { return pct[b] - pct[a] || (b === obj) - (a === obj); });
-      // A segunda frente só entra quando a afinidade com ela também é relevante (40% ou mais).
-      var rec = ordem.filter(function (k, i) { return i === 0 || (i === 1 && pct[k] >= 40); });
+      // A segunda frente entra com 40% ou mais; a terceira, acima de 30% (e aí as três aparecem).
+      var tres = pct[ordem[2]] > 30;
+      var rec = ordem.filter(function (k, i) { return i === 0 || tres || (i === 1 && pct[k] >= 40); });
       return { s: s, pct: pct, rec: rec, nota: Math.min(100, nota) };
     }
     function minus(t) { return t.charAt(0).toLowerCase() + t.slice(1); }
@@ -340,10 +341,10 @@
       var titulo = calc.rec.length === 1 ? "Recomendamos o Prompts360 " + nomes[0] + "." : "Recomendamos " + nomes.join(" + ") + ".";
       var sub = calc.rec.length === 1 ? F[calc.rec[0]].porque : "A combinação certa para o seu momento: " + calc.rec.map(function (k) { return F[k].porque.charAt(0).toLowerCase() + F[k].porque.slice(1, -1); }).join("; ") + ".";
       var logos = calc.rec.map(function (k) { return '<figure class="vidro" style="--c:' + F[k].cor + '"><img src="assets/img/' + F[k].slug + '-escuro.webp" alt="Prompts360 ' + F[k].nome + '"><figcaption>' + F[k].nome.toUpperCase() + "</figcaption></figure>"; }).join("");
-      var passos = []; calc.rec.forEach(function (k) { F[k].passos.forEach(function (x, i) { if (i < (calc.rec.length > 1 ? 2 : 3)) passos.push(x); }); });
+      var passos = []; calc.rec.forEach(function (k, j) { F[k].passos.forEach(function (x, i) { if (i < (calc.rec.length === 1 ? 3 : calc.rec.length === 2 || j === 0 ? 2 : 1)) passos.push(x); }); });
       var med = ["G", "A", "L"].sort(function (x, y) { var r = function (k) { var i = calc.rec.indexOf(k); return i < 0 ? 9 : i; }; return calc.pct[y] - calc.pct[x] || r(x) - r(y); }).map(function (k) { var pct = calc.pct[k]; return '<div class="medidor" style="--c:' + F[k].cor + '"><span>' + F[k].nome + '</span><i><b data-w="' + pct + '%"></b></i><span>' + pct + "%</span></div>"; }).join("");
       res.innerHTML = '<p class="rotulo">SUA RECOMENDAÇÃO</p><h3>' + titulo + '</h3><p class="lead" style="margin-top:10px">' + sub + "</p>" +
-        '<div class="rec-logos">' + logos + "</div>" +
+        '<div class="rec-logos' + (calc.rec.length > 2 ? " tres" : "") + '">' + logos + "</div>" +
         '<div class="rec-por"><div><h4>Por que essa recomendação</h4><ul><li>Seu objetivo: ' + minus(texto("objetivo")) + "</li><li>Hoje: " + minus(texto("marketing")) + "</li><li>Onde perde tempo: " + minus(texto("tempo")) + '</li></ul></div><div><h4>Afinidade com cada frente</h4><div class="medidores">' + med + "</div></div></div>" +
         '<div class="rec-por" style="margin-top:22px"><div><h4>Primeiros passos sugeridos</h4><ul>' + passos.map(function (x) { return "<li>" + x + "</li>"; }).join("") + '</ul></div><div><h4>O que vem no diagnóstico completo</h4><ul><li>Leitura do seu site, Instagram e anúncios</li><li>Os 3 gargalos que mais custam vendas</li><li>Um plano de 90 dias com fases</li></ul></div></div>' +
         (ext && i2 < 0
