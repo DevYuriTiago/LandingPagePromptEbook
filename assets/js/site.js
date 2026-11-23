@@ -200,7 +200,7 @@
   function triagem() {
     var raiz = document.getElementById("triagem");
     if (!raiz) return;
-    var WHATS = "5581971009601";
+    var WHATS = "5581991886276";
     var P = [
       { id: "objetivo", t: "Qual é o seu principal objetivo agora?", a: "Escolha o que mais pesa hoje.", op: [["Vender mais e atrair clientes", { G: 5 }], ["Fortalecer a marca e a presença digital", { G: 5 }], ["Capacitar a equipe para usar IA", { A: 5 }], ["Automatizar atendimento e processos", { L: 5 }], ["Criar um app, sistema ou produto digital", { L: 5 }]] },
       { id: "marketing", t: "Como está o marketing da empresa hoje?", a: "Sem resposta certa. Queremos entender o ponto de partida.", op: [["Ninguém cuida de forma constante", { G: 2 }], ["Fazemos por conta própria, sem método", { G: 2, A: 1 }], ["Temos fornecedor, mas sem resultado claro", { G: 2 }], ["Temos um time interno", { A: 1, L: 1 }]] },
