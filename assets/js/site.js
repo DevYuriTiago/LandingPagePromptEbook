@@ -196,26 +196,40 @@
     window.addEventListener("scroll", atualiza, { passive: true }); atualiza();
   }
 
-  /* ===== Triagem: 7 perguntas, recomendação na hora, contato para o diagnóstico completo ===== */
+  /* ===== Triagem: 7 perguntas, recomendação na hora, raio-x opcional e contato para o diagnóstico completo ===== */
   function triagem() {
     var raiz = document.getElementById("triagem");
     if (!raiz) return;
     var WHATS = "5581971009601";
     var P = [
-      { id: "objetivo", t: "Qual é o seu principal objetivo agora?", a: "Escolha o que mais pesa hoje.", op: [["Vender mais e atrair clientes", { G: 3 }], ["Fortalecer a marca e a presença digital", { G: 2 }], ["Capacitar a equipe para usar IA", { A: 3 }], ["Automatizar atendimento e processos", { L: 3 }], ["Criar um app, sistema ou produto digital", { L: 3 }]] },
-      { id: "marketing", t: "Como está o marketing da empresa hoje?", a: "Sem resposta certa. Queremos entender o ponto de partida.", op: [["Ninguém cuida de forma constante", { G: 2 }], ["Fazemos por conta própria, sem método", { G: 2, A: 1 }], ["Temos fornecedor, mas sem resultado claro", { G: 2 }], ["Temos um time interno", { A: 2, L: 1 }]] },
-      { id: "tempo", t: "Onde a sua equipe mais perde tempo?", a: "Pense na semana passada.", op: [["Respondendo clientes no WhatsApp", { L: 2 }], ["Criando conteúdo e posts", { G: 1, A: 1 }], ["Planilhas, relatórios e tarefas repetidas", { L: 2, A: 1 }], ["Não sabemos medir", { G: 1, A: 1 }]] },
-      { id: "ia", t: "A sua equipe já usa IA no dia a dia?", a: "ChatGPT, Claude, Gemini ou qualquer outra.", op: [["Não, ainda nada", { A: 2 }], ["Um pouco, cada um do seu jeito", { A: 2 }], ["Sim, bastante", { L: 1 }]] },
-      { id: "faturamento", t: "Qual é o faturamento mensal da empresa?", a: "Usamos só para dimensionar o plano. Fica entre nós.", duas: true, op: [["Até R$ 30 mil", {}, 10], ["R$ 30 mil a R$ 100 mil", { G: 1 }, 25], ["R$ 100 mil a R$ 500 mil", { G: 1, L: 1 }, 35], ["Acima de R$ 500 mil", { G: 1, L: 1 }, 40]] },
+      { id: "objetivo", t: "Qual é o seu principal objetivo agora?", a: "Escolha o que mais pesa hoje.", op: [["Vender mais e atrair clientes", { G: 5 }], ["Fortalecer a marca e a presença digital", { G: 5 }], ["Capacitar a equipe para usar IA", { A: 5 }], ["Automatizar atendimento e processos", { L: 5 }], ["Criar um app, sistema ou produto digital", { L: 5 }]] },
+      { id: "marketing", t: "Como está o marketing da empresa hoje?", a: "Sem resposta certa. Queremos entender o ponto de partida.", op: [["Ninguém cuida de forma constante", { G: 2 }], ["Fazemos por conta própria, sem método", { G: 2, A: 1 }], ["Temos fornecedor, mas sem resultado claro", { G: 2 }], ["Temos um time interno", { A: 1, L: 1 }]] },
+      { id: "tempo", t: "Onde a sua equipe mais perde tempo?", a: "Pense na semana passada.", op: [["Respondendo clientes no WhatsApp", { L: 2 }], ["Criando conteúdo e posts", { G: 1, A: 1 }], ["Planilhas, relatórios e tarefas repetidas", { L: 2, A: 1 }], ["Não sabemos medir", { G: 1, L: 1 }]] },
+      { id: "ia", t: "A sua equipe já usa IA no dia a dia?", a: "ChatGPT, Claude, Gemini ou qualquer outra.", op: [["Não, ainda nada", { A: 2 }], ["Um pouco, cada um do seu jeito", { A: 2 }], ["Sim, bastante", { L: 2 }]] },
+      { id: "faturamento", t: "Qual é o faturamento mensal da empresa?", a: "Usamos só para dimensionar o plano. Fica entre nós.", duas: true, op: [["Até R$ 30 mil", { G: 1 }, 10], ["R$ 30 mil a R$ 100 mil", { G: 1 }, 25], ["R$ 100 mil a R$ 300 mil", { G: 1, L: 1 }, 35], ["R$ 300 mil a R$ 1 milhão", { L: 1, A: 1 }, 40], ["Acima de R$ 1 milhão", { L: 1, A: 1 }, 40]] },
       { id: "urgencia", t: "Quando você quer começar?", a: "Isso define o ritmo da primeira fase.", op: [["Agora, é prioridade", {}, 30], ["Nos próximos 30 dias", {}, 20], ["Só estou pesquisando", {}, 5]] },
       { id: "decisor", t: "Quem decide sobre esse investimento?", a: "Assim chamamos as pessoas certas para a conversa.", op: [["Eu decido", {}, 20], ["Eu e meus sócios", {}, 15], ["Outra pessoa", {}, 5]] }
+    ];
+    // Etapa 2, opcional: o raio-x da operação. Vai junto com o contato e vira o roteiro da reunião no CRM.
+    var P2 = [
+      { id: "lojas", t: "Quantas lojas ou unidades a empresa tem?", a: "Contando as físicas.", op: ["Só vendemos online", "1", "2 ou 3", "4 ou mais"] },
+      { id: "publico", t: "Para quem a empresa vende?", a: "Pense no faturamento do último mês.", op: ["Consumidor final", "Outras empresas", "Os dois"] },
+      { id: "tem", tipo: "varias", t: "O que a empresa já tem hoje?", a: "Marque tudo o que existe. Se nada, é só continuar.", op: ["Site", "Loja virtual completa", "Manual de marca", "Follow-up automático com clientes", "Painel de resultados", "CRM ou funil de vendas"] },
+      { id: "seguidores", t: "Quantos seguidores a empresa tem no Instagram?", a: "Um número aproximado basta.", op: ["Não temos Instagram ativo", "Até 5 mil", "5 mil a 30 mil", "Mais de 30 mil"] },
+      { id: "instagram_venda", t: "O Instagram gera vendas?", a: "Vendas que vocês conseguem ligar a um post ou story.", se: function (x) { return x.seguidores !== "Não temos Instagram ativo"; }, op: ["Sim, e sabemos medir quantas", "Gera, mas não sabemos medir", "Quase não gera venda"] },
+      { id: "whatsapp", t: "Quem atende os clientes no WhatsApp?", a: "Na maior parte do dia.", op: ["O próprio dono", "Uma pessoa dedicada só a isso", "Uma equipe", "Já é automatizado"] },
+      { id: "investimento", t: "Quanto a empresa investe por mês em tráfego pago e conteúdo?", a: "Somando anúncios e quem produz.", op: ["Nada", "Até R$ 2 mil", "R$ 2 mil a R$ 5 mil", "Acima de R$ 5 mil"] },
+      { id: "retorno", t: "Vocês sabem quanto esse investimento volta em vendas?", a: "Sem resposta certa.", se: function (x) { return x.investimento !== "Nada"; }, op: ["Sim, medimos", "Mais ou menos", "Não sabemos"] },
+      { id: "sistema", t: "Como a empresa controla vendas e estoque?", a: "O sistema de gestão do dia a dia.", op: ["Planilha ou caderno", "Sistema antigo que atrapalha", "Sistema antigo que atende", "Sistema de mercado que atende bem"] },
+      { id: "clientes_dia", t: "Vocês sabem quantos clientes atendem por dia?", a: "Na loja ou no online.", op: ["Sim, temos o número", "Temos uma ideia aproximada", "Não sabemos"] },
+      { id: "dor", tipo: "texto", t: "O que mais te incomoda hoje na empresa?", a: "Com as suas palavras. Pode pular se preferir." }
     ];
     var F = {
       G: { nome: "Growth", slug: "growth", cor: "#107BFF", porque: "O seu gargalo está em atrair e converter clientes.", passos: ["Diagnóstico de marca e de canais", "Linha editorial e conteúdo com método", "Tráfego pago e página que capta leads"] },
       A: { nome: "Academy", slug: "academy", cor: "#00D1C2", porque: "A sua equipe pode render muito mais com IA.", passos: ["Workshop de IA aplicada à gestão", "Capacitação da equipe por função", "Rotinas com IA no dia a dia"] },
       L: { nome: "Labs", slug: "labs", cor: "#8C7BFF", porque: "Tempo e dinheiro estão escapando em tarefas que podem ser automatizadas.", passos: ["Agente de IA no WhatsApp", "Automação dos processos repetidos", "Sistema ou app sob medida"] }
     };
-    var resp = {}, idx = 0, bonus = {};
+    var resp = {}, idx = 0, bonus = {}, ext = null, i2 = 0, guardado = null;
     var caixa = document.getElementById("triPerguntas"), res = document.getElementById("triResultado"), ok = document.getElementById("triSucesso");
     var barra = document.getElementById("triBarra"), cont = document.getElementById("triContador"), frase = document.getElementById("triFrase");
     var voltar = document.getElementById("triVoltar"), nav = document.getElementById("triNav");
@@ -247,21 +261,78 @@
       });
     }
     function foco() { var b = caixa.querySelector(".escolha.marcada") || caixa.querySelector(".escolha"); if (b) b.focus({ preventScroll: true }); }
-    voltar.addEventListener("click", function () { if (idx > 0) { idx--; mostra(); foco(); } });
+    voltar.addEventListener("click", function () {
+      if (ext && i2 >= 0) { var j = anterior2(i2); if (j < 0) fimRaio(); else { i2 = j; mostra2(); foco(); } return; }
+      if (idx > 0) { idx--; mostra(); foco(); }
+    });
+
+    /* ----- Etapa 2: raio-x da operação ----- */
+    function vale(j) { return !P2[j].se || P2[j].se(ext); }
+    function proximo2(j) { j++; while (j < P2.length && !vale(j)) j++; return j; }
+    function anterior2(j) { j--; while (j >= 0 && !vale(j)) j--; return j; }
+    function avanca2() { var j = proximo2(i2); if (j >= P2.length) fimRaio(); else { i2 = j; mostra2(); foco(); } }
+    function mostra2() {
+      var p = P2[i2], tot = 0, pos = 0;
+      P2.forEach(function (q, j) { if (vale(j)) { tot++; if (j <= i2) pos++; } });
+      cont.textContent = "RAIO-X " + pos + " DE " + tot; frase.textContent = pos === tot ? "Última do raio-x" : "Raio-x da operação";
+      barra.style.width = ((pos - 1) / tot * 100) + "%"; voltar.disabled = false;
+      var h = '<div class="tri-passo"><h3 id="triTitulo">' + p.t + '</h3><p class="ajuda">' + p.a + "</p>";
+      if (p.tipo === "texto") {
+        h += '<div class="campo"><textarea id="triDor" rows="4" maxlength="600" aria-labelledby="triTitulo">' + esc(ext.dor || "") + '</textarea></div><div class="acoes" style="margin-top:16px"><button type="button" class="btn principal" id="triSegue">Ver o resultado</button></div>';
+      } else {
+        var varias = p.tipo === "varias", lista = varias ? (ext[p.id] || []) : null;
+        h += '<div class="escolhas' + (p.op.length > 4 ? " duas" : "") + '" role="' + (varias ? "group" : "radiogroup") + '" aria-labelledby="triTitulo">';
+        p.op.forEach(function (o, i) {
+          var m = varias ? lista.indexOf(o) >= 0 : ext[p.id] === o;
+          h += '<button type="button" class="escolha' + (m ? " marcada" : "") + '" role="' + (varias ? "checkbox" : "radio") + '" aria-checked="' + m + '" data-i="' + i + '"><span class="letra">' + (varias ? (m ? "\u2713" : "") : String.fromCharCode(65 + i)) + "</span>" + o + "</button>";
+        });
+        h += "</div>" + (varias ? '<div class="acoes" style="margin-top:16px"><button type="button" class="btn principal" id="triSegue">Continuar</button></div>' : "");
+      }
+      caixa.innerHTML = h + "</div>";
+      var segue = document.getElementById("triSegue");
+      if (segue) segue.addEventListener("click", function () { if (p.tipo === "texto") ext.dor = document.getElementById("triDor").value.trim(); else if (!ext[p.id]) ext[p.id] = []; ev("raio_x_pergunta", { pergunta: p.id }); avanca2(); });
+      caixa.querySelectorAll(".escolha").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var o = p.op[Number(b.getAttribute("data-i"))];
+          if (p.tipo === "varias") {
+            var l = ext[p.id] || (ext[p.id] = []), k = l.indexOf(o);
+            if (k >= 0) l.splice(k, 1); else l.push(o);
+            var m = k < 0; b.classList.toggle("marcada", m); b.setAttribute("aria-checked", String(m)); b.querySelector(".letra").textContent = m ? "\u2713" : "";
+            return;
+          }
+          ext[p.id] = o; ev("raio_x_pergunta", { pergunta: p.id });
+          caixa.querySelectorAll(".escolha").forEach(function (x) { x.classList.remove("marcada"); x.setAttribute("aria-checked", "false"); });
+          b.classList.add("marcada"); b.setAttribute("aria-checked", "true");
+          setTimeout(avanca2, reduz ? 0 : 260);
+        });
+      });
+    }
+    function iniciaRaio() {
+      var f = document.getElementById("captura");
+      guardado = f ? { nome: f.nome.value, whatsapp: f.whatsapp.value, empresa: f.empresa.value, consentimento: f.consentimento.checked } : null;
+      if (!ext) ext = {};
+      i2 = 0; res.hidden = true; nav.hidden = false; mostra2(); foco(); ev("raio_x_inicio", {});
+      if (window.__lenis) window.__lenis.scrollTo(raiz, { offset: -90 }); else raiz.scrollIntoView({ behavior: reduz ? "auto" : "smooth" });
+    }
+    function fimRaio() { i2 = -1; caixa.innerHTML = ""; ev("raio_x_concluido", { respondidas: Object.keys(ext).length }); resultado(true); }
 
     function calcula() {
       var s = { G: 0, A: 0, L: 0 }, nota = 10;
       P.forEach(function (p) { var i = resp[p.id]; if (i == null) return; var o = p.op[i]; Object.keys(o[1]).forEach(function (k) { s[k] += o[1][k]; }); if (o[2]) nota += o[2]; });
       Object.keys(bonus).forEach(function (k) { s[k] += bonus[k]; });
-      var ordem = Object.keys(s).sort(function (a, b) { return s[b] - s[a]; }), topo = s[ordem[0]] || 1;
-      var rec = ordem.filter(function (k, i) { return i === 0 || (i === 1 && s[k] >= 3 && s[k] >= topo * .5); });
-      return { s: s, rec: rec, topo: topo, nota: Math.min(100, nota) };
+      // Afinidade = pontos da frente sobre o máximo que ela pode somar nas 7 respostas. O objetivo pesa mais e desempata.
+      var pct = {}, obj = Object.keys(P[0].op[resp.objetivo || 0][1])[0];
+      ["G", "A", "L"].forEach(function (k) { var max = 0; P.forEach(function (p) { max += Math.max.apply(null, p.op.map(function (o) { return o[1][k] || 0; })); }); pct[k] = Math.min(100, Math.round(s[k] / (max || 1) * 100)); });
+      var ordem = ["G", "A", "L"].sort(function (a, b) { return pct[b] - pct[a] || (b === obj) - (a === obj); });
+      // A segunda frente só entra quando a afinidade com ela também é relevante (40% ou mais).
+      var rec = ordem.filter(function (k, i) { return i === 0 || (i === 1 && pct[k] >= 40); });
+      return { s: s, pct: pct, rec: rec, nota: Math.min(100, nota) };
     }
     function minus(t) { return t.charAt(0).toLowerCase() + t.slice(1); }
     function texto(p) { var i = resp[p]; var q = P.filter(function (x) { return x.id === p; })[0]; return i == null ? "" : q.op[i][0]; }
 
     var calc;
-    function resultado() {
+    function resultado(doRaio) {
       calc = calcula();
       barra.style.width = "100%"; cont.textContent = "RESULTADO"; frase.textContent = "Sua recomendação"; nav.hidden = true;
       caixa.innerHTML = "";
@@ -270,11 +341,14 @@
       var sub = calc.rec.length === 1 ? F[calc.rec[0]].porque : "A combinação certa para o seu momento: " + calc.rec.map(function (k) { return F[k].porque.charAt(0).toLowerCase() + F[k].porque.slice(1, -1); }).join("; ") + ".";
       var logos = calc.rec.map(function (k) { return '<figure class="vidro" style="--c:' + F[k].cor + '"><img src="assets/img/' + F[k].slug + '-escuro.webp" alt="Prompts360 ' + F[k].nome + '"><figcaption>' + F[k].nome.toUpperCase() + "</figcaption></figure>"; }).join("");
       var passos = []; calc.rec.forEach(function (k) { F[k].passos.forEach(function (x, i) { if (i < (calc.rec.length > 1 ? 2 : 3)) passos.push(x); }); });
-      var med = ["G", "A", "L"].map(function (k) { var pct = Math.round(calc.s[k] / calc.topo * 100); return '<div class="medidor" style="--c:' + F[k].cor + '"><span>' + F[k].nome + '</span><i><b data-w="' + pct + '%"></b></i><span>' + pct + "%</span></div>"; }).join("");
+      var med = ["G", "A", "L"].sort(function (x, y) { var r = function (k) { var i = calc.rec.indexOf(k); return i < 0 ? 9 : i; }; return calc.pct[y] - calc.pct[x] || r(x) - r(y); }).map(function (k) { var pct = calc.pct[k]; return '<div class="medidor" style="--c:' + F[k].cor + '"><span>' + F[k].nome + '</span><i><b data-w="' + pct + '%"></b></i><span>' + pct + "%</span></div>"; }).join("");
       res.innerHTML = '<p class="rotulo">SUA RECOMENDAÇÃO</p><h3>' + titulo + '</h3><p class="lead" style="margin-top:10px">' + sub + "</p>" +
         '<div class="rec-logos">' + logos + "</div>" +
         '<div class="rec-por"><div><h4>Por que essa recomendação</h4><ul><li>Seu objetivo: ' + minus(texto("objetivo")) + "</li><li>Hoje: " + minus(texto("marketing")) + "</li><li>Onde perde tempo: " + minus(texto("tempo")) + '</li></ul></div><div><h4>Afinidade com cada frente</h4><div class="medidores">' + med + "</div></div></div>" +
         '<div class="rec-por" style="margin-top:22px"><div><h4>Primeiros passos sugeridos</h4><ul>' + passos.map(function (x) { return "<li>" + x + "</li>"; }).join("") + '</ul></div><div><h4>O que vem no diagnóstico completo</h4><ul><li>Leitura do seu site, Instagram e anúncios</li><li>Os 3 gargalos que mais custam vendas</li><li>Um plano de 90 dias com fases</li></ul></div></div>' +
+        (ext && i2 < 0
+          ? '<div class="aprofundar feito"><div><h4>Raio-x da operação respondido</h4><p>As respostas vão junto com o seu contato e deixam o diagnóstico completo mais preciso.</p></div><button type="button" class="btn vidro" id="btnAprofundar">Revisar respostas</button></div>'
+          : '<div class="aprofundar"><div><h4>Quer um diagnóstico mais preciso?</h4><p>Mais 11 perguntas rápidas sobre a operação, cerca de 2 minutos. A conversa já começa com o raio-x pronto.</p></div><button type="button" class="btn vidro" id="btnAprofundar">Responder agora</button></div>') +
         '<form class="captura" id="captura" novalidate><h4>Receba o diagnóstico completo no WhatsApp</h4><p>Um sócio da Prompts360 analisa as suas respostas e chama você com o plano e um horário para conversar.</p>' +
         '<div class="tres"><div class="campo"><label for="nome">Seu nome</label><input id="nome" name="nome" autocomplete="name" required><span class="erro">Digite o seu nome.</span></div>' +
         '<div class="campo"><label for="whatsapp">WhatsApp com DDD</label><input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(81) 90000-0000" required><span class="erro">Digite um WhatsApp com DDD.</span></div>' +
@@ -286,6 +360,12 @@
       if (window.__lenis) window.__lenis.scrollTo(raiz, { offset: -90 }); else raiz.scrollIntoView({ behavior: reduz ? "auto" : "smooth" });
       res.querySelector("h3").setAttribute("tabindex", "-1"); res.querySelector("h3").focus({ preventScroll: true });
       ligaCaptura();
+      document.getElementById("btnAprofundar").addEventListener("click", iniciaRaio);
+      if (doRaio) {
+        var fg = document.getElementById("captura");
+        if (guardado) { fg.nome.value = guardado.nome; fg.whatsapp.value = guardado.whatsapp; fg.empresa.value = guardado.empresa; fg.consentimento.checked = guardado.consentimento; }
+        return;
+      }
       enviar(payload(false));
       ev("diagnostico_concluido", { recomendacao: calc.rec.map(function (k) { return F[k].nome; }).join(" + "), nota: calc.nota });
     }
@@ -304,7 +384,7 @@
     function payload(comContato) {
       var f = document.getElementById("captura"), r = {};
       P.forEach(function (p) { r[p.id] = texto(p.id); });
-      var d = { tipo: comContato ? "lead" : "triagem_concluida", respostas: r, recomendacao: calc.rec.map(function (k) { return F[k].nome; }), afinidade: calc.s, nota: calc.nota,
+      var d = { tipo: comContato ? "lead" : "triagem_concluida", respostas: r, extras: ext && i2 < 0 ? ext : undefined, recomendacao: calc.rec.map(function (k) { return F[k].nome; }), afinidade: calc.pct, nota: calc.nota,
         origem: { primeira: primeira, atual: atual, organica: organica(), pagina_envio: location.href, aparelho: /Mobi|Android/i.test(navigator.userAgent) ? "celular" : "computador" }, enviado_em: new Date().toISOString() };
       if (comContato && f) { d.nome = f.nome.value.trim(); d.whatsapp = "55" + f.whatsapp.value.replace(/\D/g, ""); d.empresa = f.empresa.value.trim(); d.consentimento = f.consentimento.checked; d.consentimento_texto = "Aceito receber contato da Prompts360 pelo WhatsApp sobre o meu diagnóstico."; }
       return d;
@@ -339,7 +419,7 @@
     function ligaCaptura() {
       var f = document.getElementById("captura"), tel = f.whatsapp, nota = document.getElementById("notaErro");
       tel.addEventListener("input", function () { var d = tel.value.replace(/\D/g, "").slice(0, 11); tel.value = d.length > 6 ? "(" + d.slice(0, 2) + ") " + d.slice(2, d.length - 4) + "-" + d.slice(-4) : d.length > 2 ? "(" + d.slice(0, 2) + ") " + d.slice(2) : d; });
-      document.getElementById("refazer").addEventListener("click", function () { resp = {}; idx = 0; res.hidden = true; res.innerHTML = ""; nav.hidden = false; mostra(); foco(); });
+      document.getElementById("refazer").addEventListener("click", function () { resp = {}; idx = 0; ext = null; i2 = 0; guardado = null; res.hidden = true; res.innerHTML = ""; nav.hidden = false; mostra(); foco(); });
       f.addEventListener("submit", function (e) {
         e.preventDefault(); nota.textContent = "";
         var a = valida(f.nome, f.nome.value.trim().length > 1), b = valida(tel, tel.value.replace(/\D/g, "").length >= 10), c = valida(f.empresa, f.empresa.value.trim().length > 1);

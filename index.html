@@ -394,6 +394,13 @@ section{position:relative;padding:clamp(96px,12vw,160px) 0;overflow:clip}
 .campo label{font-size:13.5px;font-weight:500;color:var(--claro)}
 .campo input{width:100%;min-height:50px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:var(--claro);outline:none;transition:border-color .2s}
 .campo input:focus{border-color:var(--teal)}
+.campo textarea{width:100%;padding:14px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:var(--claro);font:inherit;font-size:16px;line-height:1.5;resize:vertical;outline:none;transition:border-color .2s}
+.campo textarea:focus{border-color:var(--teal)}
+.aprofundar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:28px;padding:20px 22px;border-radius:18px;border:1px solid rgba(0,209,194,.35);background:rgba(0,209,194,.06)}
+.aprofundar h4{font-size:18px;color:var(--claro);margin-bottom:4px}
+.aprofundar p{font-size:14.5px}
+.aprofundar .btn{flex:none}
+@media (max-width:640px){.aprofundar{flex-direction:column;align-items:stretch}}
 .campo .erro{font-size:12.5px;color:#FF8A8A;display:none}
 .campo.invalido input{border-color:#FF8A8A}
 .campo.invalido .erro{display:block}
@@ -819,6 +826,6 @@ window.P360_ENDPOINT = "https://crm.prompts360.com.br/api/site/diagnostico";
 <script src="assets/js/gsap.min.js" defer></script>
 <script src="assets/js/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/lenis.min.js" defer></script>
-<script src="assets/js/site.js?v=20261119" defer></script>
+<script src="assets/js/site.js?v=20261123" defer></script>
 </body>
 </html>
