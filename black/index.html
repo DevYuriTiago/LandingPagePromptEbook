@@ -445,7 +445,7 @@ document.querySelectorAll(".rv").forEach(function (e) { e.classList.add("pre"); 
     var campos = form.querySelectorAll('.etapa[data-etapa="' + n + '"] [required]');
     for (var i = 0; i < campos.length; i++) {
       var c = campos[i];
-      var ok = c.type === "checkbox" ? c.checked : c.value.trim().length >= 2;
+      var ok = c.type === "checkbox" ? c.checked : c.value.trim().length >= (c.name === "pessoas" ? 1 : 2);
       if (c.name === "whatsapp") ok = c.value.replace(/\D/g, "").length >= 10;
       if (!ok) {
         erro.textContent = c.name === "whatsapp" ? "Confira o WhatsApp com DDD." : c.type === "checkbox" ? "Marque a autorização para recebermos o seu contato." : "Responda esta pergunta para continuar.";
