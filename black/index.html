@@ -114,8 +114,17 @@
   .lista-ok li { display: flex; gap: 12px; align-items: flex-start; color: var(--suave); }
   .lista-ok li::before { content: ""; flex: none; margin-top: 7px; width: 10px; height: 10px; border-radius: 3px; background: var(--degrade); transform: rotate(45deg); }
 
-  .clientes { margin-top: 26px; display: flex; flex-wrap: wrap; align-items: center; gap: 22px 28px; opacity: .8; }
-  .clientes img { height: 28px; width: auto; filter: grayscale(1) brightness(2.2); }
+  /* Faixa de clientes de canto a canto, em rolagem infinita (como no site principal) */
+  .logos-trilho { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-top: 22px; padding: 18px 0; overflow: hidden;
+    border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha); background: rgba(5, 7, 13, .35);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+  .logos-faixa { display: flex; align-items: center; gap: 48px; width: max-content; animation: desliza 26s linear infinite; }
+  .logos-faixa:hover { animation-play-state: paused; }
+  .logo-cli { height: 36px; display: flex; align-items: center; opacity: .82; flex: none; }
+  .logo-cli img { height: 100%; width: auto; filter: grayscale(1) brightness(2.2); }
+  .logo-cli.alto { height: 50px; }
+  .logo-cli.baixo { height: 28px; }
+  @keyframes desliza { to { transform: translateX(-50%); } }
 
   /* Formulário */
   .reserva { background: radial-gradient(120% 60% at 50% 0%, rgba(16, 123, 255, .16), transparent 60%), var(--fundo); }
@@ -261,12 +270,29 @@
         <li>As vagas são por ordem de resposta e acabam hoje às 23h59.</li>
       </ul>
       <p class="rv mono" style="margin-top:34px;color:var(--suave)">Empresas que já crescem com a gente</p>
-      <div class="rv clientes">
-        <img src="/assets/img/clientes/tera.svg" alt="TERA" height="28" loading="lazy">
-        <img src="/assets/img/clientes/cgi.png" alt="CGI" height="28" loading="lazy">
-        <img src="/assets/img/clientes/humanah.png" alt="Humanah" height="28" loading="lazy">
-        <img src="/assets/img/clientes/dmens.png" alt="Dmens" height="28" loading="lazy">
-        <img src="/assets/img/clientes/annakarla.svg" alt="Anna Karla" height="28" loading="lazy" style="height:40px">
+      <div class="rv logos-trilho" aria-label="Clientes: TERA, CGI, D'mens Barbearia, Anna Karla Nutricionista e HumanáH">
+        <div class="logos-faixa">
+          <span class="logo-cli baixo"><img src="/assets/img/clientes/tera.svg" alt="TERA" loading="lazy"></span>
+          <span class="logo-cli baixo"><img src="/assets/img/clientes/cgi.png" alt="CGI" loading="lazy"></span>
+          <span class="logo-cli baixo"><img src="/assets/img/clientes/dmens.png" alt="D'mens Barbearia" loading="lazy"></span>
+          <span class="logo-cli alto"><img src="/assets/img/clientes/annakarla.svg" alt="Anna Karla Nutricionista" loading="lazy"></span>
+          <span class="logo-cli "><img src="/assets/img/clientes/humanah.png" alt="HumanáH" loading="lazy"></span>
+          <span class="logo-cli baixo" aria-hidden="true"><img src="/assets/img/clientes/tera.svg" alt="" loading="lazy"></span>
+          <span class="logo-cli baixo" aria-hidden="true"><img src="/assets/img/clientes/cgi.png" alt="" loading="lazy"></span>
+          <span class="logo-cli baixo" aria-hidden="true"><img src="/assets/img/clientes/dmens.png" alt="" loading="lazy"></span>
+          <span class="logo-cli alto" aria-hidden="true"><img src="/assets/img/clientes/annakarla.svg" alt="" loading="lazy"></span>
+          <span class="logo-cli " aria-hidden="true"><img src="/assets/img/clientes/humanah.png" alt="" loading="lazy"></span>
+          <span class="logo-cli baixo" aria-hidden="true"><img src="/assets/img/clientes/tera.svg" alt="" loading="lazy"></span>
+          <span class="logo-cli baixo" aria-hidden="true"><img src="/assets/img/clientes/cgi.png" alt="" loading="lazy"></span>
+          <span class="logo-cli baixo" aria-hidden="true"><img src="/assets/img/clientes/dmens.png" alt="" loading="lazy"></span>
+          <span class="logo-cli alto" aria-hidden="true"><img src="/assets/img/clientes/annakarla.svg" alt="" loading="lazy"></span>
+          <span class="logo-cli " aria-hidden="true"><img src="/assets/img/clientes/humanah.png" alt="" loading="lazy"></span>
+          <span class="logo-cli baixo" aria-hidden="true"><img src="/assets/img/clientes/tera.svg" alt="" loading="lazy"></span>
+          <span class="logo-cli baixo" aria-hidden="true"><img src="/assets/img/clientes/cgi.png" alt="" loading="lazy"></span>
+          <span class="logo-cli baixo" aria-hidden="true"><img src="/assets/img/clientes/dmens.png" alt="" loading="lazy"></span>
+          <span class="logo-cli alto" aria-hidden="true"><img src="/assets/img/clientes/annakarla.svg" alt="" loading="lazy"></span>
+          <span class="logo-cli " aria-hidden="true"><img src="/assets/img/clientes/humanah.png" alt="" loading="lazy"></span>
+        </div>
       </div>
     </div>
   </section>
