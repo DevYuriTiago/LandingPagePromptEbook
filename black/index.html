@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Black Friday Prompts360 · Diagnóstico de IA grátis para 15 empresas</title>
+<title>BLACK FRIDAY · Plano de 90 dias grátis para a sua empresa | Prompts360</title>
 <meta name="description" content="Só hoje: diagnóstico de IA com Plano de 90 dias por escrito e conversa de 30 minutos com um sócio da Prompts360. Grátis para 15 empresas, até 23h59.">
 <link rel="canonical" href="https://prompts360.com.br/black">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -12,14 +12,18 @@
 <meta property="og:site_name" content="Prompts360">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:url" content="https://prompts360.com.br/black">
-<meta property="og:title" content="Black Friday Prompts360 · Diagnóstico de IA grátis">
-<meta property="og:description" content="Plano de 90 dias por escrito e 30 minutos com um sócio. Grátis para 15 empresas, só até hoje às 23h59.">
-<meta property="og:image" content="https://prompts360.com.br/black/img/og-black.jpg">
+<meta property="og:title" content="BLACK FRIDAY · Plano de 90 dias GRÁTIS para a sua empresa">
+<meta property="og:description" content="Só hoje, até 23h59. Apenas 15 empresas vão receber um diagnóstico de IA, o Plano de 90 dias por escrito e 30 minutos com um sócio da Prompts360. Sem custo, sem cartão. Vagas por ordem de resposta.">
+<meta property="og:image" content="https://prompts360.com.br/black/img/og-black.jpg?v=2">
+<meta property="og:image:secure_url" content="https://prompts360.com.br/black/img/og-black.jpg?v=2">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Black Friday Prompts360: diagnóstico de IA com Plano de 90 dias, grátis">
+<meta property="og:image:alt" content="Black Friday Prompts360: Plano de 90 dias grátis para 15 empresas, só hoje até 23h59">
+<meta name="twitter:title" content="BLACK FRIDAY · Plano de 90 dias GRÁTIS para a sua empresa">
+<meta name="twitter:description" content="Só hoje, até 23h59. 15 vagas: diagnóstico de IA, Plano de 90 dias por escrito e 30 min com um sócio. Sem custo.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://prompts360.com.br/black/img/og-black.jpg">
+<meta name="twitter:image" content="https://prompts360.com.br/black/img/og-black.jpg?v=2">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/icone-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/icone-180.png">
 <meta name="theme-color" content="#05070d">
@@ -62,7 +66,7 @@
   .topo-abertura { position: absolute; z-index: 1; top: 28px; left: 0; right: 0; }
   .selo-hoje { display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(0, 209, 194, .45); color: var(--ciano); background: rgba(0, 209, 194, .08); }
   h1.black { margin-top: 16px; font-weight: 900; font-size: clamp(76px, 25vw, 150px); line-height: .82; letter-spacing: -.055em; }
-  h1.black span { display: block; background: linear-gradient(95deg, #fff 15%, #9fd0ff 55%, var(--ciano) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h1.black .l > span > span { display: block; background: linear-gradient(95deg, #fff 15%, #9fd0ff 55%, var(--ciano) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .oferta { margin-top: 22px; font-size: 25px; line-height: 1.22; font-weight: 600; letter-spacing: -.02em; }
   .oferta em { font-family: "Instrument Serif", serif; font-style: italic; font-weight: 400; font-size: 1.18em; color: var(--ciano); }
   .apoio { margin-top: 12px; color: var(--suave); font-size: 16px; }
@@ -149,6 +153,20 @@
   footer img { height: 34px; width: auto; margin-bottom: 14px; }
   footer a { color: var(--suave); }
 
+  /* Animações no estilo do site principal */
+  .rede { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .9; }
+  .abertura .foto { will-change: transform; }
+  h1.black .l { display: block; overflow: hidden; padding-bottom: .04em; }
+  h1.black .l > span { display: inline-block; }
+  .js .rv.pre { opacity: 0; transform: translateY(28px); }
+  .citacao .w { opacity: var(--o, 1); transition: opacity .12s linear; }
+  .passo figure img { will-change: transform; transform: scale(1.12); }
+  .barra i { box-shadow: 0 0 18px rgba(0, 209, 194, .55); }
+  .botao[data-mag] { transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .15s ease; }
+  .brilho { position: relative; overflow: hidden; }
+  .brilho::after { content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: -60%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent); transform: skewX(-18deg); animation: varre 3.2s ease-in-out 1.6s infinite; }
+  @keyframes varre { 0% { left: -60%; } 45%, 100% { left: 130%; } }
+
   /* Barra fixa no celular */
   .fixa { position: fixed; z-index: 40; left: 0; right: 0; bottom: 0; padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom));
     background: linear-gradient(180deg, rgba(5,7,13,0), rgba(5,7,13,.94) 30%); transform: translateY(120%); transition: transform .35s ease; }
@@ -174,10 +192,11 @@
 
 <main>
   <section class="abertura" aria-labelledby="titulo">
-    <img class="foto" src="/black/img/presente.webp" alt="" width="896" height="1152" fetchpriority="high">
+    <img class="foto" src="/black/img/presente.webp" alt="" width="896" height="1152" fetchpriority="high" data-vel="40">
+    <canvas class="rede" id="rede" aria-hidden="true"></canvas>
     <div class="topo-abertura"><div class="envelope"><span class="selo-hoje mono">Só hoje · 27/11</span></div></div>
     <div class="envelope">
-      <h1 class="black" id="titulo">BLACK<span>FRIDAY</span></h1>
+      <h1 class="black" id="titulo"><span class="l"><span>BLACK</span></span><span class="l"><span><span>FRIDAY</span></span></span></h1>
       <p class="oferta">Diagnóstico de IA com Plano de 90 dias, <em>de graça.</em></p>
       <p class="apoio">Para 15 empresas. Você responde 5 perguntas, recebe na hora um kit de prompts e, em até 2 dias úteis, um plano por escrito para vender mais.</p>
       <div class="contador" aria-live="polite">
@@ -187,17 +206,17 @@
         </div>
         <div class="barra" aria-hidden="true"><i id="barra"></i></div>
       </div>
-      <a class="botao" href="#reservar">Garantir minha vaga</a>
+      <a class="botao brilho" href="#reservar" data-mag>Garantir minha vaga</a>
     </div>
   </section>
 
   <section aria-labelledby="recebe">
     <div class="envelope">
-      <span class="rotulo mono">O que você recebe</span>
-      <h2 id="recebe">Quatro entregas, <span class="serifa">zero custo.</span></h2>
-      <p class="lead">Tudo pensado para a sua empresa entrar em dezembro sabendo exatamente onde está perdendo venda e o que fazer primeiro.</p>
+      <span class="rv rotulo mono">O que você recebe</span>
+      <h2 class="rv" id="recebe">Quatro entregas, <span class="serifa">zero custo.</span></h2>
+      <p class="rv lead">Tudo pensado para a sua empresa entrar em dezembro sabendo exatamente onde está perdendo venda e o que fazer primeiro.</p>
       <div class="passos">
-        <article class="passo">
+        <article class="passo rv">
           <figure><img src="/black/img/kit.webp" alt="Celular sobre uma mesa escura com a tela acesa em azul" width="900" height="675" loading="lazy"></figure>
           <div class="corpo">
             <span class="quando mono">Na hora</span>
@@ -205,12 +224,12 @@
             <p>Prompts prontos para copiar e adaptar, do atendimento à divulgação. Chega assim que você termina as respostas.</p>
           </div>
         </article>
-        <article class="passo simples">
+        <article class="passo simples rv">
           <span class="quando mono">Em até 2 dias úteis</span>
           <h3>Análise do Instagram e do site da sua empresa</h3>
           <p>A gente olha o que o seu cliente vê antes de comprar e onde a venda escapa.</p>
         </article>
-        <article class="passo">
+        <article class="passo rv">
           <figure><img src="/black/img/plano.webp" alt="Plano estratégico impresso sobre uma mesa escura" width="900" height="675" loading="lazy"></figure>
           <div class="corpo">
             <span class="quando mono">Por escrito</span>
@@ -218,7 +237,7 @@
             <p>O caminho fase por fase, com Parâmetros de Referência para você acompanhar cada passo.</p>
           </div>
         </article>
-        <article class="passo">
+        <article class="passo rv">
           <figure><img src="/black/img/conversa.webp" alt="Empresário sorrindo em uma chamada de vídeo no notebook" width="900" height="675" loading="lazy"></figure>
           <div class="corpo">
             <span class="quando mono">30 minutos</span>
@@ -231,18 +250,18 @@
   </section>
 
   <section class="porque" aria-labelledby="gratis">
-    <img class="fundo" src="/black/img/seda.webp" alt="" width="896" height="1152" loading="lazy">
+    <img class="fundo" src="/black/img/seda.webp" alt="" width="896" height="1152" loading="lazy" data-vel="60">
     <div class="envelope">
-      <span class="rotulo mono">Por que de graça?</span>
-      <p class="citacao" id="gratis">O diagnóstico é a porta, <span class="serifa">não o produto.</span></p>
-      <p class="lead">Na Black Friday a gente abre a porta para 15 empresas verem, por dentro, como a Prompts360 trabalha: estratégia, conteúdo, tráfego e IA num plano sob medida.</p>
-      <ul class="lista-ok">
+      <span class="rv rotulo mono">Por que de graça?</span>
+      <p class="citacao" id="gratis">O diagnóstico é a porta, <span class="serifa hl">não o produto.</span></p>
+      <p class="rv lead">Na Black Friday a gente abre a porta para 15 empresas verem, por dentro, como a Prompts360 trabalha: estratégia, conteúdo, tráfego e IA num plano sob medida.</p>
+      <ul class="rv lista-ok">
         <li>Sem cartão, sem contrato, sem letra miúda.</li>
         <li>Plano feito para a sua empresa, não um modelo genérico.</li>
         <li>As vagas são por ordem de resposta e acabam hoje às 23h59.</li>
       </ul>
-      <p class="mono" style="margin-top:34px;color:var(--suave)">Empresas que já crescem com a gente</p>
-      <div class="clientes">
+      <p class="rv mono" style="margin-top:34px;color:var(--suave)">Empresas que já crescem com a gente</p>
+      <div class="rv clientes">
         <img src="/assets/img/clientes/tera.svg" alt="TERA" height="28" loading="lazy">
         <img src="/assets/img/clientes/cgi.png" alt="CGI" height="28" loading="lazy">
         <img src="/assets/img/clientes/humanah.png" alt="Humanah" height="28" loading="lazy">
@@ -254,11 +273,11 @@
 
   <section class="reserva" id="reservar" aria-labelledby="reservar-titulo">
     <div class="envelope">
-      <span class="rotulo mono">Reserve a sua vaga</span>
-      <h2 id="reservar-titulo">Responda e a vaga <span class="serifa">é sua.</span></h2>
-      <p class="lead">Leva cerca de 2 minutos. A vaga fica reservada assim que você enviar.</p>
+      <span class="rv rotulo mono">Reserve a sua vaga</span>
+      <h2 class="rv" id="reservar-titulo">Responda e a vaga <span class="serifa">é sua.</span></h2>
+      <p class="rv lead">Leva cerca de 2 minutos. A vaga fica reservada assim que você enviar.</p>
 
-      <div class="cartao">
+      <div class="rv cartao">
         <form id="form" novalidate>
           <div class="progresso" aria-hidden="true"><i class="feito"></i><i></i><i></i></div>
 
@@ -311,7 +330,7 @@
         <div class="resultado" id="resultado" hidden tabindex="-1"></div>
       </div>
 
-      <div class="alternativa">
+      <div class="rv alternativa">
         Prefere pelo Instagram? Mande <b>BLACK360</b> no direct da <a href="https://instagram.com/prompts.360" target="_blank" rel="noopener"><b>@prompts.360</b></a>. As vagas são as mesmas.
       </div>
     </div>
@@ -328,17 +347,31 @@
 
 <div class="fixa" id="fixa"><a class="botao" href="#reservar"><span>Garantir minha vaga <span style="font-weight:600;opacity:.75">· <span id="fixa-restantes">15</span> restantes</span></span></a></div>
 
+<script src="/assets/js/gsap.min.js" defer></script>
+<script src="/assets/js/ScrollTrigger.min.js" defer></script>
+<script src="/assets/js/lenis.min.js" defer></script>
 <script>
+document.documentElement.classList.add("js");
+document.querySelectorAll(".rv").forEach(function (e) { e.classList.add("pre"); });
 (function () {
   "use strict";
   var API = "https://crm.prompts360.com.br/api/site/black";
   var WHATS = "5581991886276";
   var fim = new Date("2026-11-28T02:59:59Z");
   var total = 15, restantes = 15;
+  var reduz = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function $(s) { return document.querySelector(s); }
+  var mostrado = null;
+  function contar(alvo) {
+    var el = $("#restantes");
+    if (mostrado === null || reduz) { mostrado = alvo; el.textContent = alvo; return; }
+    var de = mostrado, t0 = performance.now();
+    mostrado = alvo;
+    (function passo(t) { var k = Math.min(1, (t - t0) / 700); el.textContent = Math.round(de + (alvo - de) * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(passo); })(t0);
+  }
   function pintarVagas() {
-    $("#restantes").textContent = restantes;
+    contar(restantes);
     $("#total").textContent = total;
     $("#fixa-restantes").textContent = restantes;
     $("#barra").style.width = Math.max(4, (total - restantes) / total * 100) + "%";
@@ -380,7 +413,7 @@
     erro.textContent = "";
     var primeiro = form.querySelector('.etapa.ativa input:not([type=checkbox]), .etapa.ativa textarea');
     if (primeiro && n > 1) primeiro.focus({ preventScroll: true });
-    reserva.scrollIntoView({ behavior: "smooth", block: "start" });
+    rolar(reserva);
   }
   function valido(n) {
     var campos = form.querySelectorAll('.etapa[data-etapa="' + n + '"] [required]');
@@ -424,6 +457,107 @@
       });
   }
 
+  var lenis = null;
+  function rolar(alvo) { if (lenis) lenis.scrollTo(alvo, { offset: -70 }); else alvo.scrollIntoView({ behavior: reduz ? "auto" : "smooth", block: "start" }); }
+
+  // ===== Rede animada do topo (a mesma do site principal) =====
+  (function rede() {
+    var c = document.getElementById("rede");
+    if (!c) return;
+    var x = c.getContext("2d"), P = [], W = 0, H = 0, k = Math.min(window.devicePixelRatio || 1, 2), mouse = { x: -999, y: -999 }, ativo = true;
+    function medir() {
+      var r = c.getBoundingClientRect(); W = r.width; H = r.height;
+      c.width = W * k; c.height = H * k; x.setTransform(k, 0, 0, k, 0, 0);
+      var n = Math.round(Math.min(110, Math.max(40, W * H / 9000)));
+      P = [];
+      for (var i = 0; i < n; i++) P.push({ x: Math.random() * W, y: Math.random() * H * .6, vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25, t: Math.random() });
+    }
+    function quadro() {
+      if (!ativo) return;
+      x.clearRect(0, 0, W, H);
+      var lim = Math.max(80, W / 5);
+      for (var i = 0; i < P.length; i++) {
+        var p = P[i];
+        if (!reduz) { p.x += p.vx; p.y += p.vy; if (p.x < 0 || p.x > W) p.vx *= -1; if (p.y < 0 || p.y > H * .62) p.vy *= -1; }
+        var mx = p.x - mouse.x, my = p.y - mouse.y, md = Math.hypot(mx, my);
+        if (md < 140 && !reduz) { p.x += mx / md * .6; p.y += my / md * .6; }
+        for (var j = i + 1; j < P.length; j++) {
+          var q = P[j], d = Math.hypot(p.x - q.x, p.y - q.y);
+          if (d < lim) { x.strokeStyle = "rgba(16,123,255," + (.22 * (1 - d / lim)) + ")"; x.lineWidth = .7; x.beginPath(); x.moveTo(p.x, p.y); x.lineTo(q.x, q.y); x.stroke(); }
+        }
+        var teal = p.t > .82;
+        x.fillStyle = teal ? "rgba(0,209,194,.9)" : "rgba(130,175,255," + (.25 + p.t * .4) + ")";
+        x.beginPath(); x.arc(p.x, p.y, teal ? 1.8 : 1.1, 0, 7); x.fill();
+      }
+      if (!reduz) requestAnimationFrame(quadro);
+    }
+    medir(); quadro();
+    var tr; window.addEventListener("resize", function () { clearTimeout(tr); tr = setTimeout(medir, 200); });
+    c.parentElement.addEventListener("pointermove", function (e) { var r = c.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+    c.parentElement.addEventListener("pointerleave", function () { mouse.x = mouse.y = -999; });
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { var vis = es[0].isIntersecting; if (vis && !ativo) { ativo = true; quadro(); } ativo = vis; }).observe(c);
+  })();
+
+  // ===== Botões magnéticos no computador =====
+  if (!reduz && window.matchMedia("(hover: hover)").matches) {
+    document.querySelectorAll("[data-mag]").forEach(function (b) {
+      b.addEventListener("pointermove", function (e) { var r = b.getBoundingClientRect(); b.style.transform = "translate(" + ((e.clientX - r.left - r.width / 2) * .18) + "px," + ((e.clientY - r.top - r.height / 2) * .25) + "px)"; });
+      b.addEventListener("pointerleave", function () { b.style.transform = ""; });
+    });
+  }
+
+  // ===== Movimento com GSAP, ScrollTrigger e Lenis (igual ao site) =====
+  function movimento() {
+    if (reduz || !window.gsap || !window.ScrollTrigger) { document.querySelectorAll(".rv").forEach(function (e) { e.classList.remove("pre"); }); return; }
+    gsap.registerPlugin(ScrollTrigger);
+    if (window.Lenis) {
+      lenis = new Lenis({ lerp: .1 });
+      lenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+      gsap.ticker.lagSmoothing(0);
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener("click", function (e) { var alvo = document.querySelector(a.getAttribute("href")); if (alvo) { e.preventDefault(); lenis.scrollTo(alvo, { offset: -70 }); } });
+      });
+    }
+    // Entrada do topo
+    gsap.from("h1.black .l>span", { yPercent: 110, duration: 1.15, ease: "power4.out", stagger: .12, delay: .1 });
+    gsap.from(".selo-hoje,.oferta,.apoio,.contador,.abertura .botao", { opacity: 0, y: 24, duration: 1, ease: "power3.out", stagger: .08, delay: .45 });
+    gsap.from(".abertura .foto", { scale: 1.15, opacity: 0, duration: 1.8, ease: "power2.out" });
+    gsap.from(".faixa", { y: -60, opacity: 0, duration: .9, ease: "power3.out", delay: .2 });
+    // Parallax das camadas de fundo
+    document.querySelectorAll("[data-vel]").forEach(function (el) {
+      var v = parseFloat(el.getAttribute("data-vel")) * .45;
+      gsap.fromTo(el, { y: -v * 2 }, { y: v * 2, ease: "none", scrollTrigger: { trigger: el.closest("section") || el, start: "top bottom", end: "bottom top", scrub: true } });
+    });
+    // Fotos dos cartões se aproximam ao rolar
+    gsap.utils.toArray(".passo figure img").forEach(function (img) {
+      gsap.fromTo(img, { scale: 1.18, yPercent: -4 }, { scale: 1, yPercent: 4, ease: "none", scrollTrigger: { trigger: img, start: "top bottom", end: "bottom top", scrub: true } });
+    });
+    // Frase do "por que de graça" acende palavra por palavra
+    var tx = document.getElementById("gratis"), ws = [];
+    (function quebra(el) {
+      Array.prototype.slice.call(el.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var fr = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function (t) {
+            if (!t) return;
+            if (/^\s+$/.test(t)) { fr.appendChild(document.createTextNode(t)); return; }
+            var s2 = document.createElement("span"); s2.className = "w"; s2.textContent = t; fr.appendChild(s2); ws.push(s2);
+          });
+          n.parentNode.replaceChild(fr, n);
+        } else if (n.nodeType === 1) quebra(n);
+      });
+    })(tx);
+    ws.forEach(function (w) { w.style.setProperty("--o", .15); });
+    ScrollTrigger.create({ trigger: tx, start: "top 85%", end: "bottom 45%", scrub: true, onUpdate: function (st) { var a = st.progress * ws.length * 1.15; ws.forEach(function (w, i) { w.style.setProperty("--o", Math.max(.15, Math.min(1, a - i + 1))); }); } });
+    // Revelar ao entrar
+    gsap.utils.toArray(".rv").forEach(function (el, i) {
+      gsap.fromTo(el, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .9, ease: "power3.out", delay: (i % 3) * .06, scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none" }, onStart: function () { el.classList.remove("pre"); } });
+    });
+    window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+  }
+  if (document.readyState === "complete") movimento(); else window.addEventListener("load", movimento);
+
   function botaoWhats(texto, rotulo) {
     return '<a class="botao claro" href="https://wa.me/' + WHATS + "?text=" + encodeURIComponent(texto) + '" target="_blank" rel="noopener">' + rotulo + "</a>";
   }
@@ -453,8 +587,9 @@
         "<p>O kit de prompts eu te mando mesmo assim. E você entra na lista de janeiro para ser avisado quando abrirmos novas conversas.</p>" +
         '<div class="acoes">' + kit + "</div>";
     }
-    form.hidden = true; el.hidden = false; el.focus();
-    reserva.scrollIntoView({ behavior: "smooth", block: "start" });
+    form.hidden = true; el.hidden = false; el.focus({ preventScroll: true });
+    rolar(reserva);
+    if (window.gsap && !reduz) gsap.fromTo(el.children, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .8, ease: "power3.out", stagger: .08 });
   }
 })();
 </script>
