@@ -8,6 +8,14 @@
   status = 301
   force = true
 
+# Kit do robô do Instagram (Black Friday): prompts360.com.br/kit-black360 mostra a página do kit, que mora no CRM.
+# Vale para qualquer palavra-chave do robô (ex.: kit-teste360), e /pdf e /imagem vêm junto.
+[[redirects]]
+  from = "/kit-*"
+  to = "https://crm.prompts360.com.br/kit/:splat"
+  status = 200
+  force = true
+
 # Endereços do site antigo
 [[redirects]]
   from = "/politica-privacidade.html"
